@@ -31,13 +31,17 @@ import variables from '@/assets/styles/variables.module.scss'
 import useAppStore from '@/store/modules/app'
 import useSettingsStore from '@/store/modules/settings'
 import usePermissionStore from '@/store/modules/permission'
+import router from "@/router"
 
 const route = useRoute()
+
 const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 const permissionStore = usePermissionStore()
-
-const sidebarRouters = computed(() => permissionStore.sidebarRouters)
+console.log(route,"2222",router.options.sidebarRouters)
+// const sidebarRouters = computed(() => router.options.sidebarRouters)
+const sidebarRouters = router.options.sidebarRouters
+console.log('sidebarRouters',sidebarRouters)
 const showLogo = computed(() => settingsStore.sidebarLogo)
 const sideTheme = computed(() => settingsStore.sideTheme)
 const theme = computed(() => settingsStore.theme)

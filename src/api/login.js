@@ -1,15 +1,19 @@
 import request from '@/utils/request'
 
 // 登录方法
-export function login(username, password, code, uuid) {
+export function login(username, password, captcha, cap_id) {
   const data = {
+    username_desc:'用户名',
+    password_desc:'密码',
+    cap_id_desc:'验证码ID',
+    captcha_desc:'验证码',
     username,
     password,
-    code,
-    uuid
+    captcha,
+    cap_id
   }
   return request({
-    url: '/login',
+    url: '/admin/v1/login',
     headers: {
       isToken: false,
       repeatSubmit: false
@@ -59,7 +63,7 @@ export function logout() {
 // 获取验证码
 export function getCodeImg() {
   return request({
-    url: '/captchaImage',
+    url: '/admin/v1/captcha',
     headers: {
       isToken: false
     },

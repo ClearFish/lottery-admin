@@ -2,29 +2,21 @@
   <div class="login">
     <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">{{ $t('common.Lotetry') }}</h3>
-      <div>
+      <!-- <div>
         <p @click="setLang('zh')">中文</p>
         <p @click="setLang('en')">en英文</p>
         <p @click="setLang('yuenan')">vi越南</p>
-      </div>
+      </div> -->
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
           type="text"
           size="large"
           auto-complete="off"
-          placeholder="账号"
+          placeholder="用户名"
         >
           <template #prefix><svg-icon icon-class="user" class="el-input__icon input-icon" /></template>
         </el-input>
-      </el-form-item>
-      <el-form-item prop="language">
-        <el-date-picker
-          v-model="loginForm.language"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择日期"
-        />
       </el-form-item>
       <el-form-item prop="password">
         <el-input
@@ -38,19 +30,21 @@
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
         </el-input>
       </el-form-item>
-      <el-form-item prop="code" v-if="captchaEnabled">
+      <el-form-item prop="captcha" v-if="captchaEnabled">
         <el-input
-          v-model="loginForm.code"
+          v-model="loginForm.captcha"
           size="large"
           auto-complete="off"
           placeholder="验证码"
           style="width: 63%"
           @keyup.enter="handleLogin"
         >
-          <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>
+          <template #prefix>
+            <svg-icon icon-class="validCode" class="el-input__icon input-icon" />
+          </template>
         </el-input>
         <div class="login-code">
-          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
+          <img :src="captchaEnabled" @click="getCode" class="login-code-img"/>
         </div>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
@@ -96,11 +90,11 @@ const router = useRouter()
 const { proxy } = getCurrentInstance()
 
 const loginForm = ref({
-  username: "admin",
-  password: "admin123",
+  username: "",
+  password: "",
   rememberMe: false,
-  code: "",
-  uuid: ""
+  captcha: "",
+  cap_id:''
 })
 const setLang = (val)=>{
   setLocale(val)
@@ -109,10 +103,9 @@ const setLang = (val)=>{
 const loginRules = {
   username: [{ required: true, trigger: "blur", message: "请输入您的账号" }],
   password: [{ required: true, trigger: "blur", message: "请输入您的密码" }],
-  code: [{ required: true, trigger: "change", message: "请输入验证码" }]
+  captcha: [{ required: true, trigger: "change", message: "请输入验证码" }]
 }
 
-const codeUrl = ref("")
 const loading = ref(false)
 // 验证码开关
 const captchaEnabled = ref(true)
@@ -160,29 +153,13 @@ function handleLogin() {
   })
 }
 
-function getCode() {
-  getCodeImg().then(res => {
-    captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled
-    if (captchaEnabled.value) {
-      codeUrl.value = "data:image/gif;base64," + res.img
-      loginForm.value.uuid = res.uuid
-    }
-  })
-}
-
-function getCookie() {
-  const username = Cookies.get("username")
-  const password = Cookies.get("password")
-  const rememberMe = Cookies.get("rememberMe")
-  loginForm.value = {
-    username: username === undefined ? loginForm.value.username : username,
-    password: password === undefined ? loginForm.value.password : decrypt(password),
-    rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
-  }
+async function getCode() {
+  let res = await getCodeImg();
+  captchaEnabled.value = res.meta.image
+  loginForm.value.cap_id = res.meta.id
 }
 
 getCode()
-getCookie()
 </script>
 
 <style lang='scss' scoped>
@@ -227,7 +204,10 @@ getCookie()
   width: 33%;
   height: 40px;
   float: right;
+  background: #f5f7fa;
+  margin-left: 10px;
   img {
+    width: 100%;
     cursor: pointer;
     vertical-align: middle;
   }

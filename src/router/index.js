@@ -79,7 +79,7 @@ export const constantRoutes = [
   {
     path: '/user',
     component: Layout,
-    hidden: true,
+    hidden: false,
     redirect: 'noredirect',
     children: [
       {
@@ -89,7 +89,66 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
-  }
+  },
+  {
+    path: '/game',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '游戏管理', icon: 'user'},
+    children: [
+      {
+        path: 'betting-list',
+        component: () => import('@/views/game/betting-list/index.vue'),
+        name: 'BettingList',
+        hidden: false,
+        meta: { title: '投注列表', icon: 'user' }
+      },
+      {
+        path: 'im-follow',
+        component: () => import('@/views/game/im-follow/index.vue'),
+        name: 'ImFollow',
+        hidden: false,
+        meta: { title: 'IM跟投', icon: 'user' }
+      },
+      {
+        path: 'bettinglist-backup',
+        component: () => import('@/views/game/bettinglist-backup/index.vue'),
+        name: 'BettingListBackup',
+        hidden: false,
+        meta: { title: '投注列表备份', icon: 'user' }
+      },
+      {
+        path: 'game-config',
+        component: () => import('@/views/game/game-config/index.vue'),
+        name: 'GameConfig',
+        hidden: false,
+        meta: { title: '游戏配置', icon: 'user' }
+      },
+      {
+        path: 'statistical-reports',
+        component: () => import('@/views/game/statistical-reports/index.vue'),
+        name: 'StatisticalReports',
+        hidden: false,
+        meta: { title: '游戏统计', icon: 'user' }
+      },
+      {
+        path: 'commision-list',
+        component: () => import('@/views/game/commision-list/index.vue'),
+        name: 'CommissionList',
+        hidden: false,
+        meta: { title: '佣金列表', icon: 'user' }
+      },
+      {
+        path: 'lottery-results',
+        component: () => import('@/views/game/lottery-results/index.vue'),
+        name: 'LotteryResults',
+        hidden: false,
+        meta: { title: '开奖结果', icon: 'user' }
+      },
+    ]
+  },
+ 
 ]
 
 // 动态路由，基于用户权限动态去加载
@@ -166,9 +225,85 @@ export const dynamicRoutes = [
   }
 ]
 
+export const sidebarRouters = [
+   {
+    path: '/game',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '游戏管理', icon: 'user'},
+    children: [
+      {
+        path: 'betting-list',
+        component: () => import('@/views/game/betting-list/index.vue'),
+        name: 'BettingList',
+        hidden: false,
+        meta: { title: '投注列表', icon: 'user' }
+      },
+      {
+        path: 'im-follow',
+        component: () => import('@/views/game/im-follow/index.vue'),
+        name: 'ImFollow',
+        hidden: false,
+        meta: { title: 'IM跟投', icon: 'user' }
+      },
+      {
+        path: 'bettinglist-backup',
+        component: () => import('@/views/game/bettinglist-backup/index.vue'),
+        name: 'BettingListBackup',
+        hidden: false,
+        meta: { title: '投注列表备份', icon: 'user' }
+      },
+      {
+        path: 'game-config',
+        component: () => import('@/views/game/game-config/index.vue'),
+        name: 'GameConfig',
+        hidden: false,
+        meta: { title: '游戏配置', icon: 'user' }
+      },
+      {
+        path: 'statistical-reports',
+        component: () => import('@/views/game/statistical-reports/index.vue'),
+        name: 'StatisticalReports',
+        hidden: false,
+        meta: { title: '游戏统计', icon: 'user' }
+      },
+      {
+        path: 'commision-list',
+        component: () => import('@/views/game/commision-list/index.vue'),
+        name: 'CommissionList',
+        hidden: false,
+        meta: { title: '佣金列表', icon: 'user' }
+      },
+      {
+        path: 'lottery-results',
+        component: () => import('@/views/game/lottery-results/index.vue'),
+        name: 'LotteryResults',
+        hidden: false,
+        meta: { title: '开奖结果', icon: 'user' }
+      },
+
+    ]
+  },
+   {
+    path: '/user',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'profile/:activeTab?',
+        component: () => import('@/views/system/user/profile/index'),
+        name: 'Profile',
+        meta: { title: '个人中心', icon: 'user' }
+      }
+    ]
+  },
+]
 const router = createRouter({
   history: createWebHistory(),
   routes: constantRoutes,
+  sidebarRouters: sidebarRouters,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
