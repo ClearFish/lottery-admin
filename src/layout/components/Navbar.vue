@@ -10,6 +10,18 @@
 
     <div class="right-menu">
       <template v-if="appStore.device !== 'mobile'">
+         <el-dropdown @command="handleLanguageChange">
+           <div class="right-menu-item hover-effect language-switch-wrapper" @click="toggleLanguage">
+             <svg-icon icon-class="language" />
+           </div>
+           <template #dropdown>
+             <el-dropdown-menu>
+               <el-dropdown-item command="zh">中文</el-dropdown-item>
+               <el-dropdown-item command="en">English</el-dropdown-item>
+               <el-dropdown-item command="yuenan">vi</el-dropdown-item>
+             </el-dropdown-menu>
+           </template>
+         </el-dropdown>
         <header-search id="header-search" class="right-menu-item" />
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
@@ -27,8 +39,9 @@
 
       <el-dropdown @command="handleCommand" class="avatar-container right-menu-item hover-effect" trigger="hover">
         <div class="avatar-wrapper">
-          <img :src="userStore.avatar" class="user-avatar" />
-          <span class="user-nickname"> {{ userStore.nickName }} </span>
+          <img :src="userStore.avatar" class="user-avatar" v-if="userStore.avatar"/>
+          <img src="@/assets/images/profile.jpg" class="user-avatar" alt="" v-else>
+          <span class="user-nickname"> {{ userStore.nickName || 'Admin'}} </span>
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -68,6 +81,10 @@ import useUserStore from '@/store/modules/user'
 import useLockStore from '@/store/modules/lock'
 import useSettingsStore from '@/store/modules/settings'
 import HeaderNotice from './HeaderNotice'
+import { setLocale } from '@/locales'
+import useLocaleStore from '@/store/modules/locales'
+
+const useLocale = useLocaleStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -95,7 +112,10 @@ function handleCommand(command) {
       break
   }
 }
-
+const handleLanguageChange = (command) => {
+  setLocale(command)
+  useLocale.setLocale(command)
+}
 function logout() {
   ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
     confirmButtonText: '确定',

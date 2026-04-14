@@ -148,7 +148,50 @@ export const constantRoutes = [
       },
     ]
   },
- 
+    {
+    path: '/agent',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '代理管理', icon: 'user'},
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/agent/user/index.vue'),
+        name: 'User',
+        hidden: false,
+        meta: { title: '代理用户管理', icon: 'user' }
+      },
+      {
+        path: 'balance',
+        component: () => import('@/views/agent/balance/index.vue'),
+        name: 'Balance',
+        hidden: false,
+        meta: { title: '代理余额列表', icon: 'user' }
+      },
+      {
+        path: 'menu',
+        component: () => import('@/views/agent/menu/index.vue'),
+        name: 'Menu',
+        hidden: false,
+        meta: { title: '代理菜单权限', icon: 'user' }
+      },
+      {
+        path: 'actionlog',
+        component: () => import('@/views/agent/actionlog/index.vue'),
+        name: 'ActionLog',
+        hidden: false,
+        meta: { title: '代理操作日志列表', icon: 'user' }
+      },
+      {
+        path: 'applay',
+        component: () => import('@/views/agent/applay/index.vue'),
+        name: 'Applay',
+        hidden: false,
+        meta: { title: '代理申请', icon: 'user' }
+      },
+    ]
+  }
 ]
 
 // 动态路由，基于用户权限动态去加载
@@ -299,6 +342,50 @@ export const sidebarRouters = [
       }
     ]
   },
+  {
+    path: '/agent',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '代理管理', icon: 'user'},
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/agent/user/index.vue'),
+        name: 'User',
+        hidden: false,
+        meta: { title: '代理用户管理', icon: 'user' }
+      },
+      {
+        path: 'balance',
+        component: () => import('@/views/agent/balance/index.vue'),
+        name: 'Balance',
+        hidden: false,
+        meta: { title: '代理余额列表', icon: 'user' }
+      },
+      {
+        path: 'menu',
+        component: () => import('@/views/agent/menu/index.vue'),
+        name: 'Menu',
+        hidden: false,
+        meta: { title: '代理菜单权限', icon: 'user' }
+      },
+      {
+        path: 'actionlog',
+        component: () => import('@/views/agent/actionlog/index.vue'),
+        name: 'ActionLog',
+        hidden: false,
+        meta: { title: '代理操作日志列表', icon: 'user' }
+      },
+      {
+        path: 'applay',
+        component: () => import('@/views/agent/applay/index.vue'),
+        name: 'Applay',
+        hidden: false,
+        meta: { title: '代理申请', icon: 'user' }
+      },
+    ]
+  }
 ]
 const router = createRouter({
   history: createWebHistory(),

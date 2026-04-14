@@ -21,7 +21,6 @@ const isWhiteList = (path) => {
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (getToken()) {
-    console.log('getToken', getToken())
     to.meta.title && useSettingsStore().setTitle(to.meta.title)
     const isLock = useLockStore().isLock
     /* has token*/
