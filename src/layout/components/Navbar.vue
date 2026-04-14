@@ -81,12 +81,8 @@ import useUserStore from '@/store/modules/user'
 import useLockStore from '@/store/modules/lock'
 import useSettingsStore from '@/store/modules/settings'
 import HeaderNotice from './HeaderNotice'
-import { setLocale } from '@/locales'
+import { setLocale,$t } from '@/locales'
 import useLocaleStore from '@/store/modules/locales'
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
-const $t = t
 
 const useLocale = useLocaleStore()
 const route = useRoute()

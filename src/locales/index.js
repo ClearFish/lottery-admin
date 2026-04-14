@@ -11,6 +11,9 @@ const i18n = createI18n({
   messages
 });
 
+export const $t = i18n.global.t;
+export const $locale = i18n.global.locale;
+
 function getDefaultLanguage() {
   const locales = Object.keys(messages);
   const localLanguage = localStorage.getItem("language");
