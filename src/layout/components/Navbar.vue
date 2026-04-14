@@ -51,9 +51,9 @@
             <el-dropdown-item command="setLayout" v-if="settingsStore.showSettings">
                 <span>布局设置</span>
             </el-dropdown-item>
-            <el-dropdown-item command="lockScreen">
+            <!-- <el-dropdown-item command="lockScreen">
                 <span>锁定屏幕</span>
-            </el-dropdown-item>
+            </el-dropdown-item> -->
             <el-dropdown-item divided command="logout">
               <span>退出登录</span>
             </el-dropdown-item>
@@ -83,9 +83,12 @@ import useSettingsStore from '@/store/modules/settings'
 import HeaderNotice from './HeaderNotice'
 import { setLocale } from '@/locales'
 import useLocaleStore from '@/store/modules/locales'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const $t = t
 
 const useLocale = useLocaleStore()
-
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
@@ -117,9 +120,9 @@ const handleLanguageChange = (command) => {
   useLocale.setLocale(command)
 }
 function logout() {
-  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm($t('common.logout_confirm'), $t('common.logout_title'), {
+    confirmButtonText: $t('common.confirm'),
+    cancelButtonText: $t('common.cancel'),
     type: 'warning'
   }).then(() => {
     userStore.logOut().then(() => {

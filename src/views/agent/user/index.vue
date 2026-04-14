@@ -1,52 +1,59 @@
 <template>
     <div>
         <div class="form_box">
-            <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-width="100px">
-                <el-form-item label="代理ID" prop="username">
-                    <el-input v-model="queryParams.username" placeholder="请输入代理ID" />
+            <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
+                <el-form-item label="id:" prop="id">
+                    <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
                 </el-form-item>
-                <el-form-item label="上级ID" prop="mobile">
-                    <el-input v-model="queryParams.mobile" placeholder="请输入上级ID" />
+                <el-form-item label="username:" prop="username">
+                    <el-input v-model="queryParams.username" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
                 </el-form-item>
-                <el-form-item label="用户名" prop="email">
-                    <el-input v-model="queryParams.email" placeholder="请输入用户名" />
+                <el-form-item label="email:" prop="email">
+                    <el-input v-model="queryParams.email" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
                 </el-form-item>
-                <el-form-item label="所属组别" prop="groupId">
-                    <el-input v-model="queryParams.groupId" placeholder="请输入所属组别" />
+                <el-form-item label="phone:" prop="phone">
+                    <el-input v-model="queryParams.phone" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
                 </el-form-item>
-                <el-form-item label="绑定会员ID" prop="memberId">
-                    <el-input v-model="queryParams.memberId" placeholder="请输入绑定会员ID" />
+                <el-form-item label="status:" prop="status">
+                    <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' ' + $t('agent.id')">
+                        <el-option label="normol" value="1" />
+                        <el-option label="disabled" value="0" />
+                    </el-select>
                 </el-form-item>
-                <el-form-item label="im群ID" prop="imGroupId">
-                    <el-input v-model="queryParams.imGroupId" placeholder="请输入im群ID" />
-                </el-form-item>
-                <el-form-item label="系统余额" prop="systemBalance">
-                    <el-input v-model="queryParams.systemBalance" placeholder="请输入系统余额" />
-                </el-form-item>
-                <el-form-item label="状态" prop="status">
-                    <el-input v-model="queryParams.status" placeholder="请输入状态" />
+                <el-form-item label="create time:" prop="created_at">
+                    <el-date-picker 
+                        v-model="queryParams.created_at" 
+                        type="daterange" 
+                        value-format="yyyy-MM-dd" 
+                        :range-separator="$t('common.to')" 
+                        :start-placeholder="$t('common.start_date')" 
+                        :end-placeholder="$t('common.end_date')" 
+                    />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="default" @click="resetForm">重置</el-button>
-                    <el-button type="primary" @click="getList">查询</el-button>
+                    <el-button type="default" @click="resetForm">{{ $t('common.reset') }}</el-button>
+                    <el-button type="primary" @click="getList">{{ $t('common.search') }}</el-button>
                 </el-form-item>
             </el-form>
         </div>
         <el-table :data="dataList" style="width: 100%" border >
-            <el-table-column prop="username" label="代理ID" align="center"  />
-            <el-table-column prop="mobile" label="上级ID" align="center"  />
-            <el-table-column prop="email" label="用户名" align="center"  />
-            <el-table-column prop="createTime" label="所属组别" align="center"  />
-            <el-table-column prop="createTime" label="绑定会员ID" align="center"  />
-            <el-table-column prop="createTime" label="im群ID" align="center"  />
-            <el-table-column prop="createTime" label="系统余额" align="center"  />
-            <el-table-column prop="createTime" label="状态" align="center"  />
-            <el-table-column prop="createTime" label="最后登录" align="center"  />
-            <el-table-column prop="createTime" label="操作" align="center">
+            <el-table-column prop="id" label="id" align="center"  />
+            <el-table-column prop="name" label="name" align="center">
                 <template #default="scope">
-                    <el-button type="text">编辑</el-button>
-                    <el-button type="text">删除</el-button>
-                    <el-button type="text">详情</el-button>
+                    {{ scope.row.first_name +' '+ scope.row.last_name }}
+                </template>
+            </el-table-column>
+            <el-table-column prop="username" label="username" align="center"  />
+            <el-table-column prop="email" label="email" align="center"  />
+            <el-table-column prop="created_at" label="created time" align="center"  />
+            <el-table-column prop="phone" label="phone" align="center"  />
+            <el-table-column prop="area_code" label="area_code" align="center"  />
+            <el-table-column prop="status" label="status" align="center"  />
+            <el-table-column prop="" label="action" align="center" min-width="150">
+                <template #default="scope">
+                    <el-button type="info">Detail</el-button>
+                    <el-button type="primary">Edit</el-button>
+                    <el-button type="danger" >Delete</el-button>
                 </template>
             </el-table-column>
         </el-table>

@@ -1,5 +1,15 @@
 {
   "common": {
-    "Lotetry": "Lotetry"
+    "Lotetry": "Lotetry",
+    "place_enter":"Please enter",
+    "place_select":"Please select",
+    "reset":"Reset",
+    "search":"Search",
+    "to":"To",
+    "start_date":"Start Date",
+    "end_date":"End Date"
+  },
+  "agent":{
+    "id":"id"
   }
 }

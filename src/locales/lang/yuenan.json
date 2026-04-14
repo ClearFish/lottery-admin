@@ -1,6 +1,16 @@
 
 {
   "common": {
-    "Lotetry": "Tất cả"
+    "Lotetry": "Tất cả",
+    "place_enter":"Vui lòng nhập",
+    "place_select":"Vui lòng chọn",
+    "reset":"Cài lại",
+    "search":"Truy vấn",
+    "to":"Với",
+    "start_date":"Ngày bắt đầu",
+    "end_date":"Ngày kết thúc"
+  },
+  "agent":{
+    "id":"id"
   }
 }

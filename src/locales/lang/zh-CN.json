@@ -1,5 +1,19 @@
 {
   "common": {
-    "Lotetry": "彩票"
+    "Lotetry": "彩票",
+    "place_enter":"请输入",
+    "place_select":"请选择",
+    "reset":"重置",
+    "search":"查询",
+    "to":"至",
+    "start_date":"开始日期",
+    "end_date":"结束日期",
+    "confirm":"确定",
+    "cancel":"取消",
+    "logout_confirm":"确定注销并退出系统吗？",
+    "logout_title":"提示"
+  },
+  "agent":{
+    "id":"id"
   }
 }

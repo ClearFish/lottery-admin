@@ -3,10 +3,6 @@ import request from '@/utils/request'
 // 登录方法
 export function login(username, password, captcha, cap_id) {
   const data = {
-    // username_desc:'用户名',
-    // password_desc:'密码',
-    // cap_id_desc:'验证码ID',
-    // captcha_desc:'验证码',
     username,
     password,
     captcha,
@@ -55,7 +51,7 @@ export function unlockScreen(password) {
 // 退出方法
 export function logout() {
   return request({
-    url: '/logout',
+    url: '/admin/v1/logout',
     method: 'post'
   })
 }
