@@ -11,7 +11,10 @@
     "confirm":"确定",
     "cancel":"取消",
     "logout_confirm":"确定注销并退出系统吗？",
-    "logout_title":"提示"
+    "logout_title":"提示",
+    "detail":"详情",
+    "edit":"编辑",
+    "delete":"删除"
   },
   "agent":{
     "id":"id"

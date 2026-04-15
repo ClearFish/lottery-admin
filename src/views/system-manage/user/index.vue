@@ -8,11 +8,8 @@
                 <el-form-item label="username:" prop="username">
                     <el-input v-model="queryParams.username" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
                 </el-form-item>
-                <el-form-item label="email:" prop="email">
+                <el-form-item label="nick name:" prop="nick_name">
                     <el-input v-model="queryParams.email" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
-                </el-form-item>
-                <el-form-item label="phone:" prop="phone">
-                    <el-input v-model="queryParams.phone" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
                 </el-form-item>
                 <el-form-item label="status:" prop="status">
                     <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' ' + $t('agent.id')">
@@ -38,18 +35,14 @@
         </div>
         <el-table :data="dataList" style="width: 100%" border >
             <el-table-column prop="id" label="id" align="center"  />
-            <el-table-column prop="name" label="name" align="center">
-                <template #default="scope">
-                    {{ scope.row.first_name +' '+ scope.row.last_name }}
-                </template>
-            </el-table-column>
+            <el-table-column prop="nick_name" label="nick name" align="center"/>
             <el-table-column prop="username" label="username" align="center"  />
-            <el-table-column prop="email" label="email" align="center"  />
-            <el-table-column prop="created_at" label="created time" align="center"  />
-            <el-table-column prop="phone" label="phone" align="center"  />
-            <el-table-column prop="area_code" label="area_code" align="center"  />
+            <el-table-column prop="email" label="email" align="center" width="200" />
+            <el-table-column prop="last_login" label="last login" align="center" />
+            <el-table-column prop="last_login_ip" label="last login ip" align="center"  />
+            <el-table-column prop="created_at" label="created at" align="center"  />
             <el-table-column prop="status" label="status" align="center"  />
-            <el-table-column prop="" label="action" align="center" min-width="150">
+            <el-table-column prop="" label="action" align="center" min-width="120">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>
@@ -69,8 +62,8 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getUserList } from '@/api/agent'
-import detailsDialog from '@/views/agent/user/components/detailsDialog.vue'
+import { getUserList } from '@/api/systemmanage'
+import detailsDialog from './components/detailsDialog.vue'
 const detailsDialogRef = ref(null)
 const dataList = ref([])
 

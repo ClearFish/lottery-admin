@@ -71,12 +71,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/lock',
-    component: () => import('@/views/lock'),
-    hidden: true,
-    meta: { title: '锁定屏幕' }
-  },
-  {
     path: '/user',
     component: Layout,
     hidden: false,
@@ -148,7 +142,7 @@ export const constantRoutes = [
       },
     ]
   },
-    {
+  {
     path: '/agent',
     component: Layout,
     hidden: false,
@@ -158,118 +152,72 @@ export const constantRoutes = [
       {
         path: 'user',
         component: () => import('@/views/agent/user/index.vue'),
-        name: 'User',
+        name: 'AgentUser',
         hidden: false,
         meta: { title: '代理用户管理', icon: 'user' }
       },
       {
         path: 'balance',
         component: () => import('@/views/agent/balance/index.vue'),
-        name: 'Balance',
+        name: 'AgentBalance',
         hidden: false,
         meta: { title: '代理余额列表', icon: 'user' }
       },
       {
         path: 'menu',
         component: () => import('@/views/agent/menu/index.vue'),
-        name: 'Menu',
+        name: 'AgentMenu',
         hidden: false,
         meta: { title: '代理菜单权限', icon: 'user' }
       },
       {
         path: 'actionlog',
         component: () => import('@/views/agent/actionlog/index.vue'),
-        name: 'ActionLog',
+        name: 'AgentActionLog',
         hidden: false,
         meta: { title: '代理操作日志列表', icon: 'user' }
       },
       {
         path: 'applay',
         component: () => import('@/views/agent/applay/index.vue'),
-        name: 'Applay',
+        name: 'AgentApplay',
         hidden: false,
         meta: { title: '代理申请', icon: 'user' }
       },
     ]
-  }
+  },
+  {
+    path: '/system-manage',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '系统管理', icon: 'user'},
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/system-manage/user/index.vue'),
+        name: 'SystemManageUser',
+        hidden: false,
+        meta: { title: '用户管理', icon: 'user' }
+      },
+      {
+        path: 'action',
+        component: () => import('@/views/system-manage/action/index.vue'),
+        name: 'SystemManageAction',
+        hidden: false,
+        meta: { title: '操作日志', icon: 'user' }
+      },
+    ]
+  },
 ]
 
 // 动态路由，基于用户权限动态去加载
 export const dynamicRoutes = [
-  {
-    path: '/system/user-auth',
-    component: Layout,
-    hidden: true,
-    permissions: ['system:user:edit'],
-    children: [
-      {
-        path: 'role/:userId(\\d+)',
-        component: () => import('@/views/system/user/authRole'),
-        name: 'AuthRole',
-        meta: { title: '分配角色', activeMenu: '/system/user' }
-      }
-    ]
-  },
-  {
-    path: '/system/role-auth',
-    component: Layout,
-    hidden: true,
-    permissions: ['system:role:edit'],
-    children: [
-      {
-        path: 'user/:roleId(\\d+)',
-        component: () => import('@/views/system/role/authUser'),
-        name: 'AuthUser',
-        meta: { title: '分配用户', activeMenu: '/system/role' }
-      }
-    ]
-  },
-  {
-    path: '/system/dict-data',
-    component: Layout,
-    hidden: true,
-    permissions: ['system:dict:list'],
-    children: [
-      {
-        path: 'index/:dictId(\\d+)',
-        component: () => import('@/views/system/dict/data'),
-        name: 'Data',
-        meta: { title: '字典数据', activeMenu: '/system/dict' }
-      }
-    ]
-  },
-  {
-    path: '/monitor/job-log',
-    component: Layout,
-    hidden: true,
-    permissions: ['monitor:job:list'],
-    children: [
-      {
-        path: 'index/:jobId(\\d+)',
-        component: () => import('@/views/monitor/job/log'),
-        name: 'JobLog',
-        meta: { title: '调度日志', activeMenu: '/monitor/job' }
-      }
-    ]
-  },
-  {
-    path: '/tool/gen-edit',
-    component: Layout,
-    hidden: true,
-    permissions: ['tool:gen:edit'],
-    children: [
-      {
-        path: 'index/:tableId(\\d+)',
-        component: () => import('@/views/tool/gen/editTable'),
-        name: 'GenEdit',
-        meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
-      }
-    ]
-  }
+
 ]
 
 export const sidebarRouters = [
-   {
+  {
     path: '/game',
     component: Layout,
     hidden: false,
@@ -328,7 +276,7 @@ export const sidebarRouters = [
 
     ]
   },
-   {
+  {
     path: '/user',
     component: Layout,
     hidden: false,
@@ -352,40 +300,63 @@ export const sidebarRouters = [
       {
         path: 'user',
         component: () => import('@/views/agent/user/index.vue'),
-        name: 'User',
+        name: 'AgentUser',
         hidden: false,
         meta: { title: '代理用户管理', icon: 'user' }
       },
       {
         path: 'balance',
         component: () => import('@/views/agent/balance/index.vue'),
-        name: 'Balance',
+        name: 'AgentBalance',
         hidden: false,
         meta: { title: '代理余额列表', icon: 'user' }
       },
       {
         path: 'menu',
         component: () => import('@/views/agent/menu/index.vue'),
-        name: 'Menu',
+        name: 'AgentMenu',
         hidden: false,
         meta: { title: '代理菜单权限', icon: 'user' }
       },
       {
         path: 'actionlog',
         component: () => import('@/views/agent/actionlog/index.vue'),
-        name: 'ActionLog',
+        name: 'AgentActionLog',
         hidden: false,
         meta: { title: '代理操作日志列表', icon: 'user' }
       },
       {
         path: 'applay',
         component: () => import('@/views/agent/applay/index.vue'),
-        name: 'Applay',
+        name: 'AgentApplay',
         hidden: false,
         meta: { title: '代理申请', icon: 'user' }
       },
     ]
-  }
+  },
+  {
+    path: '/system-manage',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '系统管理', icon: 'user'},
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/system-manage/user/index.vue'),
+        name: 'SystemManageUser',
+        hidden: false,
+        meta: { title: '人员管理', icon: 'user' }
+      },
+      {
+        path: 'action',
+        component: () => import('@/views/system-manage/action/index.vue'),
+        name: 'SystemManageAction',
+        hidden: false,
+        meta: { title: '操作日志', icon: 'user' }
+      },
+    ]
+  },
 ]
 const router = createRouter({
   history: createWebHistory(),
