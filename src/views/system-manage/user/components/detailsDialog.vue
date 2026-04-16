@@ -55,16 +55,21 @@ const show = async(type,row) => {
         1:$t('common.edit'),
         2:$t('common.add')
     }
-    let res = await getAuterUser({id:row.id});
-    if(res.code === 200) {
-        detailsInfo.value = res.data || {}
+    isCheck.value = type === 0
+    actionType.value = type
+    title.value = num[type]
+    if(type === 2) {
+        detailsInfo.value = {}
         visible.value = true
-        nextTick(() => {
-            avatarRef.value.setAvatar(detailsInfo.value.avatar)
-        })
-        isCheck.value = type === 0
-        actionType.value = type
-        title.value = num[type]
+    }else {
+        let res = await getAuterUser({id:row.id});
+        if(res.code === 200) {
+            detailsInfo.value = res.data || {}
+            visible.value = true
+            nextTick(() => {
+                avatarRef.value.setAvatar(detailsInfo.value.avatar)
+            })
+        }
     }
 }
 const emit = defineEmits(['close'])
@@ -99,6 +104,7 @@ function handleClose() {
     visible.value = false;
     detailsInfo.value = {};
     actionType.value = null;
+    avatarRef.value.setAvatar('')
     emit('close')
 }
 </script>

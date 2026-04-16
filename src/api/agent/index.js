@@ -10,7 +10,7 @@ export function getUserList(data) {
 // 获取代理用户详情
 export function getUserDetail(data) {
   return request({
-    url: '/admin/v1/agent/user/'+data.id,
+    url: '/admin/v1/agent/agent/'+data.id,
     method: 'get',
     params: {}
   })
@@ -18,7 +18,7 @@ export function getUserDetail(data) {
 // 新增
 export function addUser(data) {
   return request({
-    url: '/admin/v1/agent/user',
+    url: '/admin/v1/agent/agent',
     method: 'post',
     data: data
   })
@@ -26,7 +26,7 @@ export function addUser(data) {
 // 编辑
 export function updateUser(data) {
   return request({
-    url: '/admin/v1/agent/user/'+data.id,
+    url: '/admin/v1/agent/agent/'+data.id,
     method: 'put',
     data: data
   })
@@ -34,7 +34,7 @@ export function updateUser(data) {
 // 删除
 export function deleteUser(data) {
   return request({
-    url: '/admin/v1/agent/user/'+data.id,
+    url: '/admin/v1/agent/agent/'+data.id,
     method: 'delete',
     data: data
   })

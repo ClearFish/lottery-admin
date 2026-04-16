@@ -60,11 +60,11 @@ const setAvatar = (avatar) => {
 
 
 /** 覆盖默认上传行为 */
-function requestUpload() {
+function requestUpload(file) {
+  console.log(file,"2222")
   let formData = new FormData()
-  formData.append("file", options.file)
+  formData.append("file", file.file)
   uploadFile(formData).then(res => {
-    open.value = false
     console.log(res)
     options.value.img =  res.data.Url
     proxy.$modal.msgSuccess("上传成功")
@@ -79,13 +79,13 @@ function beforeUpload(file) {
   if (file.type.indexOf("image/") == -1) {
     proxy.$modal.msgError("文件格式错误，请上传图片类型,如：JPG，PNG后缀的文件。")
   } else {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => {
-      options.img = reader.result
-      options.filename = file.name
-      options.file = file
-    }
+    // const reader = new FileReader()
+    // reader.readAsDataURL(file)
+    // reader.onload = () => {
+    //   options.value.img = reader.result
+    //   options.value.filename = file.name
+    //   options.value.file = file
+    // }
   }
 }
 defineExpose({

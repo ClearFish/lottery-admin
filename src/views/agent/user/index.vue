@@ -36,6 +36,9 @@
                 </el-form-item>
             </el-form>
         </div>
+        <div class="add_box">
+            <el-button type="primary" @click="addDetails">{{ $t('common.add') }}</el-button>
+        </div>
         <el-table :data="dataList" style="width: 100%" border >
             <el-table-column prop="id" label="id" align="center"  />
             <el-table-column prop="name" label="name" align="center">
@@ -53,7 +56,7 @@
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>
-                    <el-button type="danger" >{{ $t('common.delete') }}</el-button>
+                    <el-button type="danger"  @click="deleteRow(scope.row)">{{ $t('common.delete') }}</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -64,12 +67,12 @@
             v-model:limit="page.pageSize"
             @pagination="getList"
         />
-        <details-dialog ref="detailsDialogRef" />
+        <details-dialog ref="detailsDialogRef" @close="getList"/>
     </div>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getUserList } from '@/api/agent'
+import { getUserList,deleteUser } from '@/api/agent'
 import detailsDialog from '@/views/agent/user/components/detailsDialog.vue'
 const detailsDialogRef = ref(null)
 const dataList = ref([])
@@ -88,6 +91,16 @@ const showDetails = (row) => {
 }
 const editDetails = (row) => {
     detailsDialogRef.value.show(1,row)
+}
+const addDetails = () => {
+    detailsDialogRef.value.show(2)
+}
+const deleteRow = async (row) => {
+    let res = await deleteUser({id:row.id});
+    if(res.code == 200) {
+        ElMessage.success('delete success')
+        getList()
+    }
 }
 const total = ref(0)
 const page = ref({...pageInit})
@@ -112,3 +125,8 @@ onMounted(() => {
 
 
 </script>
+<style lang="scss" scoped>
+.add_box {
+    margin-bottom: 10px;
+}
+</style>
