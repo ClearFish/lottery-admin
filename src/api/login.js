@@ -67,3 +67,11 @@ export function getCodeImg() {
     timeout: 20000
   })
 }
+// 刷新token 
+export function refreshToken(token) {
+  return request({
+    url: '/admin/v1/refresh-token',
+    method: 'post',
+    data: { token }
+  })
+}

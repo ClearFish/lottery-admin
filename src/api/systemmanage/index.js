@@ -7,3 +7,26 @@ export function getUserList(data) {
     params: data
   })
 }
+export function addUser(data) {
+  return request({
+    url: '/admin/v1/auth/user',
+    method: 'post',
+    data: data
+  })
+}
+
+export function updateUser(data) {
+  return request({
+    url: '/admin/v1/auth/user/1',
+    method: 'put',
+    data: data
+  })
+}
+
+export function deleteUser(data) {
+  return request({
+    url: '/admin/v1/auth/user/1',
+    method: 'delete',
+    data: data
+  })
+}

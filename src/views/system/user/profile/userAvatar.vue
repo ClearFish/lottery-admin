@@ -63,6 +63,7 @@ import "vue-cropper/dist/index.css"
 import { VueCropper } from "vue-cropper"
 import { uploadAvatar } from "@/api/system/user"
 import useUserStore from "@/store/modules/user"
+import Avatar from "@/assets/images/profile.jpg"
 
 const userStore = useUserStore()
 const { proxy } = getCurrentInstance()
@@ -73,7 +74,7 @@ const title = ref("修改头像")
 
 //图片裁剪数据
 const options = reactive({
-  img: userStore.avatar,     // 裁剪图片的地址
+  img: userStore.avatar || Avatar,     // 裁剪图片的地址
   autoCrop: true,            // 是否默认生成截图框
   autoCropWidth: 200,        // 默认生成截图框宽度
   autoCropHeight: 200,       // 默认生成截图框高度

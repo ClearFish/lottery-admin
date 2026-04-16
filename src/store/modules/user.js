@@ -1,6 +1,6 @@
 import router from '@/router'
 import { ElMessageBox, } from 'element-plus'
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout, getInfo, refreshToken } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { isHttp, isEmpty } from "@/utils/validate"
 import defAva from '@/assets/images/profile.jpg'
@@ -79,6 +79,18 @@ const useUserStore = defineStore(
             this.roles = []
             this.permissions = []
             removeToken()
+            resolve()
+          }).catch(error => {
+            reject(error)
+          })
+        })
+      },
+      // 刷新token
+      refreshToken() {
+        return new Promise((resolve, reject) => {
+          refreshToken(this.token).then(res => {
+            setToken(res.data.token)
+            this.token = res.data.token
             resolve()
           }).catch(error => {
             reject(error)

@@ -95,6 +95,10 @@ service.interceptors.response.use(res => {
       })
     }
       return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
+    }else if(code == 403) {
+        useUserStore().refreshToken().then(() => {
+          location.href = '/index'
+        })
     } else if (code === 500) {
       ElMessage({ message: msg, type: 'error' })
       return Promise.reject(new Error(msg))
@@ -108,10 +112,20 @@ service.interceptors.response.use(res => {
       return  Promise.resolve(res.data)
     }
   },
-  error => {
-    console.log('err' + error)
-    let { message } = error
-    if (message == "Network Error") {
+  error => {``
+    console.log('err' + error, error.response.data)
+    let { message, response } = error
+    console.log(response.data,'333')
+    if(response.data.code == 403) {
+      useUserStore().logOut().then(() => {
+          location.href = '/index'
+        })
+    }else if(response.data.code == 401) {
+      useUserStore().logOut().then(() => {
+          location.href = '/index'
+        })
+    }
+    else if (message == "Network Error") {
       message = "后端接口连接异常"
     } else if (message.includes("timeout")) {
       message = "系统接口请求超时"
