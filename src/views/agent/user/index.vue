@@ -73,6 +73,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { getUserList,deleteUser } from '@/api/agent'
+import { ElMessage } from 'element-plus'
 import detailsDialog from '@/views/agent/user/components/detailsDialog.vue'
 const detailsDialogRef = ref(null)
 const dataList = ref([])
