@@ -3,7 +3,7 @@ import path from 'path'
 import createVitePlugins from './vite/plugins'
 
 const baseUrl = 'http://ec2-43-198-91-0.ap-east-1.compute.amazonaws.com:8081' // 后端接口
-
+const staticUrl = 'http://ec2-43-198-91-0.ap-east-1.compute.amazonaws.com:8080' // 静态资源接口
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd())
@@ -53,7 +53,7 @@ export default defineConfig(({ mode, command }) => {
           rewrite: (p) => p.replace(/^\/dev-api/, '')
         },
         '/static': {
-          target: baseUrl,
+          target: staticUrl,
           changeOrigin: true,
           rewrite: (p) => p.replace(/^\/dev-api/, '')
         },

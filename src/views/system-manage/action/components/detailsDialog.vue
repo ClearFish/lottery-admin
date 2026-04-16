@@ -17,7 +17,7 @@
                     <el-input v-model="detailsInfo.email" placeholder="请输入邮箱"></el-input>
                 </el-form-item>
                 <el-form-item label="头像" prop="avatar">
-                    <Avatar ref="avatarRef" @update:avatar="updateAvatarUrl" />
+                    <Avatar :avatar="detailsInfo.avatar" @update:avatar="updateAvatarUrl" />
                 </el-form-item>
                 <el-form-item label="状态" prop="status">
                     <el-radio-group v-model="detailsInfo.status">
@@ -39,7 +39,7 @@
 import { ref,defineExpose } from 'vue'
 import {$t} from '@/locales'
 import Avatar from "@/components/avatar/index.vue"
-import { addUser,updateUser,getAuterUser } from "@/api/systemmanage/index.js"
+import { addUser,updateUser } from "@/api/systemmanage/index.js"
 
 const { proxy } = getCurrentInstance()
 const visible = ref(false)
@@ -48,24 +48,18 @@ const detailsInfo = ref({})
 const isCheck = ref(false)
 const actionType = ref(null)
 const formRef = ref(null)
-const avatarRef = ref(null)
-const show = async(type,row) => {
+const show = (type,row) => {
+    console.log(type,row)
     const num = {
         0:$t('common.detail'),
         1:$t('common.edit'),
         2:$t('common.add')
     }
-    let res = await getAuterUser({id:row.id});
-    if(res.code === 200) {
-        detailsInfo.value = res.data || {}
-        visible.value = true
-        nextTick(() => {
-            avatarRef.value.setAvatar(detailsInfo.value.avatar)
-        })
-        isCheck.value = type === 0
-        actionType.value = type
-        title.value = num[type]
-    }
+    visible.value = true
+    isCheck.value = type === 0
+    actionType.value = type
+    title.value = num[type]
+    detailsInfo.value = row || {}
 }
 const emit = defineEmits(['close'])
 /** 更新头像URL */

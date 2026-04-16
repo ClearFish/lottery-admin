@@ -80,7 +80,6 @@ const queryParams = ref({
     mobile:''
 })
 const showDetails = (row) => {
-    console.log(row)
     detailsDialogRef.value.show(0,row)
 }
 const editDetails = (row) => {

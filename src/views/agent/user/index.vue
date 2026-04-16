@@ -3,19 +3,19 @@
         <div class="form_box">
             <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
                 <el-form-item label="id:" prop="id">
-                    <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
+                    <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
                 <el-form-item label="username:" prop="username">
-                    <el-input v-model="queryParams.username" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
+                    <el-input v-model="queryParams.username" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
                 <el-form-item label="email:" prop="email">
-                    <el-input v-model="queryParams.email" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
+                    <el-input v-model="queryParams.email" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
                 <el-form-item label="phone:" prop="phone">
-                    <el-input v-model="queryParams.phone" :placeholder="$t('common.place_enter') + ' ' + $t('agent.id')" />
+                    <el-input v-model="queryParams.phone" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
                 <el-form-item label="status:" prop="status">
-                    <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' ' + $t('agent.id')">
+                    <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' '">
                         <el-option label="normol" value="1" />
                         <el-option label="disabled" value="0" />
                     </el-select>

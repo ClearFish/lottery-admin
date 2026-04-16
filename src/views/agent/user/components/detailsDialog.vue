@@ -28,21 +28,26 @@
 <script setup>
 import { ref,defineExpose } from 'vue'
 import {$t} from '@/locales'
+import { getUserDetail,addUser,updateUser } from "@/api/agent/index.js"
 
 const visible = ref(false)
 const title = ref($t('common.detail'))
 const detailsInfo = ref({})
 const isEdit = ref(false)
-const show = (type,row) => {
+const show = async(type,row) => {
     console.log(type,row)
     const num = {
         0:$t('common.detail'),
         1:$t('common.edit')
     }
-    visible.value = true
-    isEdit.value = type === 1
-    title.value = num[type]
-    detailsInfo.value = row
+    let res = await getUserDetail({id:row.id})
+    if(res.code === 200){
+        detailsInfo.value = res.data
+        visible.value = true
+        isEdit.value = type === 1
+        title.value = num[type]
+    }
+  
 }
 defineExpose({
     show

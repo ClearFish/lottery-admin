@@ -7,6 +7,15 @@ export function getUserList(data) {
     params: data
   })
 }
+// 获取代理用户详情
+export function getAuterUser(data) {
+  return request({
+    url: '/admin/v1/auth/user/'+data.id,
+    method: 'get',
+    params: {}
+  })
+}
+// 新增
 export function addUser(data) {
   return request({
     url: '/admin/v1/auth/user',
@@ -14,7 +23,7 @@ export function addUser(data) {
     data: data
   })
 }
-
+// 编辑
 export function updateUser(data) {
   return request({
     url: '/admin/v1/auth/user/'+data.id,
@@ -22,7 +31,7 @@ export function updateUser(data) {
     data: data
   })
 }
-
+// 删除
 export function deleteUser(data) {
   return request({
     url: '/admin/v1/auth/user/'+data.id,

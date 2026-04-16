@@ -4,10 +4,10 @@
     <img :src="noImg" alt="" class="no_img" v-else>
     <div class="action_box" v-if="showAction">
        <el-button type="text">
-        <el-icon class="el-icon--right" color="#000"><Delete /></el-icon>
+        <el-icon class="el-icon--right" color="#fff"><Delete /></el-icon>
       </el-button>
       <el-button type="text">
-        <el-icon class="el-icon--right" color="#000"><View /></el-icon>
+        <el-icon class="el-icon--right" color="#fff"><View /></el-icon>
       </el-button>
       <el-upload
           action="#"
@@ -18,7 +18,7 @@
           class="upload_btn"
         >
           <el-button type="text">
-            <el-icon class="el-icon--right" color="#000"><Upload /></el-icon>
+            <el-icon class="el-icon--right" color="#fff"><Upload /></el-icon>
           </el-button>
         </el-upload>
     </div>
@@ -27,6 +27,7 @@
 
 <script setup>
 import "vue-cropper/dist/index.css"
+import { ref,defineExpose } from 'vue'
 import { uploadFile } from "@/api/file"
 import noImg from "@/assets/images/no_img.png"
 import {$t} from "@/locales"
@@ -36,19 +37,12 @@ const open = ref(false)
 const visible = ref(false)
 const showAction = ref(false)
 const title = ref($t('common.avatarUpload'))
-const props = defineProps({
-  avatar: {
-    type: String,
-    default: ''
-  }
-})
 
 const accept = ref("image/*")
 const emit = defineEmits(['update:avatar'])
-
 //图片裁剪数据
-const options = reactive({
-  img: props.avatar,     // 裁剪图片的地址
+const options = ref({
+  img: '',     // 裁剪图片的地址
   autoCrop: true,            // 是否默认生成截图框
   autoCropWidth: 200,        // 默认生成截图框宽度
   autoCropHeight: 200,       // 默认生成截图框高度
@@ -58,6 +52,11 @@ const options = reactive({
   previews: {},             //预览数据
   file: null
 })
+// 设置头像
+const setAvatar = (avatar) => {
+  options.value.img = avatar
+}
+
 
 
 /** 覆盖默认上传行为 */
@@ -67,7 +66,7 @@ function requestUpload() {
   uploadFile(formData).then(res => {
     open.value = false
     console.log(res)
-    options.img =  import.meta.env.VITE_APP_BASE_URL + res.data.Url
+    options.value.img =  res.data.Url
     proxy.$modal.msgSuccess("上传成功")
     emit('update:avatar', res.data.Url)
     visible.value = false
@@ -89,7 +88,9 @@ function beforeUpload(file) {
     }
   }
 }
-
+defineExpose({
+  setAvatar
+})
 </script>
 
 <style lang='scss' scoped>
