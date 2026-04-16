@@ -90,7 +90,7 @@ const addDetails = () => {
     detailsDialogRef.value.show(2)
 }
 const deleteRow = async (row) => {
-    let res = await deleteUser(row);
+    let res = await deleteUser({id:row.id});
     if(res.code == 200) {
         ElMessage.success('delete success')
         getList()

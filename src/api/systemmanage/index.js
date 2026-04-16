@@ -17,7 +17,7 @@ export function addUser(data) {
 
 export function updateUser(data) {
   return request({
-    url: '/admin/v1/auth/user/1',
+    url: '/admin/v1/auth/user/'+data.id,
     method: 'put',
     data: data
   })
@@ -25,7 +25,7 @@ export function updateUser(data) {
 
 export function deleteUser(data) {
   return request({
-    url: '/admin/v1/auth/user/1',
+    url: '/admin/v1/auth/user/'+data.id,
     method: 'delete',
     data: data
   })
