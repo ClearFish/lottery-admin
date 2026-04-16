@@ -4,10 +4,10 @@
     <img :src="noImg" alt="" class="no_img" v-else>
     <div class="action_box" v-if="showAction">
        <el-button type="text">
-        <el-icon class="el-icon--right" color="#fff"><Delete /></el-icon>
+        <el-icon class="el-icon--right" color="#fff" @click="deleteAvatar"><Delete /></el-icon>
       </el-button>
       <el-button type="text">
-        <el-icon class="el-icon--right" color="#fff"><View /></el-icon>
+        <el-icon class="el-icon--right" color="#fff" @click="preview"><View /></el-icon>
       </el-button>
       <el-upload
           action="#"
@@ -22,6 +22,12 @@
           </el-button>
         </el-upload>
     </div>
+    <el-image-viewer
+      v-if="showViewer"
+      z-index="9999999"
+      :url-list="previewSrcList"
+      @close="showViewer = false"
+    />
   </div>
 </template>
 
@@ -37,6 +43,8 @@ const open = ref(false)
 const visible = ref(false)
 const showAction = ref(false)
 const title = ref($t('common.avatarUpload'))
+const showViewer = ref(false)
+const previewSrcList = ref([])
 
 const accept = ref("image/*")
 const emit = defineEmits(['update:avatar'])
@@ -57,8 +65,16 @@ const setAvatar = (avatar) => {
   options.value.img = avatar
 }
 
-
-
+/** 预览头像 */
+const preview = () => {
+  previewSrcList.value = [options.value.img]
+  showViewer.value = true;
+}
+/** 删除头像 */
+const deleteAvatar = () => {
+  options.value.img = ''
+  emit('update:avatar', '')
+}
 /** 覆盖默认上传行为 */
 function requestUpload(file) {
   console.log(file,"2222")
