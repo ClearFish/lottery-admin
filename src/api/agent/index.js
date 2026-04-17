@@ -73,6 +73,13 @@ export function updateAgentWalletBalance(data) {
     data: data
   })
 }
-
+// 代理用户余额记录列表 /admin/v1/currency/agent-balance-logs/
+export function getAgentBalanceLogsList(data) {
+  return request({
+    url: '/admin/v1/currency/agent-balance-logs/',
+    method: 'get',
+    params: {}
+  })
+}
 
 

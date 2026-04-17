@@ -33,9 +33,6 @@
                 </el-form-item>
             </el-form>
         </div>
-        <div class="add_box">
-            <el-button type="primary" @click="addDetails">{{ $t('common.add') }}</el-button>
-        </div>
         <el-table :data="dataList" style="width: 100%" border >
             <el-table-column prop="id" :label="$t('systemManage.user.id')" align="center"  />
             <el-table-column prop="nick_name" :label="$t('systemManage.user.nickName')" align="center"/>
@@ -48,7 +45,6 @@
             <el-table-column prop="" :label="$t('systemManage.user.action')" align="center" min-width="120">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
-                    <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>
                     <el-button type="danger" @click="deleteRow(scope.row)">{{ $t('common.delete') }}</el-button>
                 </template>
             </el-table-column>
@@ -67,7 +63,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage,ElMessageBox } from 'element-plus'
 import {$t} from "@/locales"
-import { getUserList,deleteUser } from '@/api/systemmanage'
+import { getLogList,deleteLog } from '@/api/systemmanage'
 import detailsDialog from './components/detailsDialog.vue'
 const detailsDialogRef = ref(null)
 const dataList = ref([])
@@ -84,19 +80,14 @@ const showDetails = (row) => {
     console.log(row)
     detailsDialogRef.value.show(0,row)
 }
-const editDetails = (row) => {
-    detailsDialogRef.value.show(1,row)
-}
-const addDetails = () => {
-    detailsDialogRef.value.show(2)
-}
+
 const deleteRow = async (row) => {
     ElMessageBox.confirm($t('common.delete_confirm'), $t('common.logout_title'), {
         confirmButtonText: $t('common.confirm'),
         cancelButtonText: $t('common.cancel'),
         type: 'warning'
     }).then(async () => {
-        let res = await deleteUser({id:row.id});
+        let res = await deleteLog({id:row.id});
         if(res.code == 200) {
             ElMessage.success($t('common.delete_success'))
             getList()
@@ -106,7 +97,7 @@ const deleteRow = async (row) => {
 const total = ref(0)
 const page = ref({...pageInit})
 async function getList() {
-  const res = await getUserList(page.value)
+  const res = await getLogList(page.value)
   if (res.code === 200) {
     dataList.value = res.data
     total.value = res.meta.total

@@ -128,5 +128,26 @@
       "submit": "提交",
       "close": "关闭"
     }
+  },
+  "game": {
+    "editSuccess": "编辑成功",
+    "gameConfig": {
+      "agent": "所属代理",
+      "status": "状态",
+      "bet": "投注",
+      "autoDraw": "自动开奖",
+      "icon": "图标",
+      "none": "无",
+      "betStatus": "投注状态",
+      "weight": "权重"
+    },
+    "gameConfigDialog": {
+      "gameName": "游戏名称",
+      "gameCode": "游戏编码",
+      "gameIcon": "游戏图标",
+      "gameStatus": "游戏状态",
+      "betStatus": "投注状态",
+      "drawStatus": "开奖状态"
+    }
   }
 }

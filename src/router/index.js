@@ -161,7 +161,14 @@ export const constantRoutes = [
         component: () => import('@/views/agent/balance/index.vue'),
         name: 'AgentBalance',
         hidden: false,
-        meta: { title: '代理余额列表', icon: 'user' }
+        meta: { title: '代理余额钱包列表', icon: 'user' }
+      },
+      {
+        path: 'report',
+        component: () => import('@/views/agent/balance-report/index.vue'),
+        name: 'AgentReport',
+        hidden: false,
+        meta: { title: '代理用户余额列表', icon: 'user' }
       },
       {
         path: 'menu',
@@ -332,7 +339,14 @@ export const sidebarRouters = [
         component: () => import('@/views/agent/balance/index.vue'),
         name: 'AgentBalance',
         hidden: false,
-        meta: { title: '代理余额列表', icon: 'user' }
+        meta: { title: '代理余额钱包列表', icon: 'user' }
+      },
+      {
+        path: 'report',
+        component: () => import('@/views/agent/balance-report/index.vue'),
+        name: 'AgentReport',
+        hidden: false,
+        meta: { title: '代理用户余额列表', icon: 'user' }
       },
       {
         path: 'menu',

@@ -30,7 +30,6 @@
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>
-                    <!-- <el-button type="danger"  @click="deleteRow(scope.row)">{{ $t('common.delete') }}</el-button> -->
                 </template>
             </el-table-column>
         </el-table>
@@ -46,7 +45,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getAgentWallet } from '@/api/agent'
+import { getAgentBalanceLogsList } from '@/api/agent'
 import { ElMessage,ElMessageBox } from 'element-plus'
 import detailsDialog from './components/detailsDialog.vue'
 import {$t} from "@/locales"
@@ -71,23 +70,10 @@ const editDetails = (row) => {
 const addDetails = () => {
     detailsDialogRef.value.show(2)
 }
-const deleteRow = async (row) => {
-    ElMessageBox.confirm($t('common.delete_confirm'), $t('common.logout_title'), {
-        confirmButtonText: $t('common.confirm'),
-        cancelButtonText: $t('common.cancel'),
-        type: 'warning'
-    }).then(async () => {
-        let res = await deleteCurrencyConfig({id:row.id});
-        if(res.code == 200) {
-            ElMessage.success($t('common.delete_success'))
-            getList()
-        }
-    }).catch(() => { })
-}
 const total = ref(0)
 const page = ref({...pageInit})
 async function getList() {
-  const res = await getAgentWallet(page.value)
+  const res = await getAgentBalanceLogsList(page.value)
   if (res.code === 200) {
     dataList.value = res.data
     total.value = res.meta.total

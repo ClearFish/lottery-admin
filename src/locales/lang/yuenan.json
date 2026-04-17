@@ -129,5 +129,26 @@
       "submit": "Gửi",
       "close": "Đóng"
     }
+  },
+  "game": {
+    "editSuccess": "Chỉnh sửa thành công",
+    "gameConfig": {
+      "agent": "Đại lý",
+      "status": "Trạng thái",
+      "bet": "Cược",
+      "autoDraw": "Tự động mở thưởng",
+      "icon": "Biểu tượng",
+      "none": "Không có",
+      "betStatus": "Trạng thái cược",
+      "weight": "Trọng số"
+    },
+    "gameConfigDialog": {
+      "gameName": "Tên trò chơi",
+      "gameCode": "Mã trò chơi",
+      "gameIcon": "Biểu tượng trò chơi",
+      "gameStatus": "Trạng thái trò chơi",
+      "betStatus": "Trạng thái cược",
+      "drawStatus": "Trạng thái mở thưởng"
+    }
   }
 }

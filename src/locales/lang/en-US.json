@@ -128,5 +128,26 @@
       "submit": "Submit",
       "close": "Close"
     }
+  },
+  "game": {
+    "editSuccess": "Edited successfully",
+    "gameConfig": {
+      "agent": "Agent",
+      "status": "Status",
+      "bet": "Bet",
+      "autoDraw": "Auto Draw",
+      "icon": "Icon",
+      "none": "None",
+      "betStatus": "Bet Status",
+      "weight": "Weight"
+    },
+    "gameConfigDialog": {
+      "gameName": "Game Name",
+      "gameCode": "Game Code",
+      "gameIcon": "Game Icon",
+      "gameStatus": "Game Status",
+      "betStatus": "Bet Status",
+      "drawStatus": "Draw Status"
+    }
   }
 }
