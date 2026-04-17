@@ -21,6 +21,112 @@
     "avatarUpload":"头像上传"
   },
   "agent":{
-    "id":"id"
+    "id":"id",
+    "addSuccess":"添加成功",
+    "editSuccess":"编辑成功",
+    "user": {
+      "id": "ID",
+      "username": "用户名",
+      "email": "邮箱",
+      "phone": "手机号",
+      "status": "状态",
+      "normal": "正常",
+      "disabled": "禁用",
+      "createdTime": "创建时间",
+      "name": "姓名",
+      "areaCode": "区号",
+      "action": "操作"
+    },
+    "balance": {
+      "id": "ID",
+      "currency": "货币",
+      "createdTime": "创建时间",
+      "updatedTime": "更新时间",
+      "action": "操作"
+    },
+    "dialog": {
+      "username": "用户名",
+      "password": "密码",
+      "areaCode": "区号",
+      "phone": "手机号",
+      "email": "邮箱",
+      "firstName": "姓",
+      "lastName": "名",
+      "avatar": "头像",
+      "status": "状态",
+      "submit": "提交",
+      "close": "关闭"
+    },
+    "balanceDialog": {
+      "agentId": "代理ID",
+      "currency": "货币"
+    },
+    "actionlog": {
+      "title": "代理操作日志列表"
+    },
+    "menu": {
+      "title": "菜单权限"
+    },
+    "applay": {
+      "title": "申请"
+    }
+  },
+  "currency": {
+    "addSuccess": "添加成功",
+    "editSuccess": "编辑成功",
+    "config": {
+      "frontend": "前端",
+      "show": "显示",
+      "hide": "隐藏",
+      "status": "状态",
+      "disabled": "禁用",
+      "enable": "启用",
+      "id": "ID",
+      "name": "名称",
+      "code": "编码",
+      "symbol": "符号",
+      "displayPrecision": "前端显示",
+      "action": "操作"
+    },
+    "dialog": {
+      "name": "货币名称",
+      "code": "货币编码",
+      "symbol": "货币符号",
+      "icon": "货币图标",
+      "minDeposit": "最小充值",
+      "minWithdraw": "最小提现",
+      "submit": "提交",
+      "close": "关闭"
+    },
+    "userBalance": {
+      "title": "用户余额列表"
+    }
+  },
+  "systemManage": {
+    "addSuccess": "添加成功",
+    "editSuccess": "编辑成功",
+    "user": {
+      "id": "ID",
+      "username": "用户名",
+      "nickName": "昵称",
+      "email": "邮箱",
+      "status": "状态",
+      "normal": "正常",
+      "disabled": "禁用",
+      "createTime": "创建时间",
+      "lastLogin": "最后登录",
+      "lastLoginIp": "最后登录IP",
+      "createdAt": "创建于",
+      "action": "操作"
+    },
+    "dialog": {
+      "name": "名称",
+      "nickName": "昵称",
+      "email": "邮箱",
+      "avatar": "头像",
+      "status": "状态",
+      "submit": "提交",
+      "close": "关闭"
+    }
   }
 }

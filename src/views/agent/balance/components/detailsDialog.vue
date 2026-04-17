@@ -7,7 +7,7 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-               <el-form-item label="代理id" prop="id">
+               <el-form-item :label="$t('agent.balanceDialog.agentId')" prop="id">
                      <el-select v-model="detailsInfo.id" :placeholder="$t('common.place_select') + ' '">
                         <el-option v-for="item in agentList" 
                             :key="item.id" 
@@ -15,18 +15,18 @@
                             :value="item.id" />
                     </el-select>
                 </el-form-item>
-                <el-form-item label="货币" prop="currency">
+                <el-form-item :label="$t('agent.balanceDialog.currency')" prop="currency">
                     <el-select v-model="detailsInfo.currency" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="normol" value="1" />
-                        <el-option label="disabled" value="0" />
+                        <el-option :label="$t('agent.user.normal')" value="1" />
+                        <el-option :label="$t('agent.user.disabled')" value="0" />
                     </el-select>
                 </el-form-item>
            </el-form>
         </div>
          <template #footer>
             <div class="dialog-footer">
-                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">提交</el-button>
-                <el-button type="default"  @click="handleClose">关闭</el-button>
+                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">{{ $t('agent.dialog.submit') }}</el-button>
+                <el-button type="default"  @click="handleClose">{{ $t('agent.dialog.close') }}</el-button>
             </div>
         </template>
     </el-dialog>
@@ -77,14 +77,14 @@ const handleSubmit = async () => {
         // 新增
         let res = await addUser(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess("添加成功")
+            proxy.$modal.msgSuccess($t('agent.addSuccess'))
             handleClose()
         }
     }else {
         // 编辑
         let res = await updateUser(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess("编辑成功")
+            proxy.$modal.msgSuccess($t('agent.editSuccess'))
             handleClose()
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        申请
+        {{ $t('agent.applay.title') }}
     </div>
 </template>
 <script setup>

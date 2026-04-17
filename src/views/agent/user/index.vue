@@ -2,25 +2,25 @@
     <div>
         <div class="form_box">
             <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
-                <el-form-item label="id:" prop="id">
+                <el-form-item :label="$t('agent.user.id') + ':'" prop="id">
                     <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
-                <el-form-item label="username:" prop="username">
+                <el-form-item :label="$t('agent.user.username') + ':'" prop="username">
                     <el-input v-model="queryParams.username" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
-                <el-form-item label="email:" prop="email">
+                <el-form-item :label="$t('agent.user.email') + ':'" prop="email">
                     <el-input v-model="queryParams.email" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
-                <el-form-item label="phone:" prop="phone">
+                <el-form-item :label="$t('agent.user.phone') + ':'" prop="phone">
                     <el-input v-model="queryParams.phone" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
-                <el-form-item label="status:" prop="status">
+                <el-form-item :label="$t('agent.user.status') + ':'" prop="status">
                     <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="normol" value="1" />
-                        <el-option label="disabled" value="0" />
+                        <el-option :label="$t('agent.user.normal')" value="1" />
+                        <el-option :label="$t('agent.user.disabled')" value="0" />
                     </el-select>
                 </el-form-item>
-                <el-form-item label="create time:" prop="created_at">
+                <el-form-item :label="$t('agent.user.createdTime') + ':'" prop="created_at">
                     <el-date-picker 
                         v-model="queryParams.created_at" 
                         type="daterange" 
@@ -40,19 +40,19 @@
             <el-button type="primary" @click="addDetails">{{ $t('common.add') }}</el-button>
         </div>
         <el-table :data="dataList" style="width: 100%" border >
-            <el-table-column prop="id" label="id" align="center"  />
-            <el-table-column prop="name" label="name" align="center">
+            <el-table-column prop="id" :label="$t('agent.user.id')" align="center"  />
+            <el-table-column prop="name" :label="$t('agent.user.name')" align="center">
                 <template #default="scope">
                     {{ scope.row.first_name +' '+ scope.row.last_name }}
                 </template>
             </el-table-column>
-            <el-table-column prop="username" label="username" align="center"  />
-            <el-table-column prop="email" label="email" align="center"  />
-            <el-table-column prop="created_at" label="created time" align="center"  />
-            <el-table-column prop="phone" label="phone" align="center"  />
-            <el-table-column prop="area_code" label="area_code" align="center"  />
-            <el-table-column prop="status" label="status" align="center"  />
-            <el-table-column prop="" label="action" align="center" min-width="150">
+            <el-table-column prop="username" :label="$t('agent.user.username')" align="center"  />
+            <el-table-column prop="email" :label="$t('agent.user.email')" align="center"  />
+            <el-table-column prop="created_at" :label="$t('agent.user.createdTime')" align="center"  />
+            <el-table-column prop="phone" :label="$t('agent.user.phone')" align="center"  />
+            <el-table-column prop="area_code" :label="$t('agent.user.areaCode')" align="center"  />
+            <el-table-column prop="status" :label="$t('agent.user.status')" align="center"  />
+            <el-table-column prop="" :label="$t('agent.user.action')" align="center" min-width="150">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>

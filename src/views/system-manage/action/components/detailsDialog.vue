@@ -7,30 +7,30 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                 <el-form-item label="名称" prop="username">
-                    <el-input v-model="detailsInfo.username" placeholder="请输入名称"></el-input>
+                <el-form-item :label="$t('systemManage.dialog.name')" prop="username">
+                    <el-input v-model="detailsInfo.username" :placeholder="$t('common.place_enter') + $t('systemManage.dialog.name')"></el-input>
                 </el-form-item>
-                <el-form-item label="昵称" prop="nick_name">
-                    <el-input v-model="detailsInfo.nick_name" placeholder="请输入昵称"></el-input>
+                <el-form-item :label="$t('systemManage.dialog.nickName')" prop="nick_name">
+                    <el-input v-model="detailsInfo.nick_name" :placeholder="$t('common.place_enter') + $t('systemManage.dialog.nickName')"></el-input>
                 </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="detailsInfo.email" placeholder="请输入邮箱"></el-input>
+                <el-form-item :label="$t('systemManage.dialog.email')" prop="email">
+                    <el-input v-model="detailsInfo.email" :placeholder="$t('common.place_enter') + $t('systemManage.dialog.email')"></el-input>
                 </el-form-item>
-                <el-form-item label="头像" prop="avatar">
+                <el-form-item :label="$t('systemManage.dialog.avatar')" prop="avatar">
                     <Avatar ref="avatarRef" @update:avatar="updateAvatarUrl" />
                 </el-form-item>
-                <el-form-item label="状态" prop="status">
+                <el-form-item :label="$t('systemManage.dialog.status')" prop="status">
                     <el-radio-group v-model="detailsInfo.status">
-                        <el-radio label="normal">正常</el-radio>
-                        <el-radio label="disabled">禁用</el-radio>
+                        <el-radio label="normal">{{ $t('systemManage.user.normal') }}</el-radio>
+                        <el-radio label="disabled">{{ $t('systemManage.user.disabled') }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
            </el-form>
         </div>
         <template #footer>
             <div class="dialog-footer">
-                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">提交</el-button>
-                <el-button type="default"  @click="handleClose">关闭</el-button>
+                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">{{ $t('systemManage.dialog.submit') }}</el-button>
+                <el-button type="default"  @click="handleClose">{{ $t('systemManage.dialog.close') }}</el-button>
             </div>
         </template>
     </el-dialog>
@@ -74,14 +74,14 @@ const handleSubmit = async () => {
         // 新增
         let res = await addUser(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess("添加成功")
+            proxy.$modal.msgSuccess($t('systemManage.addSuccess'))
             handleClose()
         }
     }else {
         // 编辑
         let res = await updateUser(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess("编辑成功")
+            proxy.$modal.msgSuccess($t('systemManage.editSuccess'))
             handleClose()
         }
     }

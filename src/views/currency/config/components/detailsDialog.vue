@@ -7,42 +7,42 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                 <el-form-item label="货币名称" prop="name">
-                     <el-input v-model="detailsInfo.name" placeholder="请输入货币名称" />
+                <el-form-item :label="$t('currency.dialog.name')" prop="name">
+                    <el-input v-model="detailsInfo.name" :placeholder="$t('common.place_enter') + $t('currency.dialog.name')" />
                 </el-form-item>
-                <el-form-item label="货币Code" prop="code">
-                    <el-input v-model="detailsInfo.code" placeholder="请输入货币Code" />
+                <el-form-item :label="$t('currency.dialog.code')" prop="code">
+                    <el-input v-model="detailsInfo.code" :placeholder="$t('common.place_enter') + $t('currency.dialog.code')" />
                 </el-form-item>
-                <el-form-item label="货币符号" prop="symbol">
-                    <el-input v-model="detailsInfo.symbol" placeholder="请输入货币符号" />
+                <el-form-item :label="$t('currency.dialog.symbol')" prop="symbol">
+                    <el-input v-model="detailsInfo.symbol" :placeholder="$t('common.place_enter') + $t('currency.dialog.symbol')" />
                 </el-form-item>
-                <el-form-item label="货币图标" prop="precision">
+                <el-form-item :label="$t('currency.dialog.icon')" prop="precision">
                     <Avatar ref="avatarRef" @update:avatar="updateAvatarUrl" />
                 </el-form-item>
-                <el-form-item label="最小充值" prop="min_deposit">
-                    <el-input v-model="detailsInfo.min_deposit" placeholder="请输入最小充值" />
+                <el-form-item :label="$t('currency.dialog.minDeposit')" prop="min_deposit">
+                    <el-input v-model="detailsInfo.min_deposit" :placeholder="$t('common.place_enter') + $t('currency.dialog.minDeposit')" />
                 </el-form-item>
-                <el-form-item label="最小提现" prop="min_withdraw">
-                    <el-input v-model="detailsInfo.min_withdraw" placeholder="请输入最小提现" />
+                <el-form-item :label="$t('currency.dialog.minWithdraw')" prop="min_withdraw">
+                    <el-input v-model="detailsInfo.min_withdraw" :placeholder="$t('common.place_enter') + $t('currency.dialog.minWithdraw')" />
                 </el-form-item>
-                <el-form-item label="前端:" prop="display_precision">
+                <el-form-item :label="$t('currency.config.frontend') + ':'" prop="display_precision">
                     <el-select v-model="detailsInfo.display_precision" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="隐藏" :value="1" />
-                        <el-option label="显示" :value="2" />
+                        <el-option :label="$t('currency.config.hide')" :value="1" />
+                        <el-option :label="$t('currency.config.show')" :value="2" />
                     </el-select>
                 </el-form-item>
-                <el-form-item label="status:" prop="status">
+                <el-form-item :label="$t('currency.config.status') + ':'" prop="status">
                     <el-select v-model="detailsInfo.status" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="disabled" :value="'disabled'"/>
-                        <el-option label="enable" :value="'enable'"/>
+                        <el-option :label="$t('currency.config.disabled')" :value="'disabled'"/>
+                        <el-option :label="$t('currency.config.enable')" :value="'enable'"/>
                     </el-select>
                 </el-form-item>
            </el-form>
         </div>
          <template #footer>
             <div class="dialog-footer">
-                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">提交</el-button>
-                <el-button type="default"  @click="handleClose">关闭</el-button>
+                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">{{ $t('currency.dialog.submit') }}</el-button>
+                <el-button type="default"  @click="handleClose">{{ $t('currency.dialog.close') }}</el-button>
             </div>
         </template>
     </el-dialog>
@@ -97,14 +97,14 @@ const handleSubmit = async () => {
         // 新增
         let res = await addCurrencyConfig(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess("添加成功")
+            proxy.$modal.msgSuccess($t('currency.addSuccess'))
             handleClose()
         }
     }else {
         // 编辑
         let res = await updateCurrencyConfig(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess("编辑成功")
+            proxy.$modal.msgSuccess($t('currency.editSuccess'))
             handleClose()
         }
     }

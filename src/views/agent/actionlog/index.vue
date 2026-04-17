@@ -1,6 +1,6 @@
 <template>
     <div>
-        代理操作日志列表
+        {{ $t('agent.actionlog.title') }}
     </div>
 </template>
 <script setup>

@@ -2,13 +2,13 @@
     <div>
         <div class="form_box">
             <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
-                <el-form-item label="id:" prop="id">
+                <el-form-item :label="$t('agent.balance.id') + ':'" prop="id">
                     <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
-                <el-form-item label="currency:" prop="currency">
+                <el-form-item :label="$t('agent.balance.currency') + ':'" prop="currency">
                     <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="normol" value="1" />
-                        <el-option label="disabled" value="0" />
+                        <el-option :label="$t('agent.user.normal')" value="1" />
+                        <el-option :label="$t('agent.user.disabled')" value="0" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -21,16 +21,16 @@
             <el-button type="primary" @click="addDetails">{{ $t('common.add') }}</el-button>
         </div>
         <el-table :data="dataList" style="width: 100%" border >
-            <el-table-column prop="id" label="id" align="center"  />
-            <el-table-column prop="name" label="name" align="center">
+            <el-table-column prop="id" :label="$t('agent.balance.id')" align="center"  />
+            <el-table-column prop="name" :label="$t('agent.user.name')" align="center">
                 <template #default="scope">
                     {{ scope.row.first_name +' '+ scope.row.last_name }}
                 </template>
             </el-table-column>
-            <el-table-column prop="currency_code" label="currency" align="center"  />
-            <el-table-column prop="created_at" label="created time" align="center"  />
-            <el-table-column prop="updated_time" label="update time" align="center"  />
-            <el-table-column prop="" label="action" align="center" min-width="150">
+            <el-table-column prop="currency_code" :label="$t('agent.balance.currency')" align="center"  />
+            <el-table-column prop="created_at" :label="$t('agent.balance.createdTime')" align="center"  />
+            <el-table-column prop="updated_time" :label="$t('agent.balance.updatedTime')" align="center"  />
+            <el-table-column prop="" :label="$t('agent.balance.action')" align="center" min-width="150">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>

@@ -2,16 +2,16 @@
     <div>
         <div class="form_box">
             <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
-                <el-form-item label="前端:" prop="display_precision">
+                <el-form-item :label="$t('currency.config.frontend') + ':'" prop="display_precision">
                     <el-select v-model="queryParams.display_precision" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="显示" value="2" />
-                        <el-option label="隐藏" value="1" />
+                        <el-option :label="$t('currency.config.show')" value="2" />
+                        <el-option :label="$t('currency.config.hide')" value="1" />
                     </el-select>
                 </el-form-item>
-                <el-form-item label="status:" prop="status">
+                <el-form-item :label="$t('currency.config.status') + ':'" prop="status">
                     <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="disabled" value="1" />
-                        <el-option label="enable" value="0" />
+                        <el-option :label="$t('currency.config.disabled')" value="1" />
+                        <el-option :label="$t('currency.config.enable')" value="0" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -24,17 +24,17 @@
             <el-button type="primary" @click="addDetails">{{ $t('common.add') }}</el-button>
         </div>
         <el-table :data="dataList" style="width: 100%" border >
-            <el-table-column prop="id" label="id" align="center"  />
-            <el-table-column prop="name" label="name" align="center"/>
-            <el-table-column prop="code" label="code" align="center"  />
-             <el-table-column prop="symbol" label="symbol" align="center"  />
-            <el-table-column prop="status" label="status" align="center"  />
-            <el-table-column prop="display_precision" label="display_precision" align="center">
+            <el-table-column prop="id" :label="$t('currency.config.id')" align="center"  />
+            <el-table-column prop="name" :label="$t('currency.config.name')" align="center"/>
+            <el-table-column prop="code" :label="$t('currency.config.code')" align="center"  />
+             <el-table-column prop="symbol" :label="$t('currency.config.symbol')" align="center"  />
+            <el-table-column prop="status" :label="$t('currency.config.status')" align="center"  />
+            <el-table-column prop="display_precision" :label="$t('currency.config.displayPrecision')" align="center">
                 <template #default="scope">
-                    {{scope.row.display_precision == 2 ? '显示' : '隐藏'}}
+                    {{scope.row.display_precision == 2 ? $t('currency.config.show') : $t('currency.config.hide')}}
                 </template>
             </el-table-column>
-            <el-table-column prop="" label="action" align="center" min-width="150">
+            <el-table-column prop="" :label="$t('currency.config.action')" align="center" min-width="150">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>

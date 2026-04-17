@@ -1,6 +1,6 @@
 <template>
     <div>
-        菜单权限
+        {{ $t('agent.menu.title') }}
     </div>
 </template>
 <script setup>

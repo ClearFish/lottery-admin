@@ -8,9 +8,126 @@
     "search":"Truy vấn",
     "to":"Với",
     "start_date":"Ngày bắt đầu",
-    "end_date":"Ngày kết thúc"
+    "end_date":"Ngày kết thúc",
+    "confirm":"Xác nhận",
+    "cancel":"Hủy bỏ",
+    "logout_confirm":"Bạn có chắc chắn muốn thoát khỏi hệ thống không?",
+    "logout_title":"Thoát khỏi hệ thống",
+    "delete_confirm":"Bạn có chắc chắn muốn xóa không?",
+    "delete_success":"Xóa thành công",
+    "detail":"Chi tiết",
+    "edit":"Sỉnh sửa",
+    "delete":"Xóa",
+    "add":"Thêm mới",
+    "avatarUpload":"Tải lên avatar"
   },
   "agent":{
-    "id":"id"
+    "id":"id",
+    "addSuccess":"Thêm thành công",
+    "editSuccess":"Chỉnh sửa thành công",
+    "user": {
+      "id": "ID",
+      "username": "Tên người dùng",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "status": "Trạng thái",
+      "normal": "Bình thường",
+      "disabled": "Vô hiệu hóa",
+      "createdTime": "Thời gian tạo",
+      "name": "Họ tên",
+      "areaCode": "Mã vùng",
+      "action": "Thao tác"
+    },
+    "balance": {
+      "id": "ID",
+      "currency": "Tiền tệ",
+      "createdTime": "Thời gian tạo",
+      "updatedTime": "Thời gian cập nhật",
+      "action": "Thao tác"
+    },
+    "dialog": {
+      "username": "Tên người dùng",
+      "password": "Mật khẩu",
+      "areaCode": "Mã vùng",
+      "phone": "Số điện thoại",
+      "email": "Email",
+      "firstName": "Họ",
+      "lastName": "Tên",
+      "avatar": "Ảnh đại diện",
+      "status": "Trạng thái",
+      "submit": "Gửi",
+      "close": "Đóng"
+    },
+    "balanceDialog": {
+      "agentId": "ID đại lý",
+      "currency": "Tiền tệ"
+    },
+    "actionlog": {
+      "title": "Danh sách nhật ký thao tác đại lý"
+    },
+    "menu": {
+      "title": "Quyền menu"
+    },
+    "applay": {
+      "title": "Đơn đăng ký"
+    }
+  },
+  "currency": {
+    "addSuccess": "Thêm thành công",
+    "editSuccess": "Chỉnh sửa thành công",
+    "config": {
+      "frontend": "Giao diện",
+      "show": "Hiển thị",
+      "hide": "Ẩn",
+      "status": "Trạng thái",
+      "disabled": "Vô hiệu hóa",
+      "enable": "Kích hoạt",
+      "id": "ID",
+      "name": "Tên",
+      "code": "Mã",
+      "symbol": "Ký hiệu",
+      "displayPrecision": "Hiển thị giao diện",
+      "action": "Thao tác"
+    },
+    "dialog": {
+      "name": "Tên tiền tệ",
+      "code": "Mã tiền tệ",
+      "symbol": "Ký hiệu tiền tệ",
+      "icon": "Biểu tượng tiền tệ",
+      "minDeposit": "Nạp tối thiểu",
+      "minWithdraw": "Rút tối thiểu",
+      "submit": "Gửi",
+      "close": "Đóng"
+    },
+    "userBalance": {
+      "title": "Danh sách số dư người dùng"
+    }
+  },
+  "systemManage": {
+    "addSuccess": "Thêm thành công",
+    "editSuccess": "Chỉnh sửa thành công",
+    "user": {
+      "id": "ID",
+      "username": "Tên người dùng",
+      "nickName": "Biệt danh",
+      "email": "Email",
+      "status": "Trạng thái",
+      "normal": "Bình thường",
+      "disabled": "Vô hiệu hóa",
+      "createTime": "Thời gian tạo",
+      "lastLogin": "Đăng nhập lần cuối",
+      "lastLoginIp": "IP đăng nhập lần cuối",
+      "createdAt": "Được tạo lúc",
+      "action": "Thao tác"
+    },
+    "dialog": {
+      "name": "Tên",
+      "nickName": "Biệt danh",
+      "email": "Email",
+      "avatar": "Ảnh đại diện",
+      "status": "Trạng thái",
+      "submit": "Gửi",
+      "close": "Đóng"
+    }
   }
 }
