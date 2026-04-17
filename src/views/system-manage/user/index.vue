@@ -65,7 +65,8 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage,ElMessageBox } from 'element-plus'
+import {$t} from "@/locales"
 import { getUserList,deleteUser } from '@/api/systemmanage'
 import detailsDialog from './components/detailsDialog.vue'
 const detailsDialogRef = ref(null)
@@ -89,11 +90,17 @@ const addDetails = () => {
     detailsDialogRef.value.show(2)
 }
 const deleteRow = async (row) => {
-    let res = await deleteUser({id:row.id});
-    if(res.code == 200) {
-        ElMessage.success('delete success')
-        getList()
-    }
+    ElMessageBox.confirm($t('common.delete_confirm'), $t('common.logout_title'), {
+        confirmButtonText: $t('common.confirm'),
+        cancelButtonText: $t('common.cancel'),
+        type: 'warning'
+    }).then(async () => {
+        let res = await deleteUser({id:row.id});
+        if(res.code == 200) {
+            ElMessage.success($t('common.delete_success'))
+            getList()
+        }
+    }).catch(() => { })
 }
 const total = ref(0)
 const page = ref({...pageInit})

@@ -209,6 +209,29 @@ export const constantRoutes = [
       },
     ]
   },
+  {
+    path: '/currency',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '货币管理', icon: 'user'},
+    children: [
+      {
+        path: 'config',
+        component: () => import('@/views/currency/config/index.vue'),
+        name: 'CurrencyConfig',
+        hidden: false,
+        meta: { title: '货币配置', icon: 'user' }
+      },
+      {
+        path: 'userbalance',
+        component: () => import('@/views/currency/userbalance/index.vue'),
+        name: 'CurrencyUserBalance',
+        hidden: false,
+        meta: { title: '用户余额列表', icon: 'user' }
+      },
+    ]
+  }
 ]
 
 // 动态路由，基于用户权限动态去加载
@@ -357,6 +380,29 @@ export const sidebarRouters = [
       },
     ]
   },
+  {
+    path: '/currency',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '货币管理', icon: 'user'},
+    children: [
+      {
+        path: 'config',
+        component: () => import('@/views/currency/config/index.vue'),
+        name: 'CurrencyConfig',
+        hidden: false,
+        meta: { title: '货币配置', icon: 'user' }
+      },
+      {
+        path: 'userbalance',
+        component: () => import('@/views/currency/userbalance/index.vue'),
+        name: 'CurrencyUserBalance',
+        hidden: false,
+        meta: { title: '用户余额列表', icon: 'user' }
+      },
+    ]
+  }
 ]
 const router = createRouter({
   history: createWebHistory(),

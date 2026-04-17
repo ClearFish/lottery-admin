@@ -12,6 +12,8 @@
     "cancel":"取消",
     "logout_confirm":"确定注销并退出系统吗？",
     "logout_title":"提示",
+    "delete_confirm":"确定删除吗？",
+    "delete_success":"删除成功",
     "detail":"详情",
     "edit":"编辑",
     "delete":"删除",

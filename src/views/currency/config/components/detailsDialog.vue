@@ -7,36 +7,35 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                <el-form-item label="用户名" prop="username">
-                    <el-input v-model="detailsInfo.username" placeholder="请输入用户名"></el-input>
+                 <el-form-item label="货币名称" prop="name">
+                     <el-input v-model="detailsInfo.name" placeholder="请输入货币名称" />
                 </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input v-model="detailsInfo.password" placeholder="请输入密码"></el-input>
+                <el-form-item label="货币Code" prop="code">
+                    <el-input v-model="detailsInfo.code" placeholder="请输入货币Code" />
                 </el-form-item>
-                
-                <el-form-item label="区号" prop="area_code">
-                    <el-input v-model="detailsInfo.area_code" placeholder="请输入区号"></el-input>
+                <el-form-item label="货币符号" prop="symbol">
+                    <el-input v-model="detailsInfo.symbol" placeholder="请输入货币符号" />
                 </el-form-item>
-                <el-form-item label="手机号" prop="phone">
-                    <el-input v-model="detailsInfo.phone" placeholder="请输入手机号"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="detailsInfo.email" placeholder="请输入邮箱"></el-input>
-                </el-form-item>
-                <el-form-item label="姓" prop="first_name">
-                    <el-input v-model="detailsInfo.first_name" placeholder="请输入姓"></el-input>
-                </el-form-item>
-                <el-form-item label="名" prop="last_name">
-                    <el-input v-model="detailsInfo.last_name" placeholder="请输入名"></el-input>
-                </el-form-item>
-                 <el-form-item label="头像" prop="avatar">
+                <el-form-item label="货币图标" prop="precision">
                     <Avatar ref="avatarRef" @update:avatar="updateAvatarUrl" />
                 </el-form-item>
-                <el-form-item label="状态" prop="status">
-                    <el-radio-group v-model="detailsInfo.status">
-                        <el-radio label="normal">正常</el-radio>
-                        <el-radio label="disabled">禁用</el-radio>
-                    </el-radio-group>
+                <el-form-item label="最小充值" prop="min_deposit">
+                    <el-input v-model="detailsInfo.min_deposit" placeholder="请输入最小充值" />
+                </el-form-item>
+                <el-form-item label="最小提现" prop="min_withdraw">
+                    <el-input v-model="detailsInfo.min_withdraw" placeholder="请输入最小提现" />
+                </el-form-item>
+                <el-form-item label="前端:" prop="display_precision">
+                    <el-select v-model="detailsInfo.display_precision" :placeholder="$t('common.place_select') + ' '">
+                        <el-option label="隐藏" :value="1" />
+                        <el-option label="显示" :value="2" />
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="status:" prop="status">
+                    <el-select v-model="detailsInfo.status" :placeholder="$t('common.place_select') + ' '">
+                        <el-option label="disabled" :value="'disabled'"/>
+                        <el-option label="enable" :value="'enable'"/>
+                    </el-select>
                 </el-form-item>
            </el-form>
         </div>
@@ -49,19 +48,20 @@
     </el-dialog>
 </template>
 <script setup>
-import { ref,defineExpose } from 'vue'
+import { ref,defineExpose,nextTick } from 'vue'
 import {$t} from '@/locales'
-import { getUserDetail,addUser,updateUser } from "@/api/agent/index.js"
 import Avatar from "@/components/avatar/index.vue"
+import { getCurrencyConfigDetail,addCurrencyConfig,updateCurrencyConfig } from "@/api/currency/index.js"
+
 
 const visible = ref(false)
 const title = ref($t('common.detail'))
 const { proxy } = getCurrentInstance()
 const detailsInfo = ref({})
-const avatarRef = ref(null)
 const isCheck = ref(false)
 const actionType = ref(null)
 const formRef = ref(null)
+const avatarRef = ref(null)
 const show = async(type,row) => {
     console.log(type,row)
     const num = {
@@ -75,12 +75,12 @@ const show = async(type,row) => {
         detailsInfo.value = {}
         visible.value = true
     }else {
-        let res = await getUserDetail({id:row.id})
+        let res = await getCurrencyConfigDetail({id:row.id})
         if(res.code === 200){
-            detailsInfo.value = res.data
             visible.value = true
             nextTick(() => {
-                avatarRef.value.setAvatar(res.data.avatar)
+                detailsInfo.value = res.data
+                avatarRef.value.setAvatar(res.data.icon)
             })
         }
     }
@@ -89,27 +89,27 @@ const show = async(type,row) => {
 const emit = defineEmits(['close'])
 /** 更新头像URL */
 const updateAvatarUrl = (url) => {
-    detailsInfo.value.avatar = url
+    detailsInfo.value.icon = url
 }
 const handleSubmit = async () => {
     await formRef.value.validate()
-    detailsInfo.value.group_ids =[1]
     if (actionType.value === 2) {
         // 新增
-        let res = await addUser(detailsInfo.value)
+        let res = await addCurrencyConfig(detailsInfo.value)
         if (res.code === 200) {
             proxy.$modal.msgSuccess("添加成功")
             handleClose()
         }
     }else {
         // 编辑
-        let res = await updateUser(detailsInfo.value)
+        let res = await updateCurrencyConfig(detailsInfo.value)
         if (res.code === 200) {
             proxy.$modal.msgSuccess("编辑成功")
             handleClose()
         }
     }
 }
+
 /** 关闭弹窗 */
 function handleClose() {
     detailsInfo.value = {};

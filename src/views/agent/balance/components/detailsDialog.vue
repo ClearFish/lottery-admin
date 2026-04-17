@@ -7,27 +7,23 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                 <el-form-item label="名称" prop="username">
-                    <el-input v-model="detailsInfo.username" placeholder="请输入名称"></el-input>
+               <el-form-item label="代理id" prop="id">
+                     <el-select v-model="detailsInfo.id" :placeholder="$t('common.place_select') + ' '">
+                        <el-option v-for="item in agentList" 
+                            :key="item.id" 
+                            :label="item.username" 
+                            :value="item.id" />
+                    </el-select>
                 </el-form-item>
-                <el-form-item label="昵称" prop="nick_name">
-                    <el-input v-model="detailsInfo.nick_name" placeholder="请输入昵称"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="detailsInfo.email" placeholder="请输入邮箱"></el-input>
-                </el-form-item>
-                <el-form-item label="头像" prop="avatar">
-                    <Avatar ref="avatarRef" @update:avatar="updateAvatarUrl" />
-                </el-form-item>
-                <el-form-item label="状态" prop="status">
-                    <el-radio-group v-model="detailsInfo.status">
-                        <el-radio label="normal">正常</el-radio>
-                        <el-radio label="disabled">禁用</el-radio>
-                    </el-radio-group>
+                <el-form-item label="货币" prop="currency">
+                    <el-select v-model="detailsInfo.currency" :placeholder="$t('common.place_select') + ' '">
+                        <el-option label="normol" value="1" />
+                        <el-option label="disabled" value="0" />
+                    </el-select>
                 </el-form-item>
            </el-form>
         </div>
-        <template #footer>
+         <template #footer>
             <div class="dialog-footer">
                 <el-button type="primary" v-if="!isCheck" @click="handleSubmit">提交</el-button>
                 <el-button type="default"  @click="handleClose">关闭</el-button>
@@ -38,35 +34,42 @@
 <script setup>
 import { ref,defineExpose } from 'vue'
 import {$t} from '@/locales'
-import Avatar from "@/components/avatar/index.vue"
-import { addUser,updateUser } from "@/api/systemmanage/index.js"
+import { getAgentWalletDetail,getUserList,addAgentWallet,updateAgentWalletBalance } from "@/api/agent/index.js"
 
-const { proxy } = getCurrentInstance()
+
 const visible = ref(false)
 const title = ref($t('common.detail'))
+const { proxy } = getCurrentInstance()
 const detailsInfo = ref({})
 const isCheck = ref(false)
 const actionType = ref(null)
 const formRef = ref(null)
-const avatarRef = ref(null)
-const show = (type,row) => {
+
+
+const show = async(type,row) => {
     console.log(type,row)
     const num = {
         0:$t('common.detail'),
-        1:$t('common.edit'),
-        2:$t('common.add')
+        1:$t('common.edit')
     }
-    visible.value = true
     isCheck.value = type === 0
     actionType.value = type
     title.value = num[type]
-    detailsInfo.value = row || {}
+    getAgentList()
+    if(type === 2) {
+        detailsInfo.value = {}
+        visible.value = true
+    }else {
+        let res = await getAgentWalletDetail({id:row.id})
+        if(res.code === 200){
+            detailsInfo.value = res.data
+            visible.value = true
+        }
+    }
+  
 }
 const emit = defineEmits(['close'])
-/** 更新头像URL */
-const updateAvatarUrl = (url) => {
-    detailsInfo.value.avatar = url
-}
+
 const handleSubmit = async () => {
     await formRef.value.validate()
     detailsInfo.value.group_ids =[1]
@@ -86,16 +89,24 @@ const handleSubmit = async () => {
         }
     }
 }
-defineExpose({
-    show
-})
+const agentList = ref([])
+async function getAgentList() {
+    let res = await getUserList()
+    if(res.code === 200){
+        agentList.value = res.data
+    }
+}
 /** 关闭弹窗 */
 function handleClose() {
     visible.value = false;
     detailsInfo.value = {};
     actionType.value = null;
+    avatarRef.value.setAvatar('')
     emit('close')
 }
+defineExpose({
+    show
+})
 </script>
 <style scoped lang="scss">
 .dialog-footer {

@@ -2,13 +2,16 @@
     <div>
         <div class="form_box">
             <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
-                <el-form-item label="id:" prop="id">
-                    <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' '" />
+                <el-form-item label="前端:" prop="display_precision">
+                    <el-select v-model="queryParams.display_precision" :placeholder="$t('common.place_select') + ' '">
+                        <el-option label="显示" value="2" />
+                        <el-option label="隐藏" value="1" />
+                    </el-select>
                 </el-form-item>
-                <el-form-item label="currency:" prop="currency">
+                <el-form-item label="status:" prop="status">
                     <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' '">
-                        <el-option label="normol" value="1" />
-                        <el-option label="disabled" value="0" />
+                        <el-option label="disabled" value="1" />
+                        <el-option label="enable" value="0" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -22,14 +25,15 @@
         </div>
         <el-table :data="dataList" style="width: 100%" border >
             <el-table-column prop="id" label="id" align="center"  />
-            <el-table-column prop="name" label="name" align="center">
+            <el-table-column prop="name" label="name" align="center"/>
+            <el-table-column prop="code" label="code" align="center"  />
+             <el-table-column prop="symbol" label="symbol" align="center"  />
+            <el-table-column prop="status" label="status" align="center"  />
+            <el-table-column prop="display_precision" label="display_precision" align="center">
                 <template #default="scope">
-                    {{ scope.row.first_name +' '+ scope.row.last_name }}
+                    {{scope.row.display_precision == 2 ? '显示' : '隐藏'}}
                 </template>
             </el-table-column>
-            <el-table-column prop="currency_code" label="currency" align="center"  />
-            <el-table-column prop="created_at" label="created time" align="center"  />
-            <el-table-column prop="updated_time" label="update time" align="center"  />
             <el-table-column prop="" label="action" align="center" min-width="150">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
@@ -50,7 +54,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getAgentWallet } from '@/api/agent'
+import { getCurrencyConfigList,deleteCurrencyConfig } from '@/api/currency'
 import { ElMessage,ElMessageBox } from 'element-plus'
 import detailsDialog from './components/detailsDialog.vue'
 import {$t} from "@/locales"
@@ -62,8 +66,8 @@ const pageInit = {
     page:1
 }
 const queryParams = ref({
-    username:'',
-    mobile:''
+    display_precision:'',
+    status:''
 })
 const showDetails = (row) => {
     console.log(row)
@@ -91,7 +95,7 @@ const deleteRow = async (row) => {
 const total = ref(0)
 const page = ref({...pageInit})
 async function getList() {
-  const res = await getAgentWallet(page.value)
+  const res = await getCurrencyConfigList({...queryParams.value,...page.value})
   if (res.code === 200) {
     dataList.value = res.data
     total.value = res.meta.total

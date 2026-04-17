@@ -101,10 +101,10 @@ defineExpose({
 })
 /** 关闭弹窗 */
 function handleClose() {
-    visible.value = false;
     detailsInfo.value = {};
     actionType.value = null;
     avatarRef.value.setAvatar('')
+    visible.value = false;
     emit('close')
 }
 </script>

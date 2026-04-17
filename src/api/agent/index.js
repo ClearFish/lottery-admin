@@ -39,3 +39,40 @@ export function deleteUser(data) {
     data: data
   })
 }
+
+// 余额钱包 /admin/v1/currency/agent-wallet
+export function getAgentWallet(data) {
+  return request({
+    url: '/admin/v1/currency/agent-wallet',
+    method: 'get',
+    params: data
+  })
+}
+
+// 新增钱包 /admin/v1/currency/agent-wallet/
+export function addAgentWallet(data) {
+  return request({
+    url: '/admin/v1/currency/agent-wallet',
+    method: 'post',
+    data: data
+  })
+}
+// 查询钱包 /admin/v1/currency/agent-wallet/{id}
+export function getAgentWalletDetail(data) {
+  return request({
+    url: '/admin/v1/currency/agent-wallet/'+data.id,
+    method: 'get',
+    params: {}
+  })
+}
+// 增减余额 /admin/v1/currency/agent-wallet/balance
+export function updateAgentWalletBalance(data) {
+  return request({
+    url: '/admin/v1/currency/agent-wallet/balance',
+    method: 'patch',
+    data: data
+  })
+}
+
+
+
