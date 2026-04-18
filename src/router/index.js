@@ -140,6 +140,27 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '开奖结果', icon: 'user' }
       },
+      {
+        path: 'classific',
+        component: () => import('@/views/game/classific/index.vue'),
+        name: 'LotteryResults',
+        hidden: false,
+        meta: { title: '游戏分类', icon: 'user' }
+      },
+      {
+        path: 'gameplay',
+        component: () => import('@/views/game/gameplay/index.vue'),
+        name: 'Gameplay',
+        hidden: false,
+        meta: { title: '游戏玩法', icon: 'user' }
+      },
+      {
+        path: 'odds-config',
+        component: () => import('@/views/game/odds-config/index.vue'),
+        name: 'OddsConfig',
+        hidden: false,
+        meta: { title: '盘口配置', icon: 'user' }
+      },
     ]
   },
   {
@@ -254,6 +275,34 @@ export const sidebarRouters = [
     redirect: 'noredirect',
     meta: { title: '游戏管理', icon: 'user'},
     children: [
+       {
+        path: 'game-config',
+        component: () => import('@/views/game/game-config/index.vue'),
+        name: 'GameConfig',
+        hidden: false,
+        meta: { title: '游戏配置', icon: 'user' }
+      },
+      {
+        path: 'gameplay',
+        component: () => import('@/views/game/gameplay/index.vue'),
+        name: 'Gameplay',
+        hidden: false,
+        meta: { title: '游戏玩法', icon: 'user' }
+      },
+      {
+        path: 'classific',
+        component: () => import('@/views/game/classific/index.vue'),
+        name: 'Classific',
+        hidden: false,
+        meta: { title: '游戏分类', icon: 'user' }
+      },
+      {
+        path: 'odds-config',
+        component: () => import('@/views/game/odds-config/index.vue'),
+        name: 'OddsConfig',
+        hidden: false,
+        meta: { title: '盘口配置', icon: 'user' }
+      },
       {
         path: 'betting-list',
         component: () => import('@/views/game/betting-list/index.vue'),
@@ -275,13 +324,7 @@ export const sidebarRouters = [
         hidden: false,
         meta: { title: '投注列表备份', icon: 'user' }
       },
-      {
-        path: 'game-config',
-        component: () => import('@/views/game/game-config/index.vue'),
-        name: 'GameConfig',
-        hidden: false,
-        meta: { title: '游戏配置', icon: 'user' }
-      },
+     
       {
         path: 'statistical-reports',
         component: () => import('@/views/game/statistical-reports/index.vue'),
@@ -303,7 +346,7 @@ export const sidebarRouters = [
         hidden: false,
         meta: { title: '开奖结果', icon: 'user' }
       },
-
+      
     ]
   },
   {
