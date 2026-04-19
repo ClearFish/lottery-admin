@@ -129,4 +129,19 @@ export function deleteOddsConfig(data) {
     params: {}
   })
 }
-
+// 投注列表 /admin/v1/game/orders/
+export function getBettingList(data) {
+  return request({
+    url: '/admin/v1/game/orders',
+    method: 'get',
+    params: data
+  })
+}
+// 投注查看详情 /api/admin/v1/game/orders/1
+export function getBettingDetail(data) {
+  return request({
+    url: '/admin/v1/game/orders/'+data.id,
+    method: 'get',
+    params: {}
+  })
+}

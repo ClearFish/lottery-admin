@@ -7,30 +7,11 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                <el-form-item :label="$t('game.gameConfigDialog.gameName') + ':'" prop="play_type_name">
-                    <el-input v-model="detailsInfo.play_type_name" :placeholder="$t('common.place_enter') + $t('game.gameConfigDialog.gameName')" />
+                <el-form-item label="游戏编码" prop="game_code">
+                    <el-input v-model="detailsInfo.game_code" :placeholder="$t('common.place_enter') + $t('game.gameConfigDialog.gameName')" />
                 </el-form-item>
-                <el-form-item label="游戏名称code:" prop="play_type_code">
-                    <el-input v-model="detailsInfo.play_type_code" :placeholder="$t('common.place_enter') + $t('game.gameConfigDialog.gameName')" />
-                </el-form-item>
-                <el-form-item :label="$t('game.gameConfigDialog.gameCode') + ':'" prop="game_code">
-                    <el-input v-model="detailsInfo.game_code" :placeholder="$t('common.place_enter') + $t('game.gameConfigDialog.gameCode')" />
-                </el-form-item>
-                <el-form-item :label="$t('game.gameConfigDialog.gameStatus') + ':'" prop="status">
-                    <el-switch 
-                        v-model="detailsInfo.status" 
-                        active-value="enable" 
-                        inactive-value="disabled" 
-                        :active-text="$t('agent.user.normal')"
-                        :inactive-text="$t('agent.user.disabled')" />
-                </el-form-item>
-                 <el-form-item label="类型模式：" prop="type_mode">
-                    <el-switch 
-                        v-model="detailsInfo.type_mode" 
-                        active-value="normal" 
-                        inactive-value="disabled" 
-                        :active-text="$t('agent.user.normal')" 
-                        :inactive-text="$t('agent.user.disabled')" />
+                <el-form-item label="pk" prop="pk">
+                    <el-input v-model="detailsInfo.pk" :placeholder="$t('common.place_enter') + $t('game.gameConfigDialog.gameCode')" />
                 </el-form-item>
            </el-form>
         </div>
@@ -45,7 +26,7 @@
 <script setup>
 import { ref,defineExpose } from 'vue'
 import {$t} from '@/locales'
-import { getClassificDetail,addClassific,updateClassific } from "@/api/game/index.js"
+import { getOddsConfigDetail,addOddsConfig,updateOddsConfig } from "@/api/game/index.js"
 import Avatar from "@/components/avatar/index.vue"
 
 
@@ -71,7 +52,7 @@ const show = async(type,row) => {
         detailsInfo.value = {}
         visible.value = true
     }else {
-        let res = await getClassificDetail({id:row.id})
+        let res = await getOddsConfigDetail({id:row.id})
         if(res.code === 200){
             detailsInfo.value = res.data;
             visible.value = true
@@ -83,17 +64,16 @@ const show = async(type,row) => {
 const emit = defineEmits(['close'])
 const handleSubmit = async () => {
     await formRef.value.validate()
-    detailsInfo.value.group_ids =[1]
     if (actionType.value === 2) {
         // 新增
-        let res = await addClassific(detailsInfo.value)
+        let res = await addOddsConfig(detailsInfo.value)
         if (res.code === 200) {
             proxy.$modal.msgSuccess($t('agent.addSuccess'))
             handleClose()
         }
     }else {
         // 编辑
-        let res = await updateClassific(detailsInfo.value)
+        let res = await updateOddsConfig(detailsInfo.value)
         if (res.code === 200) {
             proxy.$modal.msgSuccess($t('agent.editSuccess'))
             handleClose()

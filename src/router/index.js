@@ -161,6 +161,13 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '盘口配置', icon: 'user' }
       },
+      {
+        path: 'lottery-result',
+        component: () => import('@/views/game/lottery-result/index.vue'),
+        name: 'LotteryResult',
+        hidden: false,
+        meta: { title: '开奖结果', icon: 'user' }
+      },
     ]
   },
   {
@@ -311,6 +318,13 @@ export const sidebarRouters = [
         meta: { title: '投注列表', icon: 'user' }
       },
       {
+        path: 'lottery-results',
+        component: () => import('@/views/game/lottery-results/index.vue'),
+        name: 'LotteryResults',
+        hidden: false,
+        meta: { title: '开奖结果', icon: 'user' }
+      },
+      {
         path: 'im-follow',
         component: () => import('@/views/game/im-follow/index.vue'),
         name: 'ImFollow',
@@ -339,13 +353,7 @@ export const sidebarRouters = [
         hidden: false,
         meta: { title: '佣金列表', icon: 'user' }
       },
-      {
-        path: 'lottery-results',
-        component: () => import('@/views/game/lottery-results/index.vue'),
-        name: 'LotteryResults',
-        hidden: false,
-        meta: { title: '开奖结果', icon: 'user' }
-      },
+      
       
     ]
   },
