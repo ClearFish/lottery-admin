@@ -150,8 +150,9 @@ onMounted(() => {
             color: #fff;
             width: 24px;
             height: 24px;
-            line-height: 24px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-radius: 24px;
         }
     }
