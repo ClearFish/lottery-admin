@@ -2,10 +2,10 @@
     <div>
         <div class="form_box">
             <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
-                <el-form-item label="游戏Code:" prop="game_code">
+                <el-form-item :label="$t('game.bettingList.gameCode') + ':'" prop="game_code">
                     <el-input v-model="queryParams.game_code" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
-                <el-form-item label="pk:" prop="pk">
+                <el-form-item :label="$t('game.bettingList.pk') + ':'" prop="pk">
                     <el-input v-model="queryParams.pk" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
                 <el-form-item>
@@ -19,10 +19,10 @@
         </div>
         <el-table :data="dataList" style="width: 100%" border >
             <el-table-column prop="id" :label="$t('agent.balance.id')" align="center"/>
-            <el-table-column prop="game_code" label="游戏Code" align="center"/>
-            <el-table-column prop="pk" label="pk" align="center"  />
-            <el-table-column prop="created_at" label="创建时间" align="center"/>
-            <el-table-column prop="updated_at" label="更新时间" align="center"/>
+            <el-table-column prop="game_code" :label="$t('game.bettingList.gameCode')" align="center"/>
+            <el-table-column prop="pk" :label="$t('game.bettingList.pk')" align="center"  />
+            <el-table-column prop="created_at" :label="$t('game.common.createdAt')" align="center"/>
+            <el-table-column prop="updated_at" :label="$t('game.common.updatedAt')" align="center"/>
             <el-table-column prop="" :label="$t('agent.balance.action')" align="center" min-width="100">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>

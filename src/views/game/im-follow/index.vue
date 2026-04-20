@@ -1,6 +1,6 @@
 <template>
     <div>
-        游戏跟头列表
+        {{ $t('game.title.imFollow') }}
     </div>
 </template>
 <script setup>

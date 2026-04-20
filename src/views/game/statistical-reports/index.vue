@@ -1,6 +1,6 @@
 <template>
     <div>
-        游戏统计报表
+        {{ $t('game.title.statisticalReports') }}
     </div>
 </template>
 <script setup>

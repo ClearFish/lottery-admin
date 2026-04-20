@@ -1,6 +1,6 @@
 <template>
     <div>
-        游戏投注列表备份
+        {{ $t('game.title.bettingListBackup') }}
     </div>
 </template>
 <script setup>

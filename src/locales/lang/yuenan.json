@@ -19,7 +19,9 @@
     "edit":"Sỉnh sửa",
     "delete":"Xóa",
     "add":"Thêm mới",
-    "avatarUpload":"Tải lên avatar"
+    "avatarUpload":"Tải lên avatar",
+    "dateNow":"Ngày hiện tại",
+    "date":"Ngày"
   },
   "agent":{
     "id":"id",
@@ -131,7 +133,38 @@
     }
   },
   "game": {
+    "addSuccess": "Thêm thành công",
     "editSuccess": "Chỉnh sửa thành công",
+    "title": {
+      "bettingListBackup": "Sao lưu danh sách cược trò chơi",
+      "imFollow": "Danh sách theo cược trò chơi",
+      "commissionList": "Danh sách hoa hồng trò chơi",
+      "statisticalReports": "Báo cáo thống kê trò chơi"
+    },
+    "common": {
+      "empty": "--",
+      "createdAt": "Thời gian tạo",
+      "updatedAt": "Thời gian cập nhật"
+    },
+    "lotteryResult": {
+      "searchGameCode": "Mã trò chơi",
+      "searchIssueNo": "Kỳ",
+      "issueNo": "Kỳ",
+      "gameIdentifier": "Định danh trò chơi",
+      "result": "Kết quả",
+      "drawCloseTime": "Thời gian đóng cược/mở thưởng",
+      "status": "Trạng thái"
+    },
+    "lotteryResultDialog": {
+      "gameCode": "Định danh trò chơi",
+      "issueNo": "Kỳ",
+      "nextIssueNo": "Kỳ tiếp theo",
+      "status": "Trạng thái",
+      "startTime": "Thời gian bắt đầu",
+      "endTime": "Thời gian kết thúc",
+      "drawTime": "Thời gian mở thưởng",
+      "result": "Kết quả"
+    },
     "gameConfig": {
       "agent": "Đại lý",
       "status": "Trạng thái",

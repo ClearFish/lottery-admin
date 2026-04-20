@@ -1,6 +1,6 @@
 <template>
     <div>
-        游戏佣金列表
+        {{ $t('game.title.commissionList') }}
     </div>
 </template>
 <script setup>

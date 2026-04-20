@@ -18,7 +18,9 @@
     "edit":"Edit",
     "delete":"Delete",
     "add":"Add",
-    "avatarUpload":"Avatar Upload"
+    "avatarUpload":"Avatar Upload",
+    "dateNow":"Current Date",
+    "date":"Date"
   },
   "agent":{
     "id":"id",
@@ -130,7 +132,38 @@
     }
   },
   "game": {
+    "addSuccess": "Added successfully",
     "editSuccess": "Edited successfully",
+    "title": {
+      "bettingListBackup": "Game Betting List Backup",
+      "imFollow": "Game Follow List",
+      "commissionList": "Game Commission List",
+      "statisticalReports": "Game Statistical Reports"
+    },
+    "common": {
+      "empty": "--",
+      "createdAt": "Created Time",
+      "updatedAt": "Updated Time"
+    },
+    "lotteryResult": {
+      "searchGameCode": "Game Code",
+      "searchIssueNo": "Issue No",
+      "issueNo": "Issue No",
+      "gameIdentifier": "Game Identifier",
+      "result": "Result",
+      "drawCloseTime": "Draw Close Time",
+      "status": "Status"
+    },
+    "lotteryResultDialog": {
+      "gameCode": "Game Identifier",
+      "issueNo": "Issue No",
+      "nextIssueNo": "Next Issue No",
+      "status": "Status",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "drawTime": "Draw Time",
+      "result": "Result"
+    },
     "gameConfig": {
       "agent": "Agent",
       "status": "Status",

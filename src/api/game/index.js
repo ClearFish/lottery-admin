@@ -145,3 +145,43 @@ export function getBettingDetail(data) {
     params: {}
   })
 }
+// 开奖结果列表 /api/admin/v1/game/result/
+export function getLotteryResultList(data) {
+  return request({
+    url: '/admin/v1/game/result',
+    method: 'get',
+    params: data
+  })
+}
+// 开奖结果详情 /api/admin/v1/game/result/1
+export function getLotteryResultDetail(data) {
+  return request({
+    url: '/admin/v1/game/result/'+data.id,
+    method: 'get',
+    params: {}
+  })
+}
+// 更新开奖结果 /api/admin/v1/game/result/1
+export function updateLotteryResult(data) {
+  return request({
+    url: '/admin/v1/game/result/'+data.id,
+    method: 'put',
+    data: data
+  })
+}
+// 新增开奖结果 /api/admin/v1/game/result/
+export function addLotteryResult(data) {
+  return request({
+    url: '/admin/v1/game/result',
+    method: 'post',
+    data: data
+  })
+}
+// 删除开奖结果 /api/admin/v1/game/result/1
+export function deleteLotteryResult(data) {
+  return request({
+    url: '/admin/v1/game/result/'+data.id,
+    method: 'delete',
+    params: {}
+  })
+}

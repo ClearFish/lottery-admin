@@ -133,13 +133,7 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '佣金列表', icon: 'user' }
       },
-      {
-        path: 'lottery-results',
-        component: () => import('@/views/game/lottery-results/index.vue'),
-        name: 'LotteryResults',
-        hidden: false,
-        meta: { title: '开奖结果', icon: 'user' }
-      },
+      
       {
         path: 'classific',
         component: () => import('@/views/game/classific/index.vue'),
@@ -318,9 +312,9 @@ export const sidebarRouters = [
         meta: { title: '投注列表', icon: 'user' }
       },
       {
-        path: 'lottery-results',
-        component: () => import('@/views/game/lottery-results/index.vue'),
-        name: 'LotteryResults',
+        path: 'lottery-result',
+        component: () => import('@/views/game/lottery-result/index.vue'),
+        name: 'LotteryResult',
         hidden: false,
         meta: { title: '开奖结果', icon: 'user' }
       },

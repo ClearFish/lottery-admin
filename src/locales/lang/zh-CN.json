@@ -18,7 +18,9 @@
     "edit":"编辑",
     "delete":"删除",
     "add":"新增",
-    "avatarUpload":"头像上传"
+    "avatarUpload":"头像上传",
+    "dateNow":"当前日期",
+    "date":"日期"
   },
   "agent":{
     "id":"id",
@@ -130,7 +132,38 @@
     }
   },
   "game": {
+    "addSuccess": "添加成功",
     "editSuccess": "编辑成功",
+    "title": {
+      "bettingListBackup": "游戏投注列表备份",
+      "imFollow": "游戏跟投列表",
+      "commissionList": "游戏佣金列表",
+      "statisticalReports": "游戏统计报表"
+    },
+    "common": {
+      "empty": "--",
+      "createdAt": "创建时间",
+      "updatedAt": "更新时间"
+    },
+    "lotteryResult": {
+      "searchGameCode": "游戏Code",
+      "searchIssueNo": "期号",
+      "issueNo": "期号",
+      "gameIdentifier": "游戏标识",
+      "result": "开奖结果",
+      "drawCloseTime": "开奖封盘时间",
+      "status": "状态"
+    },
+    "lotteryResultDialog": {
+      "gameCode": "游戏标识",
+      "issueNo": "期号",
+      "nextIssueNo": "下期号",
+      "status": "状态",
+      "startTime": "开始时间",
+      "endTime": "结束时间",
+      "drawTime": "开奖时间",
+      "result": "开奖结果"
+    },
     "gameConfig": {
       "agent": "所属代理",
       "status": "状态",
