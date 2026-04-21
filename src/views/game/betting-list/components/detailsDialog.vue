@@ -7,18 +7,18 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                <el-form-item label="游戏编码" prop="game_code">
-                    <el-input v-model="detailsInfo.game_code" :placeholder="$t('common.place_enter') + $t('game.gameConfigDialog.gameName')" />
+                <el-form-item :label="$t('game.bettingList.gameCode')" prop="game_code">
+                    <el-input v-model="detailsInfo.game_code" :placeholder="$t('common.place_enter') + $t('game.bettingList.gameCode')" />
                 </el-form-item>
-                <el-form-item label="pk" prop="pk">
-                    <el-input v-model="detailsInfo.pk" :placeholder="$t('common.place_enter') + $t('game.gameConfigDialog.gameCode')" />
+                <el-form-item :label="$t('game.bettingList.pk')" prop="pk">
+                    <el-input v-model="detailsInfo.pk" :placeholder="$t('common.place_enter') + $t('game.bettingList.pk')" />
                 </el-form-item>
            </el-form>
         </div>
          <template #footer>
             <div class="dialog-footer">
-                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">{{ $t('agent.dialog.submit') }}</el-button>
-                <el-button type="default"  @click="handleClose">{{ $t('agent.dialog.close') }}</el-button>
+                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">{{ $t('common.confirm') }}</el-button>
+                <el-button type="default"  @click="handleClose">{{ $t('common.cancel') }}</el-button>
             </div>
         </template>
     </el-dialog>
@@ -68,14 +68,14 @@ const handleSubmit = async () => {
         // 新增
         let res = await addOddsConfig(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess($t('agent.addSuccess'))
+            proxy.$modal.msgSuccess($t('game.addSuccess'))
             handleClose()
         }
     }else {
         // 编辑
         let res = await updateOddsConfig(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess($t('agent.editSuccess'))
+            proxy.$modal.msgSuccess($t('game.editSuccess'))
             handleClose()
         }
     }

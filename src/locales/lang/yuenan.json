@@ -165,6 +165,10 @@
       "drawTime": "Thời gian mở thưởng",
       "result": "Kết quả"
     },
+    "bettingList": {
+      "gameCode": "Mã trò chơi",
+      "pk": "PK"
+    },
     "gameConfig": {
       "agent": "Đại lý",
       "status": "Trạng thái",

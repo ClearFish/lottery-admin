@@ -164,6 +164,10 @@
       "drawTime": "Draw Time",
       "result": "Result"
     },
+    "bettingList": {
+      "gameCode": "Game Code",
+      "pk": "PK"
+    },
     "gameConfig": {
       "agent": "Agent",
       "status": "Status",

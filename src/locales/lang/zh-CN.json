@@ -164,6 +164,10 @@
       "drawTime": "开奖封盘时间",
       "result": "开奖结果"
     },
+    "bettingList": {
+      "gameCode": "游戏编码",
+      "pk": "PK"
+    },
     "gameConfig": {
       "agent": "所属代理",
       "status": "状态",
