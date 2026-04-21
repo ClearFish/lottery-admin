@@ -161,7 +161,7 @@
       "status": "状态",
       "startTime": "开始时间",
       "endTime": "结束时间",
-      "drawTime": "开奖时间",
+      "drawTime": "开奖封盘时间",
       "result": "开奖结果"
     },
     "gameConfig": {

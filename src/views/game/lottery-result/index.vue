@@ -32,13 +32,13 @@
                         >
                         <!-- 5d -->
                          <div v-if="lotre5DGameCode.includes(scope.row.game_code)" class="result_img_box">
-                            <img :src="getResultAssetsImg('dice_show'+item)" alt="" v-for="(item,index) in scope.row.result" :key="index"
-                                 class="result_img"
-                            >
+                            <p class="result_con" v-for="(item,index) in scope.row.result" :key="index">{{item}}</p>
                          </div>
                         <!-- k3-->
                          <div v-if="k3GameCode.includes(scope.row.game_code)" class="result_img_box">
-                            <p class="result_con" v-for="(item,index) in scope.row.result" :key="index">{{item}}</p>
+                                <img :src="getResultAssetsImg('dice_show'+item)" alt="" v-for="(item,index) in scope.row.result" :key="index"
+                                 class="result_img"
+                            >
                          </div>
                     </div>
                 </template>
