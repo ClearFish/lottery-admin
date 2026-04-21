@@ -250,7 +250,6 @@ const getTime = (item) =>{
 }
 const choseDay = (val)=>{
     dayNow.value = val
-    console.log(detailsInfo.value.dateNow)
     let dateString = dayjs(detailsInfo.value.dateNow).format('YYYYMMDD');
     let issueStr = val.toString().padStart(4,'0')
     detailsInfo.value.issue_no = dateString+issueStr
@@ -269,17 +268,17 @@ const show = async(type,row) => {
     isCheck.value = type === 0
     actionType.value = type
     title.value = num[type]
-    detailsInfo.value.dateNow = dayjs().format('YYYY-MM-DD')
     getGameList()
     if(type === 2) {
         detailsInfo.value = {}
-        visible.value = true
+        visible.value = true;
+        detailsInfo.value.dateNow = dayjs().format('YYYY-MM-DD')
     }else {
         let res = await getLotteryResultDetail({id:row.id})
         if(res.code === 200){
             detailsInfo.value = res.data;
             visible.value = true
-            
+            detailsInfo.value.dateNow = dayjs(res.data.start_time).format('YYYY-MM-DD')
         }
     }
   
