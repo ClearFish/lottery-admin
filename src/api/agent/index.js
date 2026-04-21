@@ -81,5 +81,46 @@ export function getAgentBalanceLogsList(data) {
     params: {}
   })
 }
+// 代理白名单列表 /api/admin/v1/agent/ip-whitelist/
+export function getAgentWhiteListList(data) {
+  return request({
+    url: '/admin/v1/agent/ip-whitelist/',
+    method: 'get',
+    params: {}
+  })
+}
+// 代理白名单详情 /api/admin/v1/agent/ip-whitelist/{id}
+export function getAgentWhiteListDetail(data) {
+  return request({
+    url: '/admin/v1/agent/ip-whitelist/'+data.id,
+    method: 'get',
+    params: {}
+  })
+}
+// 新增代理白名单 /api/admin/v1/agent/ip-whitelist/
+export function addAgentWhiteList(data) {
+  return request({
+    url: '/admin/v1/agent/ip-whitelist/',
+    method: 'post',
+    data: data
+  })
+}
+
+// 编辑代理白名单 /api/admin/v1/agent/ip-whitelist/{id}
+export function updateAgentWhiteList(data) {
+  return request({
+    url: '/admin/v1/agent/ip-whitelist/'+data.id,
+    method: 'put',
+    data: data
+  })
+}
+// 删除代理白名单 /api/admin/v1/agent/ip-whitelist/{id}
+export function deleteAgentWhiteList(data) {
+  return request({
+    url: '/admin/v1/agent/ip-whitelist/'+data.id,
+    method: 'delete',
+    data: data
+  })
+}
 
 

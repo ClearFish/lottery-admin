@@ -213,6 +213,13 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '代理申请', icon: 'user' }
       },
+      {
+        path: 'white-list',
+        component: () => import('@/views/agent/white-list/index.vue'),
+        name: 'AgentWhiteList',
+        hidden: false,
+        meta: { title: '代理白名单', icon: 'user' }
+      },
     ]
   },
   {
@@ -413,6 +420,13 @@ export const sidebarRouters = [
         name: 'AgentApplay',
         hidden: false,
         meta: { title: '代理申请', icon: 'user' }
+      },
+      {
+        path: 'white-list',
+        component: () => import('@/views/agent/white-list/index.vue'),
+        name: 'AgentWhiteList',
+        hidden: false,
+        meta: { title: '代理白名单', icon: 'user' }
       },
     ]
   },
