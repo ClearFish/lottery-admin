@@ -7,11 +7,20 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-               <el-form-item label="标签" prop="label">
+                 <el-form-item label="id" prop="agent_id">
+                    <el-input v-model="detailsInfo.agent_id" placeholder="请输入id" />
+                </el-form-item>
+                <el-form-item label="标签" prop="label">
                     <el-input v-model="detailsInfo.label" placeholder="请输入标签" />
                 </el-form-item>
                 <el-form-item label="ip" prop="ip_network">
                     <el-input v-model="detailsInfo.ip_network" placeholder="请输入ip" />
+                </el-form-item>
+                <el-form-item label="状态" prop="status">
+                    <el-radio-group v-model="detailsInfo.status">
+                        <el-radio :label="true">正常</el-radio>
+                        <el-radio :label="false">禁用</el-radio>
+                    </el-radio-group>
                 </el-form-item>
            </el-form>
         </div>
