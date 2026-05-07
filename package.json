@@ -1,8 +1,8 @@
 {
   "name": "lottery-admin",
   "version": "3.9.2",
-  "description": "若依管理系统",
-  "author": "若依",
+  "description": "lottery",
+  "author": "admin",
   "license": "MIT",
   "type": "module",
   "scripts": {
