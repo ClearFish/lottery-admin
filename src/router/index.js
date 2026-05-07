@@ -164,64 +164,78 @@ export const constantRoutes = [
       },
     ]
   },
-  // {
-  //   path: '/agent',
-  //   component: Layout,
-  //   hidden: false,
-  //   redirect: 'noredirect',
-  //   meta: { title: '代理管理', icon: 'user'},
-  //   children: [
-  //     {
-  //       path: 'user',
-  //       component: () => import('@/views/agent/user/index.vue'),
-  //       name: 'AgentUser',
-  //       hidden: false,
-  //       meta: { title: '代理用户管理', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'balance',
-  //       component: () => import('@/views/agent/balance/index.vue'),
-  //       name: 'AgentBalance',
-  //       hidden: false,
-  //       meta: { title: '代理余额钱包列表', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'report',
-  //       component: () => import('@/views/agent/balance-report/index.vue'),
-  //       name: 'AgentReport',
-  //       hidden: false,
-  //       meta: { title: '代理用户余额列表', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'menu',
-  //       component: () => import('@/views/agent/menu/index.vue'),
-  //       name: 'AgentMenu',
-  //       hidden: false,
-  //       meta: { title: '代理菜单权限', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'actionlog',
-  //       component: () => import('@/views/agent/actionlog/index.vue'),
-  //       name: 'AgentActionLog',
-  //       hidden: false,
-  //       meta: { title: '代理操作日志列表', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'applay',
-  //       component: () => import('@/views/agent/applay/index.vue'),
-  //       name: 'AgentApplay',
-  //       hidden: false,
-  //       meta: { title: '代理申请', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'white-list',
-  //       component: () => import('@/views/agent/white-list/index.vue'),
-  //       name: 'AgentWhiteList',
-  //       hidden: false,
-  //       meta: { title: '代理白名单', icon: 'user' }
-  //     },
-  //   ]
-  // },
+  {
+    path: '/agent',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '代理管理', icon: 'user'},
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/agent/user/index.vue'),
+        name: 'AgentUser',
+        hidden: false,
+        meta: { title: '代理用户管理', icon: 'user' }
+      },
+      {
+        path: 'balance',
+        component: () => import('@/views/agent/balance/index.vue'),
+        name: 'AgentBalance',
+        hidden: false,
+        meta: { title: '代理余额钱包列表', icon: 'user' }
+      },
+      {
+        path: 'report',
+        component: () => import('@/views/agent/balance-report/index.vue'),
+        name: 'AgentReport',
+        hidden: false,
+        meta: { title: '代理用户余额列表', icon: 'user' }
+      },
+      // {
+      //   path: 'menu',
+      //   component: () => import('@/views/agent/menu/index.vue'),
+      //   name: 'AgentMenu',
+      //   hidden: false,
+      //   meta: { title: '代理菜单权限', icon: 'user' }
+      // },
+      // {
+      //   path: 'actionlog',
+      //   component: () => import('@/views/agent/actionlog/index.vue'),
+      //   name: 'AgentActionLog',
+      //   hidden: false,
+      //   meta: { title: '代理操作日志列表', icon: 'user' }
+      // },
+      // {
+      //   path: 'applay',
+      //   component: () => import('@/views/agent/applay/index.vue'),
+      //   name: 'AgentApplay',
+      //   hidden: false,
+      //   meta: { title: '代理申请', icon: 'user' }
+      // },
+      {
+        path: 'white-list',
+        component: () => import('@/views/agent/white-list/index.vue'),
+        name: 'AgentWhiteList',
+        hidden: false,
+        meta: { title: 'API代理白名单', icon: 'user' }
+      },
+      {
+        path: 'report',
+        component: () => import('@/views/agent/report/index.vue'),
+        name: 'AgentReport',
+        hidden: false,
+        meta: { title: '代理用户报表', icon: 'user' }
+      },
+      {
+        path: 'total-report',
+        component: () => import('@/views/agent/total-report/index.vue'),
+        name: 'AgentTotalReport',
+        hidden: false,
+        meta: { title: '代理统计报表', icon: 'user' }
+      },
+    ]
+  },
   {
     path: '/system-manage',
     component: Layout,
@@ -379,64 +393,78 @@ export const sidebarRouters = [
   //     }
   //   ]
   // },
-  // {
-  //   path: '/agent',
-  //   component: Layout,
-  //   hidden: false,
-  //   redirect: 'noredirect',
-  //   meta: { title: '代理管理', icon: 'user'},
-  //   children: [
-  //     {
-  //       path: 'user',
-  //       component: () => import('@/views/agent/user/index.vue'),
-  //       name: 'AgentUser',
-  //       hidden: false,
-  //       meta: { title: '代理用户管理', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'balance',
-  //       component: () => import('@/views/agent/balance/index.vue'),
-  //       name: 'AgentBalance',
-  //       hidden: false,
-  //       meta: { title: '代理余额钱包列表', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'report',
-  //       component: () => import('@/views/agent/balance-report/index.vue'),
-  //       name: 'AgentReport',
-  //       hidden: false,
-  //       meta: { title: '代理用户余额列表', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'menu',
-  //       component: () => import('@/views/agent/menu/index.vue'),
-  //       name: 'AgentMenu',
-  //       hidden: false,
-  //       meta: { title: '代理菜单权限', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'actionlog',
-  //       component: () => import('@/views/agent/actionlog/index.vue'),
-  //       name: 'AgentActionLog',
-  //       hidden: false,
-  //       meta: { title: '代理操作日志列表', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'applay',
-  //       component: () => import('@/views/agent/applay/index.vue'),
-  //       name: 'AgentApplay',
-  //       hidden: false,
-  //       meta: { title: '代理申请', icon: 'user' }
-  //     },
-  //     {
-  //       path: 'white-list',
-  //       component: () => import('@/views/agent/white-list/index.vue'),
-  //       name: 'AgentWhiteList',
-  //       hidden: false,
-  //       meta: { title: '代理白名单', icon: 'user' }
-  //     },
-  //   ]
-  // },
+  {
+    path: '/agent',
+    component: Layout,
+    hidden: false,
+    redirect: 'noredirect',
+    meta: { title: '代理管理', icon: 'user'},
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/agent/user/index.vue'),
+        name: 'AgentUser',
+        hidden: false,
+        meta: { title: '代理用户管理', icon: 'user' }
+      },
+      {
+        path: 'balance',
+        component: () => import('@/views/agent/balance/index.vue'),
+        name: 'AgentBalance',
+        hidden: false,
+        meta: { title: '代理余额钱包列表', icon: 'user' }
+      },
+      {
+        path: 'report',
+        component: () => import('@/views/agent/balance-report/index.vue'),
+        name: 'AgentReport',
+        hidden: false,
+        meta: { title: '代理用户余额列表', icon: 'user' }
+      },
+      // {
+      //   path: 'menu',
+      //   component: () => import('@/views/agent/menu/index.vue'),
+      //   name: 'AgentMenu',
+      //   hidden: false,
+      //   meta: { title: '代理菜单权限', icon: 'user' }
+      // },
+      // {
+      //   path: 'actionlog',
+      //   component: () => import('@/views/agent/actionlog/index.vue'),
+      //   name: 'AgentActionLog',
+      //   hidden: false,
+      //   meta: { title: '代理操作日志列表', icon: 'user' }
+      // },
+      // {
+      //   path: 'applay',
+      //   component: () => import('@/views/agent/applay/index.vue'),
+      //   name: 'AgentApplay',
+      //   hidden: false,
+      //   meta: { title: '代理申请', icon: 'user' }
+      // },
+      {
+        path: 'white-list',
+        component: () => import('@/views/agent/white-list/index.vue'),
+        name: 'AgentWhiteList',
+        hidden: false,
+        meta: { title: 'API代理白名单', icon: 'user' }
+      },
+      {
+        path: 'report',
+        component: () => import('@/views/agent/report/index.vue'),
+        name: 'AgentReport',
+        hidden: false,
+        meta: { title: '代理用户报表', icon: 'user' }
+      },
+      {
+        path: 'total-report',
+        component: () => import('@/views/agent/total-report/index.vue'),
+        name: 'AgentTotalReport',
+        hidden: false,
+        meta: { title: '代理统计报表', icon: 'user' }
+      },
+    ]
+  },
   {
     path: '/system-manage',
     component: Layout,

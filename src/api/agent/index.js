@@ -122,5 +122,21 @@ export function deleteAgentWhiteList(data) {
     data: data
   })
 }
+// 代理用户报表 /admin/v1/agent/daily/agent-report
+export function getAgentReport(data) {
+  return request({
+    url: '/admin/v1/agent/daily/agent-report',
+    method: 'get',
+    params: data
+  })
+}
+// 代理统计报表 /admin/v1/agent/total-report
+export function getAgentTotalReport(data) {
+  return request({
+    url: '/admin/v1/agent/total-report',
+    method: 'get',
+    params: data
+  })
+}
 
 
