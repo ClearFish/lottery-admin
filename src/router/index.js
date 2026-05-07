@@ -70,20 +70,20 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/user',
-    component: Layout,
-    hidden: false,
-    redirect: 'noredirect',
-    children: [
-      {
-        path: 'profile/:activeTab?',
-        component: () => import('@/views/system/user/profile/index'),
-        name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
-      }
-    ]
-  },
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   hidden: false,
+  //   redirect: 'noredirect',
+  //   children: [
+  //     {
+  //       path: 'profile/:activeTab?',
+  //       component: () => import('@/views/system/user/profile/index'),
+  //       name: 'Profile',
+  //       meta: { title: '个人中心', icon: 'user' }
+  //     }
+  //   ]
+  // },
   {
     path: '/game',
     component: Layout,
@@ -98,20 +98,20 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '投注列表', icon: 'user' }
       },
-      {
-        path: 'im-follow',
-        component: () => import('@/views/game/im-follow/index.vue'),
-        name: 'ImFollow',
-        hidden: false,
-        meta: { title: 'IM跟投', icon: 'user' }
-      },
-      {
-        path: 'bettinglist-backup',
-        component: () => import('@/views/game/bettinglist-backup/index.vue'),
-        name: 'BettingListBackup',
-        hidden: false,
-        meta: { title: '投注列表备份', icon: 'user' }
-      },
+      // {
+      //   path: 'im-follow',
+      //   component: () => import('@/views/game/im-follow/index.vue'),
+      //   name: 'ImFollow',
+      //   hidden: false,
+      //   meta: { title: 'IM跟投', icon: 'user' }
+      // },
+      // {
+      //   path: 'bettinglist-backup',
+      //   component: () => import('@/views/game/bettinglist-backup/index.vue'),
+      //   name: 'BettingListBackup',
+      //   hidden: false,
+      //   meta: { title: '投注列表备份', icon: 'user' }
+      // },
       {
         path: 'game-config',
         component: () => import('@/views/game/game-config/index.vue'),
@@ -119,20 +119,20 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '游戏配置', icon: 'user' }
       },
-      {
-        path: 'statistical-reports',
-        component: () => import('@/views/game/statistical-reports/index.vue'),
-        name: 'StatisticalReports',
-        hidden: false,
-        meta: { title: '游戏统计', icon: 'user' }
-      },
-      {
-        path: 'commision-list',
-        component: () => import('@/views/game/commision-list/index.vue'),
-        name: 'CommissionList',
-        hidden: false,
-        meta: { title: '佣金列表', icon: 'user' }
-      },
+      // {
+      //   path: 'statistical-reports',
+      //   component: () => import('@/views/game/statistical-reports/index.vue'),
+      //   name: 'StatisticalReports',
+      //   hidden: false,
+      //   meta: { title: '游戏统计', icon: 'user' }
+      // },
+      // {
+      //   path: 'commision-list',
+      //   component: () => import('@/views/game/commision-list/index.vue'),
+      //   name: 'CommissionList',
+      //   hidden: false,
+      //   meta: { title: '佣金列表', icon: 'user' }
+      // },
       
       {
         path: 'classific',
@@ -164,64 +164,64 @@ export const constantRoutes = [
       },
     ]
   },
-  {
-    path: '/agent',
-    component: Layout,
-    hidden: false,
-    redirect: 'noredirect',
-    meta: { title: '代理管理', icon: 'user'},
-    children: [
-      {
-        path: 'user',
-        component: () => import('@/views/agent/user/index.vue'),
-        name: 'AgentUser',
-        hidden: false,
-        meta: { title: '代理用户管理', icon: 'user' }
-      },
-      {
-        path: 'balance',
-        component: () => import('@/views/agent/balance/index.vue'),
-        name: 'AgentBalance',
-        hidden: false,
-        meta: { title: '代理余额钱包列表', icon: 'user' }
-      },
-      {
-        path: 'report',
-        component: () => import('@/views/agent/balance-report/index.vue'),
-        name: 'AgentReport',
-        hidden: false,
-        meta: { title: '代理用户余额列表', icon: 'user' }
-      },
-      {
-        path: 'menu',
-        component: () => import('@/views/agent/menu/index.vue'),
-        name: 'AgentMenu',
-        hidden: false,
-        meta: { title: '代理菜单权限', icon: 'user' }
-      },
-      {
-        path: 'actionlog',
-        component: () => import('@/views/agent/actionlog/index.vue'),
-        name: 'AgentActionLog',
-        hidden: false,
-        meta: { title: '代理操作日志列表', icon: 'user' }
-      },
-      {
-        path: 'applay',
-        component: () => import('@/views/agent/applay/index.vue'),
-        name: 'AgentApplay',
-        hidden: false,
-        meta: { title: '代理申请', icon: 'user' }
-      },
-      {
-        path: 'white-list',
-        component: () => import('@/views/agent/white-list/index.vue'),
-        name: 'AgentWhiteList',
-        hidden: false,
-        meta: { title: '代理白名单', icon: 'user' }
-      },
-    ]
-  },
+  // {
+  //   path: '/agent',
+  //   component: Layout,
+  //   hidden: false,
+  //   redirect: 'noredirect',
+  //   meta: { title: '代理管理', icon: 'user'},
+  //   children: [
+  //     {
+  //       path: 'user',
+  //       component: () => import('@/views/agent/user/index.vue'),
+  //       name: 'AgentUser',
+  //       hidden: false,
+  //       meta: { title: '代理用户管理', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'balance',
+  //       component: () => import('@/views/agent/balance/index.vue'),
+  //       name: 'AgentBalance',
+  //       hidden: false,
+  //       meta: { title: '代理余额钱包列表', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'report',
+  //       component: () => import('@/views/agent/balance-report/index.vue'),
+  //       name: 'AgentReport',
+  //       hidden: false,
+  //       meta: { title: '代理用户余额列表', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'menu',
+  //       component: () => import('@/views/agent/menu/index.vue'),
+  //       name: 'AgentMenu',
+  //       hidden: false,
+  //       meta: { title: '代理菜单权限', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'actionlog',
+  //       component: () => import('@/views/agent/actionlog/index.vue'),
+  //       name: 'AgentActionLog',
+  //       hidden: false,
+  //       meta: { title: '代理操作日志列表', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'applay',
+  //       component: () => import('@/views/agent/applay/index.vue'),
+  //       name: 'AgentApplay',
+  //       hidden: false,
+  //       meta: { title: '代理申请', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'white-list',
+  //       component: () => import('@/views/agent/white-list/index.vue'),
+  //       name: 'AgentWhiteList',
+  //       hidden: false,
+  //       meta: { title: '代理白名单', icon: 'user' }
+  //     },
+  //   ]
+  // },
   {
     path: '/system-manage',
     component: Layout,
@@ -243,6 +243,13 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '操作日志', icon: 'user' }
       },
+      // {
+      //   path: 'permission-list',
+      //   component: () => import('@/views/system-manage/permission/list/index.vue'),
+      //   name: 'SystemManagePermissionList',
+      //   hidden: false,
+      //   meta: { title: '权限列表', icon: 'user' }
+      // },
     ]
   },
   {
@@ -259,13 +266,13 @@ export const constantRoutes = [
         hidden: false,
         meta: { title: '货币配置', icon: 'user' }
       },
-      {
-        path: 'userbalance',
-        component: () => import('@/views/currency/userbalance/index.vue'),
-        name: 'CurrencyUserBalance',
-        hidden: false,
-        meta: { title: '用户余额列表', icon: 'user' }
-      },
+      // {
+      //   path: 'userbalance',
+      //   component: () => import('@/views/currency/userbalance/index.vue'),
+      //   name: 'CurrencyUserBalance',
+      //   hidden: false,
+      //   meta: { title: '用户余额列表', icon: 'user' }
+      // },
     ]
   }
 ]
@@ -325,111 +332,111 @@ export const sidebarRouters = [
         hidden: false,
         meta: { title: '开奖结果', icon: 'user' }
       },
-      {
-        path: 'im-follow',
-        component: () => import('@/views/game/im-follow/index.vue'),
-        name: 'ImFollow',
-        hidden: false,
-        meta: { title: 'IM跟投', icon: 'user' }
-      },
-      {
-        path: 'bettinglist-backup',
-        component: () => import('@/views/game/bettinglist-backup/index.vue'),
-        name: 'BettingListBackup',
-        hidden: false,
-        meta: { title: '投注列表备份', icon: 'user' }
-      },
+      // {
+      //   path: 'im-follow',
+      //   component: () => import('@/views/game/im-follow/index.vue'),
+      //   name: 'ImFollow',
+      //   hidden: false,
+      //   meta: { title: 'IM跟投', icon: 'user' }
+      // },
+      // {
+      //   path: 'bettinglist-backup',
+      //   component: () => import('@/views/game/bettinglist-backup/index.vue'),
+      //   name: 'BettingListBackup',
+      //   hidden: false,
+      //   meta: { title: '投注列表备份', icon: 'user' }
+      // },
      
-      {
-        path: 'statistical-reports',
-        component: () => import('@/views/game/statistical-reports/index.vue'),
-        name: 'StatisticalReports',
-        hidden: false,
-        meta: { title: '游戏统计', icon: 'user' }
-      },
-      {
-        path: 'commision-list',
-        component: () => import('@/views/game/commision-list/index.vue'),
-        name: 'CommissionList',
-        hidden: false,
-        meta: { title: '佣金列表', icon: 'user' }
-      },
+      // {
+      //   path: 'statistical-reports',
+      //   component: () => import('@/views/game/statistical-reports/index.vue'),
+      //   name: 'StatisticalReports',
+      //   hidden: false,
+      //   meta: { title: '游戏统计', icon: 'user' }
+      // },
+      // {
+      //   path: 'commision-list',
+      //   component: () => import('@/views/game/commision-list/index.vue'),
+      //   name: 'CommissionList',
+      //   hidden: false,
+      //   meta: { title: '佣金列表', icon: 'user' }
+      // },
       
       
     ]
   },
-  {
-    path: '/user',
-    component: Layout,
-    hidden: false,
-    redirect: 'noredirect',
-    children: [
-      {
-        path: 'profile/:activeTab?',
-        component: () => import('@/views/system/user/profile/index'),
-        name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
-      }
-    ]
-  },
-  {
-    path: '/agent',
-    component: Layout,
-    hidden: false,
-    redirect: 'noredirect',
-    meta: { title: '代理管理', icon: 'user'},
-    children: [
-      {
-        path: 'user',
-        component: () => import('@/views/agent/user/index.vue'),
-        name: 'AgentUser',
-        hidden: false,
-        meta: { title: '代理用户管理', icon: 'user' }
-      },
-      {
-        path: 'balance',
-        component: () => import('@/views/agent/balance/index.vue'),
-        name: 'AgentBalance',
-        hidden: false,
-        meta: { title: '代理余额钱包列表', icon: 'user' }
-      },
-      {
-        path: 'report',
-        component: () => import('@/views/agent/balance-report/index.vue'),
-        name: 'AgentReport',
-        hidden: false,
-        meta: { title: '代理用户余额列表', icon: 'user' }
-      },
-      {
-        path: 'menu',
-        component: () => import('@/views/agent/menu/index.vue'),
-        name: 'AgentMenu',
-        hidden: false,
-        meta: { title: '代理菜单权限', icon: 'user' }
-      },
-      {
-        path: 'actionlog',
-        component: () => import('@/views/agent/actionlog/index.vue'),
-        name: 'AgentActionLog',
-        hidden: false,
-        meta: { title: '代理操作日志列表', icon: 'user' }
-      },
-      {
-        path: 'applay',
-        component: () => import('@/views/agent/applay/index.vue'),
-        name: 'AgentApplay',
-        hidden: false,
-        meta: { title: '代理申请', icon: 'user' }
-      },
-      {
-        path: 'white-list',
-        component: () => import('@/views/agent/white-list/index.vue'),
-        name: 'AgentWhiteList',
-        hidden: false,
-        meta: { title: '代理白名单', icon: 'user' }
-      },
-    ]
-  },
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   hidden: false,
+  //   redirect: 'noredirect',
+  //   children: [
+  //     {
+  //       path: 'profile/:activeTab?',
+  //       component: () => import('@/views/system/user/profile/index'),
+  //       name: 'Profile',
+  //       meta: { title: '个人中心', icon: 'user' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/agent',
+  //   component: Layout,
+  //   hidden: false,
+  //   redirect: 'noredirect',
+  //   meta: { title: '代理管理', icon: 'user'},
+  //   children: [
+  //     {
+  //       path: 'user',
+  //       component: () => import('@/views/agent/user/index.vue'),
+  //       name: 'AgentUser',
+  //       hidden: false,
+  //       meta: { title: '代理用户管理', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'balance',
+  //       component: () => import('@/views/agent/balance/index.vue'),
+  //       name: 'AgentBalance',
+  //       hidden: false,
+  //       meta: { title: '代理余额钱包列表', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'report',
+  //       component: () => import('@/views/agent/balance-report/index.vue'),
+  //       name: 'AgentReport',
+  //       hidden: false,
+  //       meta: { title: '代理用户余额列表', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'menu',
+  //       component: () => import('@/views/agent/menu/index.vue'),
+  //       name: 'AgentMenu',
+  //       hidden: false,
+  //       meta: { title: '代理菜单权限', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'actionlog',
+  //       component: () => import('@/views/agent/actionlog/index.vue'),
+  //       name: 'AgentActionLog',
+  //       hidden: false,
+  //       meta: { title: '代理操作日志列表', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'applay',
+  //       component: () => import('@/views/agent/applay/index.vue'),
+  //       name: 'AgentApplay',
+  //       hidden: false,
+  //       meta: { title: '代理申请', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'white-list',
+  //       component: () => import('@/views/agent/white-list/index.vue'),
+  //       name: 'AgentWhiteList',
+  //       hidden: false,
+  //       meta: { title: '代理白名单', icon: 'user' }
+  //     },
+  //   ]
+  // },
   {
     path: '/system-manage',
     component: Layout,
@@ -451,6 +458,13 @@ export const sidebarRouters = [
         hidden: false,
         meta: { title: '操作日志', icon: 'user' }
       },
+      // {
+      //   path: 'permission-list',
+      //   component: () => import('@/views/system-manage/permission/list/index.vue'),
+      //   name: 'SystemManagePermissionList',
+      //   hidden: false,
+      //   meta: { title: '权限列表', icon: 'user' }
+      // },
     ]
   },
   {
@@ -467,13 +481,13 @@ export const sidebarRouters = [
         hidden: false,
         meta: { title: '货币配置', icon: 'user' }
       },
-      {
-        path: 'userbalance',
-        component: () => import('@/views/currency/userbalance/index.vue'),
-        name: 'CurrencyUserBalance',
-        hidden: false,
-        meta: { title: '用户余额列表', icon: 'user' }
-      },
+      // {
+      //   path: 'userbalance',
+      //   component: () => import('@/views/currency/userbalance/index.vue'),
+      //   name: 'CurrencyUserBalance',
+      //   hidden: false,
+      //   meta: { title: '用户余额列表', icon: 'user' }
+      // },
     ]
   }
 ]

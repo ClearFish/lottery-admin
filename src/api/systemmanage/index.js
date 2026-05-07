@@ -65,5 +65,13 @@ export function deleteLog(data) {
     data: data
   })
 }
+// /api/admin/v1/auth/rule/
+export function getPermissionList(data) {
+  return request({
+    url: '/admin/v1/auth/rule',
+    method: 'get',
+    params: data
+  })
+}
 
 
