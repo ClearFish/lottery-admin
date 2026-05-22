@@ -1,26 +1,26 @@
 <template>
   <div v-if="!item.hidden">
     <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
-      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path, onlyOneChild.query)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
-          <svg-icon :icon-class="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"/>
-          <template #title><span class="menu-title" :title="hasTitle(onlyOneChild.meta.title)">{{ onlyOneChild.meta.title }}</span></template>
+      <app-link v-if="onlyOneChild.id" :to="resolvePath(onlyOneChild.route, onlyOneChild.query)">
+        <el-menu-item :index="resolvePath(onlyOneChild.route)" :class="{ 'submenu-title-noDropdown': !isNest }">
+          <svg-icon :icon-class="onlyOneChild.icon || (item && item.icon)"/>
+          <template #title><span class="menu-title" :title="hasTitle(onlyOneChild.title)">{{ onlyOneChild.title }}</span></template>
         </el-menu-item>
       </app-link>
     </template>
 
-    <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" teleported>
-      <template v-if="item.meta" #title>
-        <svg-icon :icon-class="item.meta && item.meta.icon" />
-        <span class="menu-title" :title="hasTitle(item.meta.title)">{{ item.meta.title }}</span>
+    <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.route)" teleported>
+      <template v-if="item.id" #title>
+        <svg-icon :icon-class="item && item.icon" />
+        <span class="menu-title" :title="hasTitle(item.title)">{{ item.title }}</span>
       </template>
 
       <sidebar-item
         v-for="(child, index) in item.children"
-        :key="child.path + index"
+        :key="child.route + index"
         :is-nest="true"
         :item="child"
-        :base-path="resolvePath(child.path)"
+        :base-path="resolvePath(child.route)"
         class="nest-menu"
       />
     </el-sub-menu>

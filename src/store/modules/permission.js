@@ -4,6 +4,7 @@ import { getRouters } from '@/api/menu'
 import Layout from '@/layout/index'
 import ParentView from '@/components/ParentView'
 import InnerLink from '@/layout/components/InnerLink'
+import { getPowerCodes } from '@/api/login'
 
 // 匹配views里面所有的.vue文件
 const modules = import.meta.glob('./../../views/**/*.vue')
@@ -36,9 +37,9 @@ const usePermissionStore = defineStore(
         return new Promise(resolve => {
           // 向后端请求路由数据
           getRouters().then(res => {
-            const sdata = JSON.parse(JSON.stringify(res.data))
-            const rdata = JSON.parse(JSON.stringify(res.data))
-            const defaultData = JSON.parse(JSON.stringify(res.data))
+            const sdata = JSON.parse(JSON.stringify(res))
+            const rdata = JSON.parse(JSON.stringify(res))
+            const defaultData = JSON.parse(JSON.stringify(res))
             const sidebarRoutes = filterAsyncRouter(sdata)
             const rewriteRoutes = filterAsyncRouter(rdata, false, true)
             const defaultRoutes = filterAsyncRouter(defaultData)
@@ -49,6 +50,13 @@ const usePermissionStore = defineStore(
             this.setDefaultRoutes(sidebarRoutes)
             this.setTopbarRoutes(defaultRoutes)
             resolve(rewriteRoutes)
+          })
+        })
+      },
+      getCodes() {
+        return new Promise(resolve => {
+          getPowerCodes().then(res => {
+            resolve(res.data)
           })
         })
       }

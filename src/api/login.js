@@ -34,7 +34,7 @@ export function register(data) {
 // 获取用户详细信息
 export function getInfo() {
   return request({
-    url: '/getInfo',
+    url: '/admin/v1/auth/user/info',
     method: 'get'
   })
 }
@@ -73,5 +73,13 @@ export function refreshToken(token) {
     url: '/admin/v1/refresh-token',
     method: 'post',
     data: { token }
+  })
+}
+
+// 获取权限码
+export function getPowerCodes() {
+  return request({
+    url: '/admin/v1/auth/user/codes',
+    method: 'get'
   })
 }
