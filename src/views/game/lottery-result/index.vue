@@ -100,8 +100,8 @@ const page = ref({...pageInit})
 async function getList() {
   const res = await getLotteryResultList(page.value)
   if (res.code === 200) {
-    dataList.value = res.data
-    total.value = res.meta.total
+    dataList.value = res.data.items
+    total.value = res.data.total
   }
 }
 const deleteDetails = async (row) => {

@@ -36,7 +36,8 @@ const usePermissionStore = defineStore(
       generateRoutes(roles) {
         return new Promise(resolve => {
           // 向后端请求路由数据
-          getRouters().then(res => {
+          getRouters().then(rsp => {
+            const res = Array.isArray(rsp) ? rsp : (Array.isArray(rsp?.data) ? rsp.data : [])
             const sdata = JSON.parse(JSON.stringify(res))
             const rdata = JSON.parse(JSON.stringify(res))
             const defaultData = JSON.parse(JSON.stringify(res))
@@ -45,6 +46,11 @@ const usePermissionStore = defineStore(
             const defaultRoutes = filterAsyncRouter(defaultData)
             const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
             asyncRoutes.forEach(route => { router.addRoute(route) })
+            rewriteRoutes.forEach(route => {
+              if (!router.hasRoute(route.name)) {
+                router.addRoute(route)
+              }
+            })
             this.setRoutes(rewriteRoutes)
             // this.setSidebarRouters(constantRoutes.concat(sidebarRoutes))
             this.setSidebarRouters(sidebarRoutes)
@@ -66,30 +72,116 @@ const usePermissionStore = defineStore(
 
 // 遍历后台传来的路由字符串，转换为组件对象
 function filterAsyncRouter(asyncRouterMap, lastRouter = false, type = false) {
-  return asyncRouterMap.filter(route => {
-    if (type && route.children) {
-      route.children = filterChildren(route.children)
-    }
-    if (route.component) {
-      // Layout ParentView 组件特殊处理
-      if (route.component === 'Layout') {
-        route.component = Layout
-      } else if (route.component === 'ParentView') {
-        route.component = ParentView
-      } else if (route.component === 'InnerLink') {
-        route.component = InnerLink
-      } else {
-        route.component = loadView(route.component)
+  const normalizePath = (value) => {
+    if (value === null || value === undefined) return ''
+    let path = String(value).trim().replace(/\\/g, '/')
+    path = path.replace(/\/+/g, '/')
+    if (!path) return ''
+    if (!path.startsWith('/')) path = `/${path}`
+    path = path.replace(/\/+/g, '/')
+    if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1)
+    return path
+  }
+
+  const normalizeComponent = (value) => {
+    if (value === null || value === undefined) return ''
+    let component = String(value).trim().replace(/\\/g, '/')
+    component = component.replace(/\/+/g, '/')
+    component = component.replace(/^\/+/, '')
+    component = component.replace(/^views\//i, '')
+    component = component.replace(/\.vue$/i, '')
+    return component
+  }
+
+  const toMenuRoutePath = (menuItem) => {
+    const raw = menuItem?.route ?? menuItem?.name ?? menuItem?.id
+    const rawStr = raw === null || raw === undefined ? '' : String(raw).trim()
+    const base = lastRouter && lastRouter.path ? String(lastRouter.path) : ''
+    if (!rawStr) return ''
+    if (rawStr.startsWith('/')) return normalizePath(rawStr)
+    return normalizePath(`${base}/${rawStr}`)
+  }
+
+  const list = Array.isArray(asyncRouterMap) ? asyncRouterMap : []
+  const sorted = list
+    .filter(Boolean)
+    .slice()
+    .sort((a, b) => (Number(a?.weigh ?? 0) - Number(b?.weigh ?? 0)) || (Number(a?.id ?? 0) - Number(b?.id ?? 0)))
+
+  return sorted
+    .filter((route) => {
+      if (route?.type === 'button') return false
+      if (route?.status && route.status !== 'normal') return false
+      return true
+    })
+    .map((route) => {
+      const isMenuFormat = route && route.route !== undefined && route.type !== undefined
+
+      if (!isMenuFormat) {
+        if (type && route.children) {
+          route.children = filterChildren(route.children)
+        }
+        if (route.component) {
+          // Layout ParentView 组件特殊处理
+          if (route.component === 'Layout') {
+            route.component = Layout
+          } else if (route.component === 'ParentView') {
+            route.component = ParentView
+          } else if (route.component === 'InnerLink') {
+            route.component = InnerLink
+          } else {
+            route.component = loadView(route.component)
+          }
+        }
+        if (route.children != null && route.children && route.children.length) {
+          route.children = filterAsyncRouter(route.children, route, type)
+        } else {
+          delete route['children']
+          delete route['redirect']
+        }
+        return route
       }
-    }
-    if (route.children != null && route.children && route.children.length) {
-      route.children = filterAsyncRouter(route.children, route, type)
-    } else {
-      delete route['children']
-      delete route['redirect']
-    }
-    return true
-  })
+
+      const path = toMenuRoutePath(route)
+      const children = filterAsyncRouter(route.children || [], { path }, type)
+
+      const result = {
+        path,
+        route: path,
+        name: route.name || String(route.id),
+        hidden: !!route.hide_menu,
+        title: route.title,
+        icon: route.icon || undefined,
+        id: route.id,
+        query: route.query,
+        meta: {
+          title: route.title,
+          icon: route.icon || undefined,
+          permission: route.permission || undefined,
+          id: route.id,
+          pid: route.pid,
+          type: route.type,
+          ...(route.meta_ext || {})
+        }
+      }
+
+      if (route.type === 'catalog') {
+        result.component = Layout
+        if (children.length) result.redirect = children[0].path
+      } else if (route.type === 'link') {
+        result.component = InnerLink
+      } else {
+        const component = normalizeComponent(route.component)
+        const byComponent = loadView(component)
+        const byComponentIndex = loadView(component ? `${component}/index` : '')
+        const byPathIndex = loadView(`${path.replace(/^\/+/, '')}/index`)
+        const byPath = loadView(path.replace(/^\/+/, ''))
+        result.component = byComponent || byComponentIndex || byPathIndex || byPath || null
+      }
+
+      if (children.length) result.children = children
+      return result
+    })
 }
 
 function filterChildren(childrenMap, lastRouter = false) {
@@ -123,10 +215,18 @@ export function filterDynamicRoutes(routes) {
 }
 
 export const loadView = (view) => {
+  if (!view) return undefined
+  const normalized = String(view)
+    .trim()
+    .replace(/\\/g, '/')
+    .replace(/\/+/g, '/')
+    .replace(/^\/+/, '')
+    .replace(/^views\//i, '')
+    .replace(/\.vue$/i, '')
   let res
   for (const path in modules) {
     const dir = path.split('views/')[1].split('.vue')[0]
-    if (dir === view) {
+    if (dir === normalized) {
       res = () => modules[path]()
     }
   }
