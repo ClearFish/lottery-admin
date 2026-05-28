@@ -32,7 +32,7 @@
         >
             <el-table-column prop="id" :label="$t('currency.config.id')" align="left"  />
             <el-table-column prop="title" :label="$t('currency.config.name')" align="center"  />
-            <el-table-column prop="name" :label="$t('currency.config.code')" align="center"/>
+            <el-table-column prop="permission" label="权限标识" align="center"/>
             <el-table-column prop="route" label="路径" align="center"/>
              <el-table-column prop="type" label="类型" align="center">
             
@@ -61,7 +61,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-// import { getPermissionList } from '@/api/systemmanage'
+import { getPermissionList } from '@/api/systemmanage'
 import { getRouters } from '@/api/menu'
 
 import { ElMessage,ElMessageBox } from 'element-plus'
@@ -80,13 +80,13 @@ const queryParams = ref({
 })
 const showDetails = (row) => {
     console.log(row)
-    detailsDialogRef.value.show(0,row)
+    detailsDialogRef.value.show(0,row,dataList.value)
 }
 const editDetails = (row) => {
-    detailsDialogRef.value.show(1,row)
+    detailsDialogRef.value.show(1,row,dataList.value)
 }
 const addDetails = () => {
-    detailsDialogRef.value.show(2)
+    detailsDialogRef.value.show(2,{},dataList.value)
 }
 const deleteRow = async (row) => {
     ElMessageBox.confirm($t('common.delete_confirm'), $t('common.logout_title'), {
@@ -117,9 +117,9 @@ const getType = (type) => {
 const total = ref(0)
 const page = ref({...pageInit})
 async function getList() {
-//   const res = await getPermissionList({...queryParams.value})
-const res = await getRouters()
-dataList.value = res
+  const res = await getPermissionList({...queryParams.value})
+// const res = await getRouters()
+dataList.value = res.data
   if (res.code === 200) {
   }
 }

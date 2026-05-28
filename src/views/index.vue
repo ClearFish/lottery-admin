@@ -5,6 +5,10 @@
 </template>
 
 <script setup name="Index">
+import { useRoute,useRouter } from 'vue-router';
+const route = useRoute()
+const router = useRouter()
+console.log(route,router.getRoutes())
 const version = ref('3.9.2')
 
 function goTarget(url) {

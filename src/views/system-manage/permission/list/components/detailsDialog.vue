@@ -7,36 +7,54 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                <el-form-item :label="$t('currency.dialog.name')" prop="name">
-                    <el-input v-model="detailsInfo.name" :placeholder="$t('common.place_enter') + $t('currency.dialog.name')" />
-                </el-form-item>
-                <el-form-item :label="$t('currency.dialog.code')" prop="code">
-                    <el-input v-model="detailsInfo.code" :placeholder="$t('common.place_enter') + $t('currency.dialog.code')" />
-                </el-form-item>
-                <el-form-item :label="$t('currency.dialog.symbol')" prop="symbol">
-                    <el-input v-model="detailsInfo.symbol" :placeholder="$t('common.place_enter') + $t('currency.dialog.symbol')" />
-                </el-form-item>
-                <el-form-item :label="$t('currency.dialog.icon')" prop="precision">
-                    <Avatar ref="avatarRef" @update:avatar="updateAvatarUrl" />
-                </el-form-item>
-                <el-form-item :label="$t('currency.dialog.minDeposit')" prop="min_deposit">
-                    <el-input v-model="detailsInfo.min_deposit" :placeholder="$t('common.place_enter') + $t('currency.dialog.minDeposit')" />
-                </el-form-item>
-                <el-form-item :label="$t('currency.dialog.minWithdraw')" prop="min_withdraw">
-                    <el-input v-model="detailsInfo.min_withdraw" :placeholder="$t('common.place_enter') + $t('currency.dialog.minWithdraw')" />
-                </el-form-item>
-                <el-form-item :label="$t('currency.config.frontend') + ':'" prop="display_precision">
-                    <el-select v-model="detailsInfo.display_precision" :placeholder="$t('common.place_select') + ' '">
-                        <el-option :label="$t('currency.config.hide')" :value="1" />
-                        <el-option :label="$t('currency.config.show')" :value="2" />
-                    </el-select>
-                </el-form-item>
-                <el-form-item :label="$t('currency.config.status') + ':'" prop="status">
-                    <el-select v-model="detailsInfo.status" :placeholder="$t('common.place_select') + ' '">
-                        <el-option :label="$t('currency.config.disabled')" :value="'disabled'"/>
-                        <el-option :label="$t('currency.config.enable')" :value="'enable'"/>
-                    </el-select>
-                </el-form-item>
+                <el-form-item label="上级菜单" v-if="detailsInfo.type != 'catalog'">
+                     <el-tree-select
+                        v-model="detailsInfo.id"
+                        :data="typesLists"
+                        :props="{ 
+                            label: 'title', 
+                            value: 'id', 
+                            children: 'children' 
+                        }"
+                        value-key="id"
+                        placeholder="选择上级菜单"
+                        check-strictly
+                     />
+                  </el-form-item>
+                  <el-form-item label="菜单类型" prop="type">
+                    <el-radio-group v-model="detailsInfo.type">
+                        <el-radio label="catalog">目录</el-radio>
+                        <el-radio label="menu">菜单</el-radio>
+                        <el-radio label="button">按妞</el-radio>
+                        <el-radio label="link">外链</el-radio>
+                    </el-radio-group>
+                  </el-form-item>
+                  <el-form-item label="菜单名称" prop="title">
+                     <el-input v-model="detailsInfo.title" placeholder="请输入菜单名称" />
+                  </el-form-item>
+                  <el-form-item label="权限标识" prop="permission">
+                     <el-input v-model="detailsInfo.permission" placeholder="请输入权限标识" />
+                   </el-form-item>
+                   <el-form-item label="路由地址" prop="route" v-if="detailsInfo.type != 'button'">
+                     <el-input v-model="detailsInfo.route" placeholder="请输入路由地址" />
+                   </el-form-item>
+                   <template v-if="detailsInfo.type == 'menu'">
+                     <el-form-item label="组件路径" prop="component">
+                        <el-input v-model="detailsInfo.component" placeholder="请输入组件路径" />
+                    </el-form-item>
+                   </template>
+                    <el-form-item label="菜单状态" prop="status">
+                        <el-radio-group v-model="detailsInfo.status">
+                            <el-radio label="normal">正常</el-radio>
+                            <el-radio label="disabled">停用</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="显示状态" prop="status" v-if="detailsInfo.type != 'button'">
+                        <el-radio-group v-model="detailsInfo.hide_menu">
+                            <el-radio :label="false">显示</el-radio>
+                            <el-radio :label="true">隐藏</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
            </el-form>
         </div>
          <template #footer>
@@ -50,8 +68,7 @@
 <script setup>
 import { ref,defineExpose,nextTick } from 'vue'
 import {$t} from '@/locales'
-import Avatar from "@/components/avatar/index.vue"
-import { getCurrencyConfigDetail,addCurrencyConfig,updateCurrencyConfig } from "@/api/currency/index.js"
+import { getPermissionDetail,updatePermission,addPermission } from "@/api/systemmanage/index.js"
 
 
 const visible = ref(false)
@@ -61,12 +78,14 @@ const detailsInfo = ref({})
 const isCheck = ref(false)
 const actionType = ref(null)
 const formRef = ref(null)
-const avatarRef = ref(null)
-const show = async(type,row) => {
-    console.log(type,row)
+const typesLists = ref([])
+const show = async(type,row,lists) => {
+    console.log(type,row,lists,"222");
+    typesLists.value = lists
     const num = {
         0:$t('common.detail'),
-        1:$t('common.edit')
+        1:$t('common.edit'),
+        2:$t('common.add')
     }
     isCheck.value = type === 0
     actionType.value = type
@@ -75,34 +94,30 @@ const show = async(type,row) => {
         detailsInfo.value = {}
         visible.value = true
     }else {
-        let res = await getCurrencyConfigDetail({id:row.id})
+        let res = await getPermissionDetail({id:row.id})
         if(res.code === 200){
             visible.value = true
             nextTick(() => {
                 detailsInfo.value = res.data
-                avatarRef.value.setAvatar(res.data.icon)
             })
         }
     }
   
 }
 const emit = defineEmits(['close'])
-/** 更新头像URL */
-const updateAvatarUrl = (url) => {
-    detailsInfo.value.icon = url
-}
+
 const handleSubmit = async () => {
     await formRef.value.validate()
     if (actionType.value === 2) {
         // 新增
-        let res = await addCurrencyConfig(detailsInfo.value)
+        let res = await addPermission(detailsInfo.value)
         if (res.code === 200) {
             proxy.$modal.msgSuccess($t('currency.addSuccess'))
             handleClose()
         }
     }else {
         // 编辑
-        let res = await updateCurrencyConfig(detailsInfo.value)
+        let res = await updatePermission(detailsInfo.value)
         if (res.code === 200) {
             proxy.$modal.msgSuccess($t('currency.editSuccess'))
             handleClose()
@@ -114,7 +129,6 @@ const handleSubmit = async () => {
 function handleClose() {
     detailsInfo.value = {};
     actionType.value = null;
-    avatarRef.value.setAvatar('')
     visible.value = false;
     emit('close')
 }

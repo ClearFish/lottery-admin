@@ -97,7 +97,7 @@ export const constantRoutes = [
         name: 'SystemManagePermissionList',
         hidden: false,
         meta: { title: '权限列表', icon: 'user' }
-      },
+      }
     ]
   },
 ]

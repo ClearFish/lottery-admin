@@ -1,6 +1,9 @@
 <template>
   <div v-if="!item.hidden">
-    <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
+    <template v-if="hasOneShowingChild(item.children, item) && 
+      (!onlyOneChild.children || onlyOneChild.noShowingChildren) && 
+      !item.alwaysShow"
+    >
       <app-link v-if="onlyOneChild.id" :to="resolvePath(onlyOneChild.route, onlyOneChild.query)">
         <el-menu-item :index="resolvePath(onlyOneChild.route)" :class="{ 'submenu-title-noDropdown': !isNest }">
           <svg-icon :icon-class="onlyOneChild.icon || (item && item.icon)"/>
@@ -47,7 +50,6 @@ const props = defineProps({
     default: ''
   }
 })
-
 const onlyOneChild = ref({})
 
 function hasOneShowingChild(children = [], parent) {
@@ -69,7 +71,7 @@ function hasOneShowingChild(children = [], parent) {
 
   // Show parent if there are no child router to display
   if (showingChildren.length === 0) {
-    onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
+    onlyOneChild.value = { ...parent, route: '', noShowingChildren: true }
     return true
   }
 
@@ -87,7 +89,9 @@ function resolvePath(routePath, routeQuery) {
     let query = JSON.parse(routeQuery)
     return { path: getNormalPath(props.basePath + '/' + routePath), query: query }
   }
+  // console.log(props.basePath + '/' + routePath,"--00",routePath)
   return getNormalPath(props.basePath + '/' + routePath)
+  // return getNormalPath(routePath)
 }
 
 function hasTitle(title){

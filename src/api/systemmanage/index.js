@@ -73,5 +73,30 @@ export function getPermissionList(data) {
     params: data
   })
 }
+// /admin/v1/auth/rule
+export function getPermissionDetail(data) {
+  return request({
+    url: '/admin/v1/auth/rule/'+data.id,
+    method: 'get',
+    params: {}
+  })
+}
+// /api/admin/v1/auth/rule/17
+export function updatePermission(data) {
+  return request({
+    url: '/admin/v1/auth/rule/'+data.id,
+    method: 'put',
+    data: data
+  })
+}
+// /api/admin/v1/auth/rule/17
+export function addPermission(data) {
+  return request({
+    url: '/admin/v1/auth/rule/',
+    method: 'post',
+    data: data
+  })
+}
+
 
 
