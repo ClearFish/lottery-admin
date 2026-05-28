@@ -155,8 +155,8 @@ function handleLogin() {
 
 async function getCode() {
   let res = await getCodeImg();
-  captchaEnabled.value = res.meta.image
-  loginForm.value.cap_id = res.meta.id
+  captchaEnabled.value = res.data.image
+  loginForm.value.cap_id = res.data.id
 }
 
 getCode()

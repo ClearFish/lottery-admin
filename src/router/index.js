@@ -70,36 +70,36 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/system-manage',
-    component: Layout,
-    hidden: false,
-    redirect: 'noredirect',
-    meta: { title: '系统管理2', icon: 'user'},
-    children: [
-      {
-        path: 'user',
-        component: () => import('@/views/system-manage/user/index.vue'),
-        name: 'SystemManageUser',
-        hidden: false,
-        meta: { title: '人员管理', icon: 'user' }
-      },
-      {
-        path: 'action',
-        component: () => import('@/views/system-manage/action/index.vue'),
-        name: 'SystemManageAction',
-        hidden: false,
-        meta: { title: '操作日志', icon: 'user' }
-      },
-      {
-        path: 'permission-list',
-        component: () => import('@/views/system-manage/permission/list/index.vue'),
-        name: 'SystemManagePermissionList',
-        hidden: false,
-        meta: { title: '权限列表', icon: 'user' }
-      }
-    ]
-  },
+  // {
+  //   path: '/system-manage',
+  //   component: Layout,
+  //   hidden: false,
+  //   redirect: 'noredirect',
+  //   meta: { title: '系统管理2', icon: 'user'},
+  //   children: [
+  //     {
+  //       path: 'user',
+  //       component: () => import('@/views/system-manage/user/index.vue'),
+  //       name: 'SystemManageUser',
+  //       hidden: false,
+  //       meta: { title: '人员管理', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'action',
+  //       component: () => import('@/views/system-manage/action/index.vue'),
+  //       name: 'SystemManageAction',
+  //       hidden: false,
+  //       meta: { title: '操作日志', icon: 'user' }
+  //     },
+  //     {
+  //       path: 'permission-list',
+  //       component: () => import('@/views/system-manage/permission/list/index.vue'),
+  //       name: 'SystemManagePermissionList',
+  //       hidden: false,
+  //       meta: { title: '权限列表', icon: 'user' }
+  //     }
+  //   ]
+  // },
 ]
 
 // 动态路由，基于用户权限动态去加载

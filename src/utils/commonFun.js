@@ -222,3 +222,64 @@ export function getNormalPath(p) {
 export function blobValidate(data) {
   return data.type !== 'application/json'
 }
+
+export function transformRoutes(menu) {
+  const normalizePath = (value) => {
+      if (value === null || value === undefined) return ""
+      let path = String(value).trim().replace(/\\/g, "/")
+      path = path.replace(/\/+/g, "/")
+      if (!path) return ""
+      if (!path.startsWith("/")) path = `/${path}`
+      path = path.replace(/\/+/g, "/")
+      if (path.length > 1 && path.endsWith("/")) path = path.slice(0, -1)
+      return path
+  }
+
+  const normalizeComponent = (value) => {
+      if (value === null || value === undefined) return ""
+      let component = String(value).trim().replace(/\\/g, "/")
+      component = component.replace(/\/+/g, "/")
+      component = component.replace(/^\/+/, "")
+      component = component.replace(/\.vue$/i, "")
+      return component
+  }
+
+  const list = Array.isArray(menu) ? menu : menu ? [menu] : []
+  const sorted = list
+      .filter(Boolean)
+      .slice()
+      .sort((a, b) => (Number(a?.weigh ?? 0) - Number(b?.weigh ?? 0)) || (Number(a?.id ?? 0) - Number(b?.id ?? 0)))
+
+  return sorted
+      .filter((item) => item.status === "normal")
+      .map((item) => {
+          const children = transformRoutes(item.children || [])
+
+          const route = {
+              path: normalizePath(item.route || item.name || item.id),
+              name: item.name || String(item.id),
+              meta: {
+                  title: item.title,
+                  icon: item.icon || undefined,
+                  permission: item.permission || undefined,
+                  hidden: !!item.hide_menu,
+                  id: item.id,
+                  pid: item.pid,
+                  type: item.type,
+                  ...(item.meta_ext || {})
+              }
+          }
+
+          if (item.type === "catalog") {
+              route.component = item.component ? normalizeComponent(item.component) : "Layout"
+              if (children.length) route.redirect = children[0].path
+          } else {
+              const component = normalizeComponent(item.component)
+              route.component = component || null
+          }
+
+          if (children.length) route.children = children
+
+          return route
+      })
+}

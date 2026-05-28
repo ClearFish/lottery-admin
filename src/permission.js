@@ -8,6 +8,7 @@ import { isRelogin } from '@/utils/request'
 import useUserStore from '@/store/modules/user'
 import useSettingsStore from '@/store/modules/settings'
 import usePermissionStore from '@/store/modules/permission'
+import { transformRoutes } from '@/utils/commonFun'
 
 NProgress.configure({ showSpinner: false })
 
@@ -17,7 +18,7 @@ const isWhiteList = (path) => {
   return whiteList.some(pattern => isPathMatch(pattern, path))
 }
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   NProgress.start()
   if (getToken()) {
     to.meta.title && useSettingsStore().setTitle(to.meta.title)
@@ -29,35 +30,28 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       next()
-      if (!useUserStore().id) {
-        isRelogin.show = true
-        // 判断当前用户是否已拉取完user_info信息
-        useUserStore().getInfo().then(() => {
-          isRelogin.show = false
-          usePermissionStore().generateRoutes().then(accessRoutes => {
-            // 根据roles权限生成可访问的路由表
-            // accessRoutes.forEach(route => {
-            //   if (!isHttp(route.path)) {
-            //     router.addRoute(route) // 动态添加可访问路由表
-            //   }
-            // })
-            // next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
-            // router.addRoute(accessRoutes)
-            console.log(accessRoutes)
-            usePermissionStore().getCodes().then(codes => {
-              console.log(codes)
-              // auth.setPermiOr(codes)
-              // router.addRoutes(accessRoutes)
-            })
-            
-          })
-        }).catch(err => {
-          useUserStore().logOut().then(() => {
+      if(!useUserStore().id) {
+          isRelogin.show = true;
+          try {
+            await useUserStore().getInfo();
+            isRelogin.show = false;
+            const accessRoutes = await usePermissionStore().generateRoutes();
+            const codes = await usePermissionStore().getCodes();
+             const routes = transformRoutes(accessRoutes)
+             routes.forEach(route => {
+               if (!isHttp(route.path)) {
+                 router.addRoute(route) // 动态添加可访问路由表
+               }
+             })
+            //  router.addRoute(routes)
+             console.log(router.getRoutes())
+             return { ...to, replace: true }
+          } catch (err) {
+            await useUserStore().logOut()
             ElMessage.error(err)
-            next({ path: '/' })
-          })
-        })
-      } else {
+            return { path: '/' }
+          }
+        } else {
         next()
       }
     }

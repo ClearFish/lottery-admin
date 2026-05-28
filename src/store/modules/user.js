@@ -39,7 +39,6 @@ const useUserStore = defineStore(
       getInfo() {
         return new Promise((resolve, reject) => {
           getInfo().then(res => {
-            console.log(res)
             const user = res.data
             let avatar = user.avatar || ""
             if (!isHttp(avatar)) {
