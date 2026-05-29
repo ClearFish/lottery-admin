@@ -5,8 +5,11 @@
                 <el-form-item :label="$t('agent.balance.id') + ':'" prop="id">
                     <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' '" />
                 </el-form-item>
-                <el-form-item label="ip:" prop="ip_network">
-                    <el-input v-model="queryParams.ip_network" :placeholder="$t('common.place_enter') + ' '" />
+                <el-form-item :label="$t('agent.balance.currency') + ':'" prop="currency">
+                    <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' '">
+                        <el-option :label="$t('agent.user.normal')" value="1" />
+                        <el-option :label="$t('agent.user.disabled')" value="0" />
+                    </el-select>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="default" @click="resetForm">{{ $t('common.reset') }}</el-button>
@@ -19,8 +22,8 @@
         </div>
         <el-table :data="dataList" style="width: 100%" border >
             <el-table-column prop="id" :label="$t('agent.balance.id')" align="center"  />
-            <el-table-column prop="ip_network" label="ip" align="center"/>
-            <el-table-column prop="label" label="标签" align="center"  />
+            <el-table-column prop="username" :label="$t('agent.user.name')" align="center"/>
+            <el-table-column prop="trans_currency" :label="$t('agent.balance.currency')" align="center"  />
             <el-table-column prop="created_at" :label="$t('agent.balance.createdTime')" align="center"  />
             <el-table-column prop="updated_at" :label="$t('agent.balance.updatedTime')" align="center"  />
             <el-table-column prop="" :label="$t('agent.balance.action')" align="center" min-width="100">
@@ -42,7 +45,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getAgentReport } from '@/api/agent'
+import { getAgentBalanceLogsList } from '@/api/agent'
 import { ElMessage,ElMessageBox } from 'element-plus'
 import detailsDialog from './components/detailsDialog.vue'
 import {$t} from "@/locales"
@@ -54,8 +57,8 @@ const pageInit = {
     page:1
 }
 const queryParams = ref({
-    sort:'id',
-    order:'DESC'
+    username:'',
+    mobile:''
 })
 const showDetails = (row) => {
     console.log(row)
@@ -70,7 +73,7 @@ const addDetails = () => {
 const total = ref(0)
 const page = ref({...pageInit})
 async function getList() {
-  const res = await getAgentReport({...page.value,...queryParams.value})
+  const res = await getAgentBalanceLogsList(page.value)
   if (res.code === 200) {
     dataList.value = res.data.items
     total.value = res.data.total
@@ -78,8 +81,8 @@ async function getList() {
 }
 const resetForm = () => {
     queryParams.value = {
-       sort:'id',
-        order:'DESC'
+        username:'',
+        mobile:''
     }
     page.value = {...pageInit}
     getList()
