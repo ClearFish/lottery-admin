@@ -46,11 +46,11 @@ const usePermissionStore = defineStore(
             const defaultRoutes = filterAsyncRouter(defaultData)
             const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
             asyncRoutes.forEach(route => { router.addRoute(route) })
-            rewriteRoutes.forEach(route => {
-              if (!router.hasRoute(route.name)) {
-                router.addRoute(route)
-              }
-            })
+            // rewriteRoutes.forEach(route => {
+            //   if (!router.hasRoute(route.name)) {
+            //     router.addRoute(route)
+            //   }
+            // })
             this.setRoutes(rewriteRoutes)
             // this.setSidebarRouters(constantRoutes.concat(sidebarRoutes))
             this.setSidebarRouters(sidebarRoutes)

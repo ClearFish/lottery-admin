@@ -18,18 +18,16 @@ const isWhiteList = (path) => {
   return whiteList.some(pattern => isPathMatch(pattern, path))
 }
 
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async(to, from) => {
   NProgress.start()
   if (getToken()) {
     to.meta.title && useSettingsStore().setTitle(to.meta.title)
-    /* has token*/
     if (to.path === '/login') {
-      next({ path: '/' })
       NProgress.done()
+      return { path: '/' }
     } else if (isWhiteList(to.path)) {
-      next()
+      return true
     } else {
-      next()
       if(!useUserStore().id) {
           isRelogin.show = true;
           try {
@@ -37,13 +35,13 @@ router.beforeEach(async(to, from, next) => {
             isRelogin.show = false;
             const accessRoutes = await usePermissionStore().generateRoutes();
             const codes = await usePermissionStore().getCodes();
-             const routes = transformRoutes(accessRoutes)
-             routes.forEach(route => {
+            //  const routes = transformRoutes(accessRoutes)
+            console.log(accessRoutes)
+             accessRoutes.forEach(route => {
                if (!isHttp(route.path)) {
                  router.addRoute(route) // 动态添加可访问路由表
                }
              })
-            //  router.addRoute(routes)
              console.log(router.getRoutes())
              return { ...to, replace: true }
           } catch (err) {
@@ -51,18 +49,17 @@ router.beforeEach(async(to, from, next) => {
             ElMessage.error(err)
             return { path: '/' }
           }
-        } else {
-        next()
-      }
+        } 
+        return true
     }
   } else {
     // 没有token
     if (isWhiteList(to.path)) {
       // 在免登录白名单，直接进入
-      next()
+      return true
     } else {
-      next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
       NProgress.done()
+      return `/login?redirect=${to.fullPath}` // 否则全部重定向到登录页
     }
   }
 })
