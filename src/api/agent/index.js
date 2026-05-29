@@ -138,5 +138,14 @@ export function getAgentTotalReport(data) {
     params: data
   })
 }
+// 代理钱包 /admin/v1/currency/agent-wallet
+export function getAgentWalletList(data) {
+  return request({
+    url: '/admin/v1/currency/agent-wallet/',
+    method: 'get',
+    params: data
+  })
+}
+
 
 
