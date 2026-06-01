@@ -78,7 +78,7 @@ export function getAgentBalanceLogsList(data) {
   return request({
     url: '/admin/v1/currency/agent-balance-logs/',
     method: 'get',
-    params: {}
+    params: data
   })
 }
 // 代理白名单列表 /api/admin/v1/agent/ip-whitelist/
@@ -146,6 +146,24 @@ export function getAgentWalletList(data) {
     params: data
   })
 }
+// 代理权限规则 /admin/v1/agent/auth/rule
+export function getAgentAuthRuleList(data) {
+  return request({
+    url: '/admin/v1/agent/auth/rule/',
+    method: 'get',
+    params: data
+  })
+}
+// 删除代理权限规则 /admin/v1/agent/auth/rule/{id}
+export function deleteAgentAuthRule(data) {
+  return request({
+    url: '/admin/v1/agent/auth/rule/'+data.id,
+    method: 'delete',
+    data: data
+  })
+} 
+
+
 
 
 

@@ -95,14 +95,14 @@ const agentList = ref([])
 async function getAgentList() {
     let res = await getUserList()
     if(res.code === 200){
-        agentList.value = res.data
+        agentList.value = res.data.items
     }
 }
 const currencyList = ref([])
 const getCurrencyList = async () => {
     let res = await getCurrencyConfigList()
     if(res.code === 200){
-        currencyList.value = res.data
+        currencyList.value = res.data.items
     }
 }
 /** 关闭弹窗 */
