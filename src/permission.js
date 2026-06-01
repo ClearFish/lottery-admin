@@ -36,13 +36,13 @@ router.beforeEach(async(to, from) => {
             const accessRoutes = await usePermissionStore().generateRoutes();
             const codes = await usePermissionStore().getCodes();
             //  const routes = transformRoutes(accessRoutes)
-            console.log(accessRoutes)
+            // console.log(accessRoutes)
              accessRoutes.forEach(route => {
                if (!isHttp(route.path)) {
                  router.addRoute(route) // 动态添加可访问路由表
                }
              })
-             console.log(router.getRoutes())
+            //  console.log(router.getRoutes())
              return { ...to, replace: true }
           } catch (err) {
             await useUserStore().logOut()

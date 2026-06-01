@@ -5,28 +5,6 @@
                 <el-form-item :label="$t('systemManage.user.id') + ':'" prop="id">
                     <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' ' + $t('systemManage.user.id')" />
                 </el-form-item>
-                <el-form-item :label="$t('systemManage.user.username') + ':'" prop="username">
-                    <el-input v-model="queryParams.username" :placeholder="$t('common.place_enter') + ' ' + $t('systemManage.user.username')" />
-                </el-form-item>
-                <el-form-item :label="$t('systemManage.user.nickName') + ':'" prop="nick_name">
-                    <el-input v-model="queryParams.email" :placeholder="$t('common.place_enter') + ' ' + $t('systemManage.user.nickName')" />
-                </el-form-item>
-                <el-form-item :label="$t('systemManage.user.status') + ':'" prop="status">
-                    <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' ' + $t('systemManage.user.status')">
-                        <el-option :label="$t('systemManage.user.normal')" value="1" />
-                        <el-option :label="$t('systemManage.user.disabled')" value="0" />
-                    </el-select>
-                </el-form-item>
-                <el-form-item :label="$t('systemManage.user.createTime') + ':'" prop="created_at">
-                    <el-date-picker 
-                        v-model="queryParams.created_at" 
-                        type="daterange" 
-                        value-format="yyyy-MM-dd" 
-                        :range-separator="$t('common.to')" 
-                        :start-placeholder="$t('common.start_date')" 
-                        :end-placeholder="$t('common.end_date')" 
-                    />
-                </el-form-item>
                 <el-form-item>
                     <el-button type="default" @click="resetForm">{{ $t('common.reset') }}</el-button>
                     <el-button type="primary" @click="getList">{{ $t('common.search') }}</el-button>
@@ -38,14 +16,16 @@
         </div>
         <el-table :data="dataList" style="width: 100%" border >
             <el-table-column prop="id" :label="$t('systemManage.user.id')" align="center"  />
-            <el-table-column prop="nick_name" :label="$t('systemManage.user.nickName')" align="center"/>
-            <el-table-column prop="username" :label="$t('systemManage.user.username')" align="center"  />
-            <el-table-column prop="email" :label="$t('systemManage.user.email')" align="center" width="200" />
-            <el-table-column prop="last_login" :label="$t('systemManage.user.lastLogin')" align="center" />
-            <el-table-column prop="last_login_ip" :label="$t('systemManage.user.lastLoginIp')" align="center"  />
-            <el-table-column prop="created_at" :label="$t('systemManage.user.createdAt')" align="center"  />
-            <el-table-column prop="status" :label="$t('systemManage.user.status')" align="center"  />
-            <el-table-column prop="" :label="$t('systemManage.user.action')" align="center" min-width="120">
+            <el-table-column prop="Category" :label="$t('systemManage.attachment.category')" align="center"/>
+            <el-table-column prop="Url" :label="$t('systemManage.attachment.preview')" align="center"  />
+            <el-table-column prop="Filename" :label="$t('systemManage.attachment.filename')" align="center" width="200" />
+            <el-table-column prop="Filesize" :label="$t('systemManage.attachment.filesize')" align="center" />
+            <el-table-column prop="ImageHeight" :label="$t('systemManage.attachment.imageHeight')" align="center"  />
+            <el-table-column prop="ImageWidth" :label="$t('systemManage.attachment.imageWidth')" align="center"  />
+            <el-table-column prop="Mimetype" :label="$t('systemManage.attachment.mimetype')" align="center"  />
+            <el-table-column prop="Storage" :label="$t('systemManage.attachment.storage')" align="center"  />
+            <el-table-column prop="created_at" :label="$t('systemManage.attachment.createdAt')" align="center"  />
+            <el-table-column prop="" :label="$t('systemManage.attachment.action')" align="center" min-width="120">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>
@@ -67,7 +47,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage,ElMessageBox } from 'element-plus'
 import {$t} from "@/locales"
-import { getUserList,deleteUser } from '@/api/systemmanage'
+import { getAttachmentList } from '@/api/systemmanage'
 import detailsDialog from './components/detailsDialog.vue'
 const detailsDialogRef = ref(null)
 const dataList = ref([])
@@ -105,10 +85,10 @@ const deleteRow = async (row) => {
 const total = ref(0)
 const page = ref({...pageInit})
 async function getList() {
-  const res = await getUserList(page.value)
+  const res = await getAttachmentList({...queryParams.value,...page.value})
   if (res.code === 200) {
-    dataList.value = res.data
-    total.value = res.meta.total
+    dataList.value = res.data.items || []
+    total.value = res.data.total
   }
 }
 const resetForm = () => {

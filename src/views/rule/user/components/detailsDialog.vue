@@ -10,6 +10,9 @@
                 <el-form-item :label="$t('systemManage.dialog.name')" prop="username">
                     <el-input v-model="detailsInfo.username" :placeholder="$t('common.place_enter') + $t('systemManage.dialog.name')"></el-input>
                 </el-form-item>
+                <el-form-item :label="$t('rule.userDialog.password')" prop="password" v-if="!isCheck">
+                    <el-input v-model="detailsInfo.password" :placeholder="$t('common.place_enter') + $t('rule.userDialog.password')"></el-input>
+                </el-form-item>
                 <el-form-item :label="$t('systemManage.dialog.nickName')" prop="nick_name">
                     <el-input v-model="detailsInfo.nick_name" :placeholder="$t('common.place_enter') + $t('systemManage.dialog.nickName')"></el-input>
                 </el-form-item>

@@ -122,6 +122,34 @@
       "createdAt": "Được tạo lúc",
       "action": "Thao tác"
     },
+    "attachment": {
+      "category": "Danh mục",
+      "preview": "Xem trước",
+      "filename": "Tên tệp",
+      "filesize": "Kích thước tệp",
+      "imageHeight": "Chiều cao",
+      "imageWidth": "Chiều rộng",
+      "mimetype": "Loại ảnh",
+      "storage": "Bộ lưu trữ",
+      "createdAt": "Ngày tạo",
+      "action": "Thao tác"
+    },
+    "config": {
+      "id": "ID",
+      "name": "Tên",
+      "title": "Tiêu đề",
+      "group": "Nhóm",
+      "type": "Loại",
+      "value": "Giá trị",
+      "rule": "Quy tắc",
+      "extend": "Mở rộng",
+      "tip": "Gợi ý",
+      "action": "Thao tác"
+    },
+    "configDialog": {
+      "agentId": "ID đại lý",
+      "currency": "Tiền tệ"
+    },
     "dialog": {
       "name": "Tên",
       "nickName": "Biệt danh",
@@ -130,6 +158,84 @@
       "status": "Trạng thái",
       "submit": "Gửi",
       "close": "Đóng"
+    }
+  },
+  "rule": {
+    "addSuccess": "Thêm thành công",
+    "editSuccess": "Chỉnh sửa thành công",
+    "status": {
+      "enabled": "Kích hoạt",
+      "normal": "Bình thường",
+      "disabled": "Vô hiệu hóa"
+    },
+    "group": {
+      "parent": "Cấp cha",
+      "code": "Mã nhóm",
+      "name": "Tên nhóm",
+      "status": "Trạng thái",
+      "action": "Thao tác"
+    },
+    "groupDialog": {
+      "parent": "Cấp cha",
+      "name": "Tên",
+      "permission": "Quyền",
+      "checkAll": "Chọn tất cả",
+      "expandAll": "Mở rộng tất cả",
+      "status": "Trạng thái"
+    },
+    "permission": {
+      "displayStatus": "Trạng thái hiển thị",
+      "show": "Hiển thị",
+      "hide": "Ẩn",
+      "id": "ID",
+      "title": "Tên menu",
+      "permission": "Mã quyền",
+      "route": "Đường dẫn",
+      "typeLabel": "Loại",
+      "type": {
+        "catalog": "Danh mục",
+        "menu": "Menu",
+        "button": "Nút",
+        "link": "Liên kết ngoài"
+      },
+      "status": "Trạng thái",
+      "action": "Thao tác"
+    },
+    "permissionDialog": {
+      "parentMenu": "Menu cấp trên",
+      "menuType": "Loại menu",
+      "type": {
+        "catalog": "Danh mục",
+        "menu": "Menu",
+        "button": "Nút",
+        "link": "Liên kết ngoài"
+      },
+      "menuName": "Tên menu",
+      "permission": "Mã quyền",
+      "route": "Địa chỉ route",
+      "component": "Đường dẫn component",
+      "status": "Trạng thái menu",
+      "displayStatus": "Trạng thái hiển thị",
+      "display": {
+        "show": "Hiển thị",
+        "hide": "Ẩn"
+      }
+    },
+    "log": {
+      "browser": "Trình duyệt",
+      "ip": "IP",
+      "url": "URL"
+    },
+    "logDialog": {
+      "ip": "IP",
+      "os": "Thiết bị",
+      "browser": "Trình duyệt",
+      "url": "URL",
+      "createdAt": "Thời gian tạo",
+      "body": "Nội dung"
+    },
+    "userDialog": {
+      "password": "Mật khẩu"
     }
   },
   "game": {

@@ -121,6 +121,34 @@
       "createdAt": "Created At",
       "action": "Action"
     },
+    "attachment": {
+      "category": "Category",
+      "preview": "Preview",
+      "filename": "Filename",
+      "filesize": "File Size",
+      "imageHeight": "Height",
+      "imageWidth": "Width",
+      "mimetype": "MIME Type",
+      "storage": "Storage",
+      "createdAt": "Created Date",
+      "action": "Action"
+    },
+    "config": {
+      "id": "ID",
+      "name": "Name",
+      "title": "Title",
+      "group": "Group",
+      "type": "Type",
+      "value": "Value",
+      "rule": "Rule",
+      "extend": "Extend",
+      "tip": "Tip",
+      "action": "Action"
+    },
+    "configDialog": {
+      "agentId": "Agent ID",
+      "currency": "Currency"
+    },
     "dialog": {
       "name": "Name",
       "nickName": "Nick Name",
@@ -129,6 +157,84 @@
       "status": "Status",
       "submit": "Submit",
       "close": "Close"
+    }
+  },
+  "rule": {
+    "addSuccess": "Added successfully",
+    "editSuccess": "Edited successfully",
+    "status": {
+      "enabled": "Enable",
+      "normal": "Normal",
+      "disabled": "Disabled"
+    },
+    "group": {
+      "parent": "Parent",
+      "code": "Group Code",
+      "name": "Group Name",
+      "status": "Status",
+      "action": "Action"
+    },
+    "groupDialog": {
+      "parent": "Parent",
+      "name": "Name",
+      "permission": "Permissions",
+      "checkAll": "Select All",
+      "expandAll": "Expand All",
+      "status": "Status"
+    },
+    "permission": {
+      "displayStatus": "Display Status",
+      "show": "Show",
+      "hide": "Hide",
+      "id": "ID",
+      "title": "Menu Name",
+      "permission": "Permission",
+      "route": "Route",
+      "typeLabel": "Type",
+      "type": {
+        "catalog": "Catalog",
+        "menu": "Menu",
+        "button": "Button",
+        "link": "External Link"
+      },
+      "status": "Status",
+      "action": "Action"
+    },
+    "permissionDialog": {
+      "parentMenu": "Parent Menu",
+      "menuType": "Menu Type",
+      "type": {
+        "catalog": "Catalog",
+        "menu": "Menu",
+        "button": "Button",
+        "link": "External Link"
+      },
+      "menuName": "Menu Name",
+      "permission": "Permission",
+      "route": "Route Path",
+      "component": "Component Path",
+      "status": "Menu Status",
+      "displayStatus": "Display Status",
+      "display": {
+        "show": "Show",
+        "hide": "Hide"
+      }
+    },
+    "log": {
+      "browser": "Browser",
+      "ip": "IP",
+      "url": "URL"
+    },
+    "logDialog": {
+      "ip": "IP",
+      "os": "Device",
+      "browser": "Browser",
+      "url": "URL",
+      "createdAt": "Created At",
+      "body": "Content"
+    },
+    "userDialog": {
+      "password": "Password"
     }
   },
   "game": {

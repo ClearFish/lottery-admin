@@ -1,43 +1,20 @@
 <template>
     <div>
-        <div class="form_box">
-            <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
-                <el-form-item :label="$t('systemManage.user.id') + ':'" prop="id">
-                    <el-input v-model="queryParams.id" :placeholder="$t('common.place_enter') + ' ' + $t('systemManage.user.id')" />
-                </el-form-item>
-                <el-form-item :label="$t('systemManage.user.username') + ':'" prop="username">
-                    <el-input v-model="queryParams.username" :placeholder="$t('common.place_enter') + ' ' + $t('systemManage.user.username')" />
-                </el-form-item>
-                <el-form-item :label="$t('systemManage.user.nickName') + ':'" prop="nick_name">
-                    <el-input v-model="queryParams.email" :placeholder="$t('common.place_enter') + ' ' + $t('systemManage.user.nickName')" />
-                </el-form-item>
-                <el-form-item :label="$t('systemManage.user.status') + ':'" prop="status">
-                    <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' ' + $t('systemManage.user.status')">
-                        <el-option :label="$t('systemManage.user.normal')" value="1" />
-                        <el-option :label="$t('systemManage.user.disabled')" value="0" />
-                    </el-select>
-                </el-form-item>
-                <el-form-item :label="$t('systemManage.user.createTime') + ':'" prop="created_at">
-                    <el-date-picker 
-                        v-model="queryParams.created_at" 
-                        type="daterange" 
-                        value-format="yyyy-MM-dd" 
-                        :range-separator="$t('common.to')" 
-                        :start-placeholder="$t('common.start_date')" 
-                        :end-placeholder="$t('common.end_date')" 
-                    />
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="default" @click="resetForm">{{ $t('common.reset') }}</el-button>
-                    <el-button type="primary" @click="getList">{{ $t('common.search') }}</el-button>
-                </el-form-item>
-            </el-form>
-        </div>
         <div class="add_box">
             <el-button type="primary" @click="addDetails">{{ $t('common.add') }}</el-button>
         </div>
         <el-table :data="dataList" style="width: 100%" border >
-            <el-table-column prop="id" :label="$t('systemManage.user.id')" align="center"  />
+            <el-table-column prop="id" :label="$t('systemManage.user.id')" align="center">
+                <template #header>
+                    <div class="sort_box">
+                        <p>{{ $t('systemManage.user.id') }}</p>
+                        <div class="icon_box">
+                            <el-icon @click="sort('id','ASC')" :color="queryParams.sort == 'id' && queryParams.order == 'ASC' ? '#409EFF' : ''"><CaretTop /></el-icon>
+                            <el-icon @click="sort('id','DESC')" :color="queryParams.sort == 'id' && queryParams.order == 'DESC' ? '#409EFF' : ''"><CaretBottom /></el-icon>
+                        </div>
+                    </div>
+                </template>
+            </el-table-column>
             <el-table-column prop="nick_name" :label="$t('systemManage.user.nickName')" align="center"/>
             <el-table-column prop="username" :label="$t('systemManage.user.username')" align="center"  />
             <el-table-column prop="email" :label="$t('systemManage.user.email')" align="center" width="200" />
@@ -66,6 +43,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { ElMessage,ElMessageBox } from 'element-plus'
+import { CaretTop, CaretBottom } from '@element-plus/icons-vue'
 import {$t} from "@/locales"
 import { getUserList,deleteUser } from '@/api/systemmanage'
 import detailsDialog from './components/detailsDialog.vue'
@@ -77,8 +55,8 @@ const pageInit = {
     page:1
 }
 const queryParams = ref({
-    username:'',
-    mobile:''
+    sort:'id',
+    order:'DESC'
 })
 const showDetails = (row) => {
     detailsDialogRef.value.show(0,row)
@@ -104,17 +82,22 @@ const deleteRow = async (row) => {
 }
 const total = ref(0)
 const page = ref({...pageInit})
+const sort = (field,order) => {
+    queryParams.value.sort = field
+    queryParams.value.order = order
+    getList()
+}
 async function getList() {
-  const res = await getUserList(page.value)
+  const res = await getUserList({...queryParams.value,...page.value})
   if (res.code === 200) {
-    dataList.value = res.data
-    total.value = res.meta.total
+    dataList.value = res.data.items
+    total.value = res.data.total
   }
 }
 const resetForm = () => {
     queryParams.value = {
-        username:'',
-        mobile:''
+        sort:'id',
+        order:'DESC'    
     }
     page.value = {...pageInit}
     getList()
@@ -128,5 +111,20 @@ onMounted(() => {
 <style lang="scss" scoped>
 .add_box {
     margin-bottom: 10px;
+    
+}
+.sort_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    .icon_box {
+        display: flex;
+        flex-direction: column;
+        .el-icon {
+            font-size: 12px;
+            cursor: pointer;
+        }
+    }
 }
 </style>

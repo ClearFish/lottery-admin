@@ -97,6 +97,56 @@ export function addPermission(data) {
     data: data
   })
 }
+// 系统配置 /admin/v1/general/config/
+export function getGeneralConfig(data) {
+  return request({
+    url: '/admin/v1/general/config/',
+    method: 'get',
+    params: data
+  })
+}
+// 附件管理 /v1/general/attachment/
+export function getAttachmentList(data) {
+  return request({
+    url: '/admin/v1/general/attachment/',
+    method: 'get',
+    params: data
+  })
+}
+// 权限分组列表 /admin/v1/auth/group/
+export function getGroupList(data) {
+  return request({
+    url: '/admin/v1/auth/group/',
+    method: 'get',
+    params: data
+  })
+}
+// 新增管理员及权限 /admin/v1/auth/rule/
+export function addGroup(data) {
+  return request({
+    url: '/admin/v1/auth/group/',
+    method: 'post',
+    data: data
+  })
+}
+// 编辑管理员及权限 /admin/v1/auth/group/
+export function updateGroup(data) {
+  return request({
+    url: '/admin/v1/auth/group/'+data.id,
+    method: 'put',
+    data: data
+  })
+}
+// 查看管理员及权限 /admin/v1/auth/group/
+export function getGroupDetail(data) {
+  return request({
+    url: '/admin/v1/auth/group/'+data.id,
+    method: 'get',
+    params: {}
+  })
+} 
+
+
 
 
 

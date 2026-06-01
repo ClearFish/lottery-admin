@@ -7,7 +7,7 @@
     >
         <div>
            <el-form :model="detailsInfo" :disabled="isCheck" :rules="rules"  ref="formRef" label-width="120px">
-                <el-form-item label="上级菜单" v-if="detailsInfo.type != 'catalog'">
+                <el-form-item :label="$t('rule.permissionDialog.parentMenu')" v-if="detailsInfo.type != 'catalog'">
                      <el-tree-select
                         v-model="detailsInfo.id"
                         :data="typesLists"
@@ -17,50 +17,50 @@
                             children: 'children' 
                         }"
                         value-key="id"
-                        placeholder="选择上级菜单"
+                        :placeholder="$t('common.place_select') + $t('rule.permissionDialog.parentMenu')"
                         check-strictly
                      />
                   </el-form-item>
-                  <el-form-item label="菜单类型" prop="type">
+                  <el-form-item :label="$t('rule.permissionDialog.menuType')" prop="type">
                     <el-radio-group v-model="detailsInfo.type">
-                        <el-radio label="catalog">目录</el-radio>
-                        <el-radio label="menu">菜单</el-radio>
-                        <el-radio label="button">按妞</el-radio>
-                        <el-radio label="link">外链</el-radio>
+                        <el-radio label="catalog">{{ $t('rule.permissionDialog.type.catalog') }}</el-radio>
+                        <el-radio label="menu">{{ $t('rule.permissionDialog.type.menu') }}</el-radio>
+                        <el-radio label="button">{{ $t('rule.permissionDialog.type.button') }}</el-radio>
+                        <el-radio label="link">{{ $t('rule.permissionDialog.type.link') }}</el-radio>
                     </el-radio-group>
                   </el-form-item>
-                  <el-form-item label="菜单名称" prop="title">
-                     <el-input v-model="detailsInfo.title" placeholder="请输入菜单名称" />
+                  <el-form-item :label="$t('rule.permissionDialog.menuName')" prop="title">
+                     <el-input v-model="detailsInfo.title" :placeholder="$t('common.place_enter') + $t('rule.permissionDialog.menuName')" />
                   </el-form-item>
-                  <el-form-item label="权限标识" prop="permission">
-                     <el-input v-model="detailsInfo.permission" placeholder="请输入权限标识" />
+                  <el-form-item :label="$t('rule.permissionDialog.permission')" prop="permission">
+                     <el-input v-model="detailsInfo.permission" :placeholder="$t('common.place_enter') + $t('rule.permissionDialog.permission')" />
                    </el-form-item>
-                   <el-form-item label="路由地址" prop="route" v-if="detailsInfo.type != 'button'">
-                     <el-input v-model="detailsInfo.route" placeholder="请输入路由地址" />
+                   <el-form-item :label="$t('rule.permissionDialog.route')" prop="route" v-if="detailsInfo.type != 'button'">
+                     <el-input v-model="detailsInfo.route" :placeholder="$t('common.place_enter') + $t('rule.permissionDialog.route')" />
                    </el-form-item>
                    <template v-if="detailsInfo.type == 'menu'">
-                     <el-form-item label="组件路径" prop="component">
-                        <el-input v-model="detailsInfo.component" placeholder="请输入组件路径" />
+                     <el-form-item :label="$t('rule.permissionDialog.component')" prop="component">
+                        <el-input v-model="detailsInfo.component" :placeholder="$t('common.place_enter') + $t('rule.permissionDialog.component')" />
                     </el-form-item>
                    </template>
-                    <el-form-item label="菜单状态" prop="status">
+                    <el-form-item :label="$t('rule.permissionDialog.status')" prop="status">
                         <el-radio-group v-model="detailsInfo.status">
-                            <el-radio label="normal">正常</el-radio>
-                            <el-radio label="disabled">停用</el-radio>
+                            <el-radio label="normal">{{ $t('rule.status.normal') }}</el-radio>
+                            <el-radio label="disabled">{{ $t('rule.status.disabled') }}</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="显示状态" prop="status" v-if="detailsInfo.type != 'button'">
+                    <el-form-item :label="$t('rule.permissionDialog.displayStatus')" prop="status" v-if="detailsInfo.type != 'button'">
                         <el-radio-group v-model="detailsInfo.hide_menu">
-                            <el-radio :label="false">显示</el-radio>
-                            <el-radio :label="true">隐藏</el-radio>
+                            <el-radio :label="false">{{ $t('rule.permissionDialog.display.show') }}</el-radio>
+                            <el-radio :label="true">{{ $t('rule.permissionDialog.display.hide') }}</el-radio>
                         </el-radio-group>
                     </el-form-item>
            </el-form>
         </div>
          <template #footer>
             <div class="dialog-footer">
-                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">{{ $t('currency.dialog.submit') }}</el-button>
-                <el-button type="default"  @click="handleClose">{{ $t('currency.dialog.close') }}</el-button>
+                <el-button type="primary" v-if="!isCheck" @click="handleSubmit">{{ $t('common.confirm') }}</el-button>
+                <el-button type="default"  @click="handleClose">{{ $t('common.cancel') }}</el-button>
             </div>
         </template>
     </el-dialog>
@@ -112,14 +112,14 @@ const handleSubmit = async () => {
         // 新增
         let res = await addPermission(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess($t('currency.addSuccess'))
+            proxy.$modal.msgSuccess($t('rule.addSuccess'))
             handleClose()
         }
     }else {
         // 编辑
         let res = await updatePermission(detailsInfo.value)
         if (res.code === 200) {
-            proxy.$modal.msgSuccess($t('currency.editSuccess'))
+            proxy.$modal.msgSuccess($t('rule.editSuccess'))
             handleClose()
         }
     }

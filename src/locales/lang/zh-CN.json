@@ -121,6 +121,34 @@
       "createdAt": "创建于",
       "action": "操作"
     },
+    "attachment": {
+      "category": "类别",
+      "preview": "预览",
+      "filename": "文件名",
+      "filesize": "文件大小",
+      "imageHeight": "高度",
+      "imageWidth": "宽度",
+      "mimetype": "图片类型",
+      "storage": "存储引擎",
+      "createdAt": "创建日期",
+      "action": "操作"
+    },
+    "config": {
+      "id": "ID",
+      "name": "名称",
+      "title": "标题",
+      "group": "分组",
+      "type": "类型",
+      "value": "值",
+      "rule": "规则",
+      "extend": "扩展",
+      "tip": "提示",
+      "action": "操作"
+    },
+    "configDialog": {
+      "agentId": "代理ID",
+      "currency": "货币"
+    },
     "dialog": {
       "name": "名称",
       "nickName": "昵称",
@@ -129,6 +157,84 @@
       "status": "状态",
       "submit": "提交",
       "close": "关闭"
+    }
+  },
+  "rule": {
+    "addSuccess": "添加成功",
+    "editSuccess": "编辑成功",
+    "status": {
+      "enabled": "启用",
+      "normal": "正常",
+      "disabled": "禁用"
+    },
+    "group": {
+      "parent": "父级",
+      "code": "分组编码",
+      "name": "分组名称",
+      "status": "状态",
+      "action": "操作"
+    },
+    "groupDialog": {
+      "parent": "父级",
+      "name": "名称",
+      "permission": "权限",
+      "checkAll": "选中全部",
+      "expandAll": "展开全部",
+      "status": "状态"
+    },
+    "permission": {
+      "displayStatus": "显示状态",
+      "show": "显示",
+      "hide": "隐藏",
+      "id": "ID",
+      "title": "菜单名称",
+      "permission": "权限标识",
+      "route": "路径",
+      "typeLabel": "类型",
+      "type": {
+        "catalog": "目录",
+        "menu": "菜单",
+        "button": "按钮",
+        "link": "外链"
+      },
+      "status": "状态",
+      "action": "操作"
+    },
+    "permissionDialog": {
+      "parentMenu": "上级菜单",
+      "menuType": "菜单类型",
+      "type": {
+        "catalog": "目录",
+        "menu": "菜单",
+        "button": "按钮",
+        "link": "外链"
+      },
+      "menuName": "菜单名称",
+      "permission": "权限标识",
+      "route": "路由地址",
+      "component": "组件路径",
+      "status": "菜单状态",
+      "displayStatus": "显示状态",
+      "display": {
+        "show": "显示",
+        "hide": "隐藏"
+      }
+    },
+    "log": {
+      "browser": "浏览器",
+      "ip": "IP",
+      "url": "URL"
+    },
+    "logDialog": {
+      "ip": "IP",
+      "os": "设备",
+      "browser": "浏览器",
+      "url": "URL",
+      "createdAt": "创建时间",
+      "body": "内容"
+    },
+    "userDialog": {
+      "password": "密码"
     }
   },
   "game": {

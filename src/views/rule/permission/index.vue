@@ -2,16 +2,16 @@
     <div>
         <div class="form_box">
             <el-form :model="queryParams" inline ref="formRef" :rules="rules" label-position="left" >
-                <el-form-item :label="$t('currency.config.frontend') + ':'" prop="display_precision">
+                <el-form-item :label="$t('rule.permission.displayStatus') + ':'" prop="display_precision">
                     <el-select v-model="queryParams.display_precision" :placeholder="$t('common.place_select') + ' '">
-                        <el-option :label="$t('currency.config.show')" value="2" />
-                        <el-option :label="$t('currency.config.hide')" value="1" />
+                        <el-option :label="$t('rule.permission.show')" value="2" />
+                        <el-option :label="$t('rule.permission.hide')" value="1" />
                     </el-select>
                 </el-form-item>
-                <el-form-item :label="$t('currency.config.status') + ':'" prop="status">
+                <el-form-item :label="$t('rule.permission.status') + ':'" prop="status">
                     <el-select v-model="queryParams.status" :placeholder="$t('common.place_select') + ' '">
-                        <el-option :label="$t('currency.config.disabled')" value="1" />
-                        <el-option :label="$t('currency.config.enable')" value="0" />
+                        <el-option :label="$t('rule.status.disabled')" value="1" />
+                        <el-option :label="$t('rule.status.enabled')" value="0" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -30,18 +30,18 @@
             row-key="id"
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
-            <el-table-column prop="id" :label="$t('currency.config.id')" align="left"  />
-            <el-table-column prop="title" :label="$t('currency.config.name')" align="center"  />
-            <el-table-column prop="permission" label="权限标识" align="center"/>
-            <el-table-column prop="route" label="路径" align="center"/>
-             <el-table-column prop="type" label="类型" align="center">
+            <el-table-column prop="id" :label="$t('rule.permission.id')" align="left"  />
+            <el-table-column prop="title" :label="$t('rule.permission.title')" align="center"  />
+            <el-table-column prop="permission" :label="$t('rule.permission.permission')" align="center"/>
+            <el-table-column prop="route" :label="$t('rule.permission.route')" align="center"/>
+             <el-table-column prop="type" :label="$t('rule.permission.typeLabel')" align="center">
             
              <template #default="scope">
                 {{ getType(scope.row.type) }}
              </template>
              </el-table-column>
-            <el-table-column prop="status" :label="$t('currency.config.status')" align="center"  />
-            <el-table-column prop="" :label="$t('currency.config.action')" align="center" min-width="150">
+            <el-table-column prop="status" :label="$t('rule.permission.status')" align="center"  />
+            <el-table-column prop="" :label="$t('rule.permission.action')" align="center" min-width="150">
                 <template #default="scope">
                     <el-button type="info" @click="showDetails(scope.row)">{{ $t('common.detail') }}</el-button>
                     <el-button type="primary"  @click="editDetails(scope.row)">{{ $t('common.edit') }}</el-button>
@@ -102,15 +102,14 @@ const deleteRow = async (row) => {
     }).catch(() => { })
 }
 const getType = (type) => {
-    //  <!-- catalog:目录/menu:菜单/button:按妞/link:外链 -->
     if(type == 'catalog') {
-        return '目录'
+        return $t('rule.permission.type.catalog')
     } else if(type == 'menu') {
-        return '菜单'
+        return $t('rule.permission.type.menu')
     } else if(type == 'button') {
-        return '按妞'
+        return $t('rule.permission.type.button')
     } else if(type == 'link') {
-        return '外链'
+        return $t('rule.permission.type.link')
     }
 }
 
