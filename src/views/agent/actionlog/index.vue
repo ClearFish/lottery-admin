@@ -5,6 +5,6 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import { getActionLogList } from '@/api/agent'
+// import { getActionLogList } from '@/api/agent'
 const actionLogList = ref([])
 </script>
