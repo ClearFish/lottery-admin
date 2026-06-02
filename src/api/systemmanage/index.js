@@ -145,6 +145,22 @@ export function getGroupDetail(data) {
     params: {}
   })
 } 
+// 按name获取配置 /admin/v1/general/config/key/
+export function getGeneralConfigKey(data) {
+  return request({
+    url: '/admin/v1/general/config/key/'+data.key,
+    method: 'get',
+    params: {}
+  })
+}
+// 更新配置 /admin/v1/general/config/5
+export function updateGeneralConfigKey(data) {
+  return request({
+    url: '/admin/v1/general/config/'+data.id,
+    method: 'put',
+    data: data
+  })
+}
 
 
 
